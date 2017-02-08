@@ -1,0 +1,18 @@
+$ git log
+commit 7f38b2ae904b6460f0e41a2f3d5a46d572f1ae60
+Author: Alexander Mikulich <almik97@mail.ru>
+Date:   Wed Feb 8 20:50:58 2017 +0300
+
+    add.log.txt
+
+commit f65a1a9018f6062b8bde12093aa9a9b8dcea70ce
+Author: Alexander Mikulich <almik97@mail.ru>
+Date:   Wed Feb 8 20:48:24 2017 +0300
+
+    add.status.txt
+
+commit 88c4e001d18b0525ae3c6156f1bda3e2b14a739a
+Author: Alexander Mikulich <almik97@mail.ru>
+Date:   Wed Feb 8 20:37:20 2017 +0300
+
+    add.gitignore
