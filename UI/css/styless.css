@@ -1,0 +1,218 @@
+@font-face {
+    font-family: "IntroScript"; /* Гарнитура шрифта */
+    src: url(../fonts/intro.otf); /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+    font-family: "CoreSansA45Script";
+    src: url(../fonts/CoreSansA45Regular.otf);
+}
+
+@font-face {
+    font-family: "CoreSansA45ScriptLigth";
+    src: url(../fonts/CoreSansA35Light.otf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body,html {
+    height: 100%;
+    width: 100%;
+}
+
+a{
+    color: #09c662;
+    text-decoration: none;
+    transition: all.6s ease;
+    -ms-transition: all.6s ease;
+    -o-transition: all.6s ease;
+    -moz-transition: all.6s ease;
+    -webkit-transition: all.6s ease;
+}
+
+a:hover{
+    color: #09c662;
+    text-decoration: none;
+    transition: all.6s ease;
+    -ms-transition: all.6s ease;
+    -o-transition: all.6s ease;
+    -moz-transition: all.6s ease;
+    -webkit-transition: all.6s ease;
+}
+
+img{
+    max-width: 100%;
+    height: auto;
+    width: auto\9;
+    -ms-transition: all.3s ease;
+    -o-transition: all.3s ease;
+    -moz-transition: all.3s ease;
+    -webkit-transition: all.3s ease;
+}
+
+hr{
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/* Стили для шапки сайта */
+
+header{
+    float: left;
+    background-color: #ed1c24;
+    width: 99.4%;
+    padding: 0.3%;
+    color: white;
+   /* border-bottom: 1px solid #ffffff;*/
+}
+
+header>div#logo>a>img{
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+header>div#logo>a>img:hover{
+    width: 52px;
+    height: 52px;
+    float: left;
+    opacity: 0.5;
+}
+header>div#logo>a{
+    color: white;
+}
+
+header>div#logo>a>span{
+    font-size: 2.5em;
+    margin-left: 10px;
+    font-family: IntroScript;
+    text-decoration: none;
+    transition: all.6s ease;
+    -ms-transition: all.6s ease;
+    -o-transition: all.6s ease;
+    -moz-transition: all.6s ease;
+    -webkit-transition: all.6s ease;
+}
+
+header>div#logo>a>span:hover{
+    font-size: 2.7em;
+    margin-left: 10px;
+    font-family: IntroScript;
+    text-decoration: none;
+    transition: all.6s ease;
+    -ms-transition: all.6s ease;
+    -o-transition: all.6s ease;
+    -moz-transition: all.6s ease;
+    -webkit-transition: all.6s ease;
+}
+
+#logo{
+    margin-left: 10%;
+}
+
+/*меню для сайта*/
+
+nav{
+    background-color: black;
+    width: 99.4%;
+    padding: 0.0% 0.3%;
+    float: left;
+    border-bottom: 1px black;
+    box-bottom-shadow: 0 0 50px rgba(0,0,0,10)
+}
+
+
+nav>div#hide_menu>a{
+    font-size: 0.8em;
+    color: white;
+    font-family: CoreSansA45ScriptLigth;
+    margin-left: 0.6%;
+}
+nav>div#hide_menu>a#main_page{
+    font-family: CoreSansA45ScriptLigth;
+    margin-left: 10%;
+}
+
+nav>div#hide_menu>a:hover{
+    margin-left: 0.6%;
+    font-size: 1em;
+    color: #09c662;
+    font-family: CoreSansA45ScriptLigth;
+    border-bottom: 4px solid #09c662;
+}
+
+nav>div#hide_menu>div#login{
+    float: right;
+    margin-right: 10%;
+}
+nav>div#hide_menu>div#login>a{
+     color: white;
+     font-size: 0.8em;
+     font-family: CoreSansA45ScriptLigth;
+
+ }
+nav>div#hide_menu>div#login>a:hover{
+    font-size: 1em;
+    font-family: CoreSansA45ScriptLigth;
+    color: #09c662;
+    border-bottom: 4px solid #09c662;
+}
+
+
+
+
+/*конец стилей для шапки сайта */
+
+#wraper{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#content{
+    flex: 1 0 auto;
+}
+
+
+/*Дизайн для футера*/
+#footer1{
+    float: left;
+    background-color: #ed1c24;
+    width: 99.4%;
+    padding: 0.3%;
+    color: white;
+    border-top: 5px solid #ffffff;
+}
+
+#footer1>#text_down{
+    font-size: 2.5em;
+    margin-left: 10px;
+    font-family: IntroScript;
+    text-align: center;
+}
+#footer1>#author{
+    font-size: 0.7em;
+    margin-left: 10px;
+    font-family: CoreSansA45ScriptLigth;
+    text-align: center;
+}
+
+#footer2{
+    float: left;
+    background-color: #000000;
+    width: 99.4%;
+    padding: 0.3%;
+    color: white;
+}
+#footer2>#text_down_info{
+    font-size: 0.5em;
+    line-height: 1.1em;
+    font-family: CoreSansA45ScriptLigth;
+    margin-left: 10%;
+}
