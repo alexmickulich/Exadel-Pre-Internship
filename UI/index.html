@@ -2,11 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>BLRNEWS.BY<</title>
+    <title>BLRNEWS.BY</title>
     <link rel="stylesheet" href="css/styless.css">
+    <link rel="stylesheet" href="css/main_page.css">
+
 </head>
 <body>
+<div id="burger_menu">
+
+    <a href="">ГЛАВНАЯ</a>
+    <a href="">МИР</a>
+    <a href="">ЭКОНОМИКА</a>
+    <a href="">СПОРТ</a>
+    <a href="">КУЛЬТУРА</a>
+    <a href="">ПРОИСШЕСТВИЯ</a>
+    <div id="burger_login">
+        <a href="">ВОЙТИ</a>
+    </div>
+
+</div>
 <div id="wraper">
+
     <div id="content">
         <header>
             <div id="logo">
@@ -17,9 +33,8 @@
             </div>
         </header>
         <nav>
-            <div id="menu_show">
+            <div id="burger"><img id="burger_button" src="img/burger.png"></div>
 
-            </div>
             <div id="hide_menu">
                 <a id="main_page" href="">ГЛАВНАЯ</a>
                 <a href="">МИР</a>
@@ -32,12 +47,90 @@
                 </div>
             </div>
         </nav>
-        <div id="main">
+
+
+        <main>
             <div id="news">
 
+                <div class="article">
+                    <div class="article_left">
+                        <a href="index.html">
+                        <img class="article_img" src="img/spacex.jpg" title="SpaceX" alt="SpaceX">
+                            </a>
+                    </div>
+
+                    <div class="article_right">
+                        <h2 class="article_heading">SpaceX отправила космический грузовик Dragon к МКС</h2>
+                        <br>
+                        <span class="article_short_info">
+                        Компания SpaceX Илона Маска отправила ракету-носитель Falcon 9 с грузовиком Dragon к МКС. Об этом сообщается в аккаунте компании в Twitter.
+                        </span>
+                        <br>
+                        <br>
+                        <a class="article_topic">Общество</a>
+                        <a class="article_date">20 Февраля 2017 | 19:00 </a>
+                        <a class="article_author"> Alexander Mikulich</a>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+
+                <div class="article">
+                    <div class="article_left">
+                        <a href="index.html">
+                            <img class="article_img" src="img/spacex.jpg" title="SpaceX" alt="SpaceX">
+                        </a>
+                    </div>
+
+                    <div class="article_right">
+                        <h2 class="article_heading">SpaceX отправила космический грузовик Dragon к МКС</h2>
+                        <br>
+                        <span class="article_short_info">
+                        Компания SpaceX Илона Маска отправила ракету-носитель Falcon 9 с грузовиком Dragon к МКС. Об этом сообщается в аккаунте компании в Twitter.
+                        </span>
+                        <br>
+                        <br>
+                        <a class="article_topic">Общество</a>
+                        <a class="article_date">20 Февраля 2017 | 19:00 </a>
+                        <a class="article_author"> Alexander Mikulich</a>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+
+                <div class="article">
+                    <div class="article_left">
+                        <a href="index.html">
+                            <img class="article_img" src="img/spacex.jpg" title="SpaceX" alt="SpaceX">
+                        </a>
+                    </div>
+
+                    <div class="article_right">
+                        <h2 class="article_heading">SpaceX отправила космический грузовик Dragon к МКС</h2>
+                        <br>
+                        <span class="article_short_info">
+                        Компания SpaceX Илона Маска отправила ракету-носитель Falcon 9 с грузовиком Dragon к МКС. Об этом сообщается в аккаунте компании в Twitter.
+                        </span>
+                        <br>
+                        <br>
+                        <a class="article_topic">Общество</a>
+                        <a class="article_date">20 Февраля 2017 | 19:00 </a>
+                        <a class="article_author"> Alexander Mikulich</a>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+
             </div>
-        </div>
+        </main>
+        <aside>
+            <p class=heading> Добавить</p>
+        </aside>
+
+
     </div>
+
+
     <footer id="footer1">
         <br>
         <p id="text_down">BLRNEWS.BY</p>
@@ -51,6 +144,8 @@
             Last changes 20.02.17
         </p>
     </footer>
+
 </div>
+<script src="js/scripts.js"></script>
 </body>
 </html>

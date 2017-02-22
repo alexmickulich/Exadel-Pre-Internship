@@ -118,6 +118,8 @@ header>div#logo>a>span:hover{
 
 /*меню для сайта*/
 
+
+
 nav{
     background-color: black;
     width: 99.4%;
@@ -164,7 +166,26 @@ nav>div#hide_menu>div#login>a:hover{
     border-bottom: 4px solid #09c662;
 }
 
+/*burger стили */
+#burger{
+    height: 1.5em;
+    width: 1.5em;
+    margin-left: 10%;
+    display: none;
+    padding: 0;
+}
 
+#burger_button{
+    height: 100%;
+    margin-left: 50%;
+}
+
+#burger_menu{
+    height: 100%;
+    width: 50%;
+    background-color: black;
+    display: none;
+}
 
 
 /*конец стилей для шапки сайта */
@@ -176,6 +197,7 @@ nav>div#hide_menu>div#login>a:hover{
 }
 
 #content{
+    display: inline;
     flex: 1 0 auto;
 }
 
@@ -215,4 +237,14 @@ nav>div#hide_menu>div#login>a:hover{
     line-height: 1.1em;
     font-family: CoreSansA45ScriptLigth;
     margin-left: 10%;
+}
+
+/* -----------------media----------------- */
+@media (max-width: 700px) {
+    #burger{
+        display: block;
+    }
+    #hide_menu{
+        display: none;
+    }
 }

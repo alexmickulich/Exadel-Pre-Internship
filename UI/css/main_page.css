@@ -1,0 +1,97 @@
+
+main{
+    float: left;
+    width: 50%;
+    margin-top: 20px;
+    margin-left: 10%;
+}
+
+aside{
+    display: block;
+    height: 20px;
+    float: left;
+    width: 20%;
+    margin-left: 5%;
+    margin-top:20px;
+    -ms-transition: all.6s ease;
+    -o-transition: all.6s ease;
+    -moz-transition: all.6s ease;
+    -webkit-transition: all.6s ease;
+}
+
+
+
+.article{
+    width: 100%;
+    float: left;
+    border-bottom: solid silver 1px;
+    margin-bottom: 4%;
+
+}
+
+.article_img{
+    width: 95%;
+    float: left;
+    padding-right: 5%;
+    -ms-transition: all.1s ease;
+    -o-transition: all.1s ease;
+    -moz-transition: all.1s ease;
+    -webkit-transition: all.1s ease;
+
+}
+.article_img:hover{
+    opacity: 0.7;
+    -ms-transition: all.1s ease;
+    -o-transition: all.1s ease;
+    -moz-transition: all.1s ease;
+    -webkit-transition: all.1s ease;
+}
+.article_right{
+    width: 59%;
+    float: right;
+}
+.article_left{
+    width: 40%;
+    height: 100%;
+}
+.article_heading{
+    font-size: 140%;
+    font-weight: normal;
+    font-family: CoreSansA45Script;
+}
+.article_short_info{
+    color:darkgray;
+    font-size: 100%;
+    font-family: CoreSansA45ScriptLigth;
+}
+
+
+.article_topic{
+    color: #ed1c24;
+    font-size: 70%;
+    font-family: CoreSansA45ScriptLigth;
+    margin-right: 1%;
+}
+
+.article_date{
+    color: darkgray;
+    font-size: 70%;
+    font-family: CoreSansA45ScriptLigth;
+    margin-right: 1%;
+}
+
+.article_author{
+    color: #09c662;
+    font-size: 70%;
+    font-family: CoreSansA45ScriptLigth;
+    margin-right: 1%;
+}
+
+@media (max-width: 1024px) {
+    aside{
+        display: none;
+    }
+    main{
+        width: 80%;
+    }
+}
