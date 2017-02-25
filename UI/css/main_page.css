@@ -1,8 +1,7 @@
 
 main{
     float: left;
-    width: 50%;
-    margin-top: 20px;
+    width: 60%;
     margin-left: 10%;
 }
 
@@ -12,7 +11,6 @@ aside{
     float: left;
     width: 20%;
     margin-left: 5%;
-    margin-top:20px;
     -ms-transition: all.6s ease;
     -o-transition: all.6s ease;
     -moz-transition: all.6s ease;
@@ -25,7 +23,7 @@ aside{
     width: 100%;
     float: left;
     border-bottom: solid silver 1px;
-    margin-bottom: 4%;
+    margin-bottom: 5%;
 
 }
 
@@ -41,13 +39,14 @@ aside{
 }
 .article_img:hover{
     opacity: 0.7;
+    margin-bottom: 2%;
     -ms-transition: all.1s ease;
     -o-transition: all.1s ease;
     -moz-transition: all.1s ease;
     -webkit-transition: all.1s ease;
 }
 .article_right{
-    width: 59%;
+    width: 60%;
     float: right;
 }
 .article_left{
@@ -66,32 +65,80 @@ aside{
 }
 
 
-.article_topic{
-    color: #ed1c24;
-    font-size: 70%;
+.article_links{
+    margin-top: 3%;
+    margin-bottom: 2px;
+}
+
+.article_links a{
+    font-size: 80%;
     font-family: CoreSansA45ScriptLigth;
     margin-right: 1%;
+}
+
+.article_links a:hover{
+    color: black;
+    cursor: pointer;
+}
+.article_topic{
+    color: #ed1c24;
 }
 
 .article_date{
     color: darkgray;
-    font-size: 70%;
-    font-family: CoreSansA45ScriptLigth;
-    margin-right: 1%;
 }
+
 
 .article_author{
     color: #09c662;
-    font-size: 70%;
-    font-family: CoreSansA45ScriptLigth;
-    margin-right: 1%;
+}
+aside{
+    height: 100%;
 }
 
-@media (max-width: 1024px) {
+
+.main_buttton{
+    width: 73%;
+    height: 100%;
+    background: #09c662;
+    margin: 1%;
+}
+.main_buttton:hover{
+    background: #09d263;
+}
+.main_buttton a{
+    margin-left: 13%;
+    color: white;
+    font-family: IntroScript;
+    font-size: 1.5em;
+}
+
+.main_buttton a:hover{
+    margin-left: 11%;
+    color: white;
+    font-family: IntroScript;
+    font-size: 1.6em;
+}
+
+@media (max-width: 700px) {
     aside{
         display: none;
     }
     main{
         width: 80%;
     }
+
+    .article_img{
+        display: none;
+    }
+
+    .article_right{
+        width: 100%;
+    }
+
+    .article_left{
+        display: none;
+    }
+
+
 }

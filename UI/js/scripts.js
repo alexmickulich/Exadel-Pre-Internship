@@ -5,7 +5,7 @@
 var view = {
     showBurgerMenu: function () {
         var burgerMenu = document.getElementById('burger_menu');
-        burgerMenu.style.display="none";
+        burgerMenu.style.display="block";
     }
 };
 
@@ -20,8 +20,8 @@ var controller = {
 (function () {
     var app = {
         event: function () {
-            var element = document.getElementById('burger');
-            element.ondblclick = controller.burgerClickEvent();
+            var element = menubar.getElementById('burger');
+            element.onclick = controller.burgerClickEvent();
         },
         init: function () {
             app.event();
