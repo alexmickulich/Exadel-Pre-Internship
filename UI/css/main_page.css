@@ -17,8 +17,6 @@ aside{
     -webkit-transition: all.6s ease;
 }
 
-
-
 .article{
     width: 100%;
     float: left;
@@ -58,6 +56,11 @@ aside{
     font-weight: normal;
     font-family: CoreSansA45Script;
 }
+
+.article_heading:hover{
+    font-family: CoreSansA45Script;
+}
+
 .article_short_info{
     color:darkgray;
     font-size: 100%;
@@ -93,31 +96,72 @@ aside{
     color: #09c662;
 }
 aside{
+    width: 14%;
+    margin-right: 10%;
     height: 100%;
 }
 
 
 .main_buttton{
-    width: 73%;
-    height: 100%;
+    float: left;
+    width: 100%;
     background: #09c662;
-    margin: 1%;
+    padding: 1vh 1vh;
 }
 .main_buttton:hover{
     background: #09d263;
 }
 .main_buttton a{
-    margin-left: 13%;
+    margin-left: 0.9vh;
     color: white;
     font-family: IntroScript;
-    font-size: 1.5em;
+    font-size: 2.8vh;
 }
 
-.main_buttton a:hover{
-    margin-left: 11%;
-    color: white;
-    font-family: IntroScript;
-    font-size: 1.6em;
+
+.search_bar{
+    width: 99%;
+    border: solid #cccccc 1px;
+    padding-left: 1vh;
+    padding-right: 1vh;
+    padding-top: 1vh;
+}
+
+.select_bar{
+    font-family: CoreSansA45ScriptLigth;
+    background-position: 95% 50%;
+    margin-bottom: 2%;
+    width: 100%;
+    height: 20px;
+}
+
+.select_bar option {
+    font-family: CoreSansA45ScriptLigth;
+    background-color: transparent;
+    border: 0;
+    padding-right: 15px;
+    height: 20px;
+    width: 220px;
+}
+
+.pagination a:first-child{
+
+    margin-left: 35%;
+    font-size: 100%;
+    padding-bottom: 2%;
+}
+
+.pagination a:hover{
+    font-size: 100%;
+    padding-bottom: 1%;
+}
+.pagination{
+    width: 100%;
+    height: 100%;
+    margin-top: 10%;
+}
+#current_page{
+    color: #ed1c24;
 }
 
 @media (max-width: 700px) {
