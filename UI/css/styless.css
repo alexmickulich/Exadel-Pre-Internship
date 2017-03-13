@@ -23,37 +23,25 @@ body,html {
     width: 100%;
 }
 
-a{
+a {
     font-family: CoreSansA45ScriptLigth;
-    color: black;
+    color: #2d2d2d;
     text-decoration: none;
-    transition: all.6s ease;
-    -ms-transition: all.6s ease;
-    -o-transition: all.6s ease;
-    -moz-transition: all.6s ease;
-    -webkit-transition: all.6s ease;
+    transition: all .6s ease;
 }
 
-a:hover{
+a:hover {
     font-family: CoreSansA45ScriptLigth;
     color: #09c662;
     text-decoration: none;
     cursor: pointer;
-    transition: all.6s ease;
-    -ms-transition: all.6s ease;
-    -o-transition: all.6s ease;
-    -moz-transition: all.6s ease;
-    -webkit-transition: all.6s ease;
+    transition: all .6s ease;
 }
-
 img{
     max-width: 100%;
     height: auto;
     width: auto\9;
-    -ms-transition: all.3s ease;
-    -o-transition: all.3s ease;
-    -moz-transition: all.3s ease;
-    -webkit-transition: all.3s ease;
+    transition: all.6s ease;
 }
 
 hr{
@@ -72,41 +60,37 @@ header{
     background-color: #ed1c24;
     width: 100%;
     color: white;
-   /* border-bottom: 1px solid #ffffff;*/
+    z-index: 1000;
 }
 
-#logo img{
+.header-logo img{
     width: 50px;
     height: 50px;
     float: left;
 }
-#logo img:hover{
+.header-logo img:hover{
     width: 52px;
     height: 52px;
     float: left;
     opacity: 0.5;
 }
-#logo a{
+.header-logo a{
     color: white;
 }
 
-#logo span{
+.header-logo span{
     font-size: 2.5em;
     margin-left: 10px;
     font-family: IntroScript;
     text-decoration: none;
     transition: all.6s ease;
-    -ms-transition: all.6s ease;
-    -o-transition: all.6s ease;
-    -moz-transition: all.6s ease;
-    -webkit-transition: all.6s ease;
 }
 
-header>div#logo>a>span:hover{
+.header-logo span:hover{
     font-size: 2.7em;
 }
 
-#logo{
+.header-logo{
     margin-left: 10%;
 }
 
@@ -114,9 +98,10 @@ header>div#logo>a>span:hover{
 
 
 
+
 nav{
     display: block;
-    background-color: black;
+    background-color: #2d2d2d;
     width: 99.4%;
     padding: 0.0% 0.3%;
     float: left;
@@ -125,41 +110,44 @@ nav{
 }
 
 
-#hide_menu a{
+.nav-hide-menu a{
     font-size: 0.8em;
     color: white;
     margin-left: 0.6%;
 }
-#hide_menu a:first-child{
+.nav-hide-menu a:first-child{
     margin-left: 10%;
 }
 
-#hide_menu a:first-child:hover{
+.nav-hide-menu a:first-child:hover{
     margin-left: 10%;
 }
 
-#hide_menu a:hover{
+.nav-hide-menu a:hover{
     margin-left: 0.6%;
     font-size: 1em;
     color: #09c662;
     border-bottom: 4px solid #09c662;
 }
 
-#login{
+.nav-hide-menu-login{
+
     float: right;
     margin-right: 10%;
 }
-#login a{
-     color: white;
-     font-size: 0.8em;
-
+.nav-hide-menu-login a{
+    text-decoration: none;
+    color: white;
+    font-size: 0.8em;
+    transition: all.6s ease;
  }
-#login a:hover{
-    font-size: 1em;
+/*
+.nav-hide-menu-login a:hover{
+    cursor: pointer;
     color: #09c662;
     border-bottom: 4px solid #09c662;
 }
-
+*/
 /*burger стили */
 #burger{
     height: 1.5em;
@@ -211,20 +199,20 @@ nav{
 
 /*конец стилей для шапки сайта */
 
-#wraper{
+.wraper{
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 
-#content{
+.content{
     display: inline;
     flex: 1 0 auto;
 }
 
 
 /*Дизайн для футера*/
-#footer1{
+.footer-first{
     float: left;
     background-color: #ed1c24;
     width: 99.4%;
@@ -233,27 +221,27 @@ nav{
     border-top: 5px solid #ffffff;
 }
 
-#footer1>#text_down{
+.footer-first-text-info{
     font-size: 2.5em;
     margin-left: 10px;
     font-family: IntroScript;
     text-align: center;
 }
-#footer1>#author{
+.footer-first-text-author{
     font-size: 0.7em;
     margin-left: 10px;
     font-family: CoreSansA45ScriptLigth;
     text-align: center;
 }
 
-#footer2{
+.footer-second{
     float: left;
-    background-color: #000000;
+    background-color: #2d2d2d;
     width: 99.4%;
     padding: 0.3%;
     color: white;
 }
-#footer2>#text_down_info{
+.footer-second-text-info{
     font-size: 0.5em;
     line-height: 1.1em;
     font-family: CoreSansA45ScriptLigth;
@@ -265,39 +253,33 @@ nav{
     #burger{
         display: block;
     }
-    #hide_menu{
+    .nav-hide-menu{
         display: none;
     }
 
-    #logo img{
+    .header-logo img{
         width: 2em;
         height: 2em;
         float: left;
     }
 
-    #logo img:hover{
+    .header-logo img:hover{
         width: 2.2em;
         height: 2.2em;
         float: left;
         opacity: 0.5;
     }
-    #logo a{
-        color: white;
-    }
 
-    #logo span{
+
+    .header-logo span{
         font-size: 1.5em;
         margin-left: 10px;
         font-family: IntroScript;
         text-decoration: none;
         transition: all.6s ease;
-        -ms-transition: all.6s ease;
-        -o-transition: all.6s ease;
-        -moz-transition: all.6s ease;
-        -webkit-transition: all.6s ease;
     }
 
-    #logo span:hover{
+    .header-logo span:hover{
         font-size: 1.6em;
     }
 

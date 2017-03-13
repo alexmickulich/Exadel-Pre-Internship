@@ -14,6 +14,7 @@ var m = document.querySelector("main"),
     aSide = document.querySelector("aside")
 h = document.querySelector("header"),
     n = document.querySelector("nav"),
+
 nHeight = 0,
 hHeight = 0;
 
@@ -47,3 +48,28 @@ window.onload = function () {
 window.onresize = function () {
     setTopPadding();
 };
+
+
+function visibleUser(name) {
+    if (name && typeof name == "string") {
+        username = name;
+        singIn();
+        console.log("true");
+    } else {
+        console.log("false");
+    }
+}
+
+
+function singIn() {
+    if (username) {
+        document.querySelector(".nav-hide-menu-login-username").innerHTML = "Hi, " + username + "!";
+        document.querySelector(".add-article").style.display = "block";
+    }
+}
+
+var add_article_button = document.querySelector(".nav-hide-menu-login-username")
+
+add_article_button.onclick = function () {
+    visibleUser("Alexander");
+}
