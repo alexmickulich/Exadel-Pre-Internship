@@ -3,26 +3,28 @@
  */
 
 var elem = document.querySelector('#burger_menu_id');
-var burgerButton = document.getElementById('burger')
+var burgerButton = document.getElementById('burger');
 
 burgerButton.onclick = function () {
     elem.classList.toggle('burger_menu_open');
-}
+};
 
 
 var m = document.querySelector("main"),
-    aSide = document.querySelector("aside")
+    aSide = document.querySelector("aside");
 h = document.querySelector("header"),
     n = document.querySelector("nav"),
+    slideShow = document.querySelector(".wrap");
 
-nHeight = 0,
+nHeight = 0;
 hHeight = 0;
 
 function setTopPadding() {
     hHeight = h.offsetHeight;
     nHeight = n.offsetHeight;
-    m.style.paddingTop = hHeight + nHeight + "px";
-    aSide.style.paddingTop = hHeight + nHeight + "px";
+    slideShow.style.paddingTop = nHeight + nHeight + hHeight + "px";
+    m.style.paddingTop = nHeight + hHeight + "px";
+    aSide.style.paddingTop = nHeight + hHeight + "px";
 }
 
 function onScroll() {
@@ -68,8 +70,60 @@ function singIn() {
     }
 }
 
+
+var userBase = (function () {
+    var loginBase = ["AlexanderMikulich", "IvanovIvan", "PetrovPetr"];
+    var passwordBase = ["123456", "111111", "222222"];
+
+    var flag = false;
+    function validateUser(login, password) {
+        for (var i = 0; i < loginBase.length; i++) {
+            if (login == loginBase[i] && passwordBase[i] == password) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+    return {
+        validateUser: validateUser
+    };
+}());
+
+
+function valid(form) {
+    var add_article_button = document.querySelector(".nav-hide-menu-login-username");
+
+    var fail = false;
+    var name = form.name.value;
+    var password = form.password.value;
+    if (name == "" || name == " ") {
+        fail = "Вы не ввели свой логин";
+    } else if (password == "") {
+        fail = "Вы не ввели свой пароль";
+    }
+    if (fail) {
+        alert(fail);
+    }
+    else {
+        if (userBase.validateUser(name, password)) {
+            document.querySelector("#loginForm").style.display = "none";
+            document.querySelector("#news").style.display = "block";
+            document.querySelector("aside").style.display = "block";
+            visibleUser(name);
+        }
+        else {
+            alert("Не совпадает логин или пароль!");
+        }
+    }
+}
+
 var add_article_button = document.querySelector(".nav-hide-menu-login-username")
 
 add_article_button.onclick = function () {
-    visibleUser("Alexander");
-}
+    document.querySelector("#loginForm").style.display = "block";
+    document.querySelector("#news").style.display = "none";
+    document.querySelector("aside").style.display = "none";
+};
+
+

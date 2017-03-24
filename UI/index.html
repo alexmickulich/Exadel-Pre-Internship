@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>BLRNEWS.BY</title>
     <link rel="stylesheet" href="css/styless.css">
+    <link rel="stylesheet" href="css/slideshow.css">
     <link rel="stylesheet" href="css/main-page.css">
 </head>
 <body>
 
 <div class="wraper">
-
     <div class="content">
         <header>
             <div class="header-logo">
@@ -30,7 +30,7 @@
                     <a href="">КУЛЬТУРА</a>
                     <a href="">ПРОИСШЕСТВИЯ</a>
                     <div class="nav-hide-menu-login">
-                        <a class="nav-hide-menu-login-username" onclick="singIn()">ВОЙТИ</a>
+                        <a class="nav-hide-menu-login-username">ВОЙТИ</a>
                     </div>
                 </div>
 
@@ -51,285 +51,52 @@
 
             </nav>
         </header>
-
+        <div class="wrap">
+            <div class="slide-header">
+                <label for="slide-1">Доступна мобильная версия сайта</label>
+                <label for="slide-2">Новостная рассылка</label>
+                <label for="slide-3">Читай нас в соц-сетях</label>
+            </div>
+            <input id="slide-1" type="radio" name="slides" checked>
+            <section class="slide slide-one">
+                <h1></h1>
+            </section>
+            <input id="slide-2" type="radio" name="slides">
+            <section class="slide slide-two">
+                <h1></h1>
+            </section>
+            <input id="slide-3" type="radio" name="slides">
+            <section class="slide slide-three">
+                <h1></h1>
+            </section>
+        </div>
         <main>
-            <div id="news">
-
-
-                <!--
-                    <div class="article">
-                        <div class="article_left">
-                            <a href="index.html">
-                                <img class="article_img" src="img/spacex.jpg" title="SpaceX" alt="SpaceX">
-                            </a>
-                        </div>
-
-                        <div class="article_right">
-                            <a class="article_heading">SpaceX отправила космический грузовик Dragon к МКС </a>
-                            <br>
-                            <br>
-                            <span class="article_short_info">
-                            Компания SpaceX Илона Маска отправила ракету-носитель Falcon 9 с грузовиком Dragon к МКС. Об этом сообщается в аккаунте компании в Twitter.
-                            </span>
-                            <br>
-                            <div class="article_links">
-                                <a class="article_topic">Мир</a>
-                                <a class="article_date">20 Февраля 2017 | 19:00 </a>
-                                <a class="article_author"> Alexander Mikulich</a>
-                            </div>
-                            <br>
-                            <br>
-                        </div>
-                    </div>
-
-                    <div class="article">
-                        <div class="article_left">
-                            <a href="index.html">
-                                <img class="article_img" src="img/doctor.jpg" title="SpaceX" alt="SpaceX">
-                            </a>
-                        </div>
-
-                        <div class="article_right">
-                            <a class="article_heading">Минские врачи начали ходить на вызовы с планшетами </a>
-                            <br>
-                            <br>
-                            <span class="article_short_info">
-                            Врачи в Минске начали ходить на вызовы с 3G-планшетами, позволяющими удаленно работать с электронными амбулаторными картами.
-                            </span>
-                            <br>
-                            <div class="article_links">
-                                <a class="article_topic">Общество</a>
-                                <a class="article_date">20 Февраля 2017 | 18:00 </a>
-                                <a class="article_author"> Alexander Mikulich</a>
-                            </div>
-                            <br>
-                            <br>
-                        </div>
-                    </div>
-
-                    <div class="article">
-                        <div class="article_left">
-                            <a href="index.html">
-                                <img class="article_img" src="img/president.jpg" title="SpaceX" alt="SpaceX">
-                            </a>
-                        </div>
-
-                        <div class="article_right">
-                            <a class="article_heading">Порошенко назначил посла в Беларусь </a>
-                            <br>
-                            <br>
-                            <span class="article_short_info">
-                            Президент Украины Петр Порошенко назначил Игоря Кизима послом в Беларуси. Раньше Кизим работал замдиректора департамента международной безопасности МИД Украины. О назначении сообщается на сайте украинского президента.
-
-                            </span>
-                            <br>
-                            <div class="article_links">
-                                <a class="article_topic">Политика</a>
-                                <a class="article_date">20 Февраля 2017 | 19:00 </a>
-                                <a class="article_author"> Alexander Mikulich</a>
-                            </div>
-                            <br>
-                            <br>
-                        </div>
-                    </div>
-
-                    <div class="article">
-                        <div class="article_left">
-                            <a href="index.html">
-                                <img class="article_img" src="img/mail.jpg" title="SpaceX" alt="SpaceX">
-                            </a>
-                        </div>
-
-                        <div class="article_right">
-                            <a class="article_heading">Счет пошел на часы. Сегодня последний день уплаты налога на тунеядство </a>
-                            <br>
-                            <br>
-                            <span class="article_short_info">
-                            Компания SpaceX Илона Маска отправила ракету-носитель Falcon 9 с грузовиком Dragon к МКС. Об этом сообщается в аккаунте компании в Twitter.
-                            </span>
-                            <br>
-                            <div class="article_links">
-                                <a class="article_topic">Общество</a>
-                                <a class="article_date">20 Февраля 2017 | 19:00 </a>
-                                <a class="article_author"> Alexander Mikulich</a>
-                            </div>
-                            <br>
-                            <br>
-                        </div>
-                    </div>
-
-                    <div class="article">
-                        <div class="article_left">
-                            <a href="index.html">
-                                <img class="article_img" src="img/bate.jpg" title="SpaceX" alt="SpaceX">
-                            </a>
-                        </div>
-
-                        <div class="article_right">
-                            <a class="article_heading">Футболист сборной Финляндии прибыл на просмотр в БАТЭ </a>
-                            <br>
-                            <br>
-                            <span class="article_short_info">
-                            В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан.
-                            </span>
-                            <br>
-                            <div class="article_links">
-                                <a class="article_topic">Спорт</a>
-                                <a class="article_date">20 Февраля 2017 | 19:00 </a>
-                                <a class="article_author"> Alexander Mikulich</a>
-                            </div>
-                            <br>
-                            <br>
-                        </div>
-                    </div>
-
-                    <div class="article">
-                        <div class="article_left">
-                            <a href="index.html">
-                                <img class="article_img" src="img/es.jpg" title="SpaceX" alt="SpaceX">
-                            </a>
-                        </div>
-
-                        <div class="article_right">
-                            <a class="article_heading">МИД: Беларусь продолжит взаимодействие с ЕС для полной отмены санкций
-                            </a>
-                            <br>
-                            <br>
-                            <span class="article_short_info">
-                           Белорусская сторона продолжит взаимодействие с ЕС в целях полной отмены санкций, заявили в МИД Беларуси, комментируя решение Евросоюза продлить на год оружейное эмбарго в отношении нашей страны и санкции в отношении четырех чиновников. В МИД отметили, что изначально исходят из того, что санкции несправедливы и контрпродуктивны.
-                            </span>
-                            <br>
-                            <div class="article_links">
-                                <a class="article_topic">Политика</a>
-                                <a class="article_date">20 Февраля 2017 | 19:00 </a>
-                                <a class="article_author"> Alexander Mikulich</a>
-                            </div>
-                            <br>
-                            <br>
-                        </div>
-                    </div>
-
-                    <div class="article">
-                        <div class="article_left">
-                            <a href="index.html">
-                                <img class="article_img" src="img/9_zhenskiy_zabeg_zam_tutby_phsl_08032016.jpg" title="SpaceX" alt="SpaceX">
-                            </a>
-                        </div>
-
-                        <div class="article_right">
-                            <a class="article_heading">Две тысячи девушек и перекрытый проспект. В Минске пройдет массовый женский забег
-                            </a>
-                            <br>
-                            <br>
-                            <span class="article_short_info">
-                            Восьмого марта в центре Минска пройдет большой забег Beauty Run, в котором примут участие исключительно девушки. В федерации легкой атлетики рассказали, как организуют мероприятие и чем оно будет интересно также мужчинам.
-                            </span>
-                            <br>
-                            <div class="article_links">
-                                <a class="article_topic">Общество</a>
-                                <a class="article_date">20 Февраля 2017 | 19:00 </a>
-                                <a class="article_author"> Alexander Mikulich</a>
-                            </div>
-                            <br>
-                            <br>
-                        </div>
-                    </div>
-
-                    <div class="article">
-                        <div class="article_left">
-                            <a href="index.html">
-                                <img class="article_img" src="img/1-marshrutka-na-zheleznodorozhnoy-sbila-muzhchinu.jpg" title="SpaceX" alt="SpaceX">
-                            </a>
-                        </div>
-
-                        <div class="article_right">
-                            <a class="article_heading">В Минске пьяный мужчина пошел на красный и попал под маршрутку
-                            </a>
-                            <br>
-                            <br>
-                            <span class="article_short_info">
-                            В Минске пьяный пешеход переходил дорогу на красный сигнал светофора и попал под маршрутку. Об этом AUTO.TUT.BY рассказала представитель ГАИ Московского района Любовь Трепашко.
-                            </span>
-                            <br>
-                            <div class="article_links">
-                                <a class="article_topic">Происшествия</a>
-                                <a class="article_date">20 Февраля 2017 | 19:00 </a>
-                                <a class="article_author"> Alexander Mikulich</a>
-                            </div>
-                            <br>
-                            <br>
-                        </div>
-                    </div>
-
-                    <div class="article">
-                        <div class="article_left">
-                            <a href="index.html">
-                                <img class="article_img" src="img/be7d2119e0dc73285ce50e1801356130.jpg" title="SpaceX" alt="SpaceX">
-                            </a>
-                        </div>
-
-                        <div class="article_right">
-                            <a class="article_heading">Следственный комитет просит проверять купюры номиналом 20 рублей
-                            </a>
-                            <br>
-                            <br>
-                            <span class="article_short_info">
-                            На днях были задержаны два фальшивомонетчика. Их взяли с поддельными 20-рублевыми купюрами. Они признались в том, что напечатали 30 купюр, но, как выяснили следователи, на самом деле поддельных банкнот не менее 200. Об этом TUT.BY рассказал официальный представитель Следственного комитета Алексей Климович.
-                            </span>
-                            <br>
-                            <div class="article_links">
-                                <a class="article_topic">Общество</a>
-                                <a class="article_date">20 Февраля 2017 | 19:00 </a>
-                                <a class="article_author"> Alexander Mikulich</a>
-                            </div>
-                            <br>
-                            <br>
-                        </div>
-                    </div>
-
-                    <div class="article">
-                        <div class="article_left">
-                            <a href="index.html">
-                                <img class="article_img" src="img/skidki_cum_20151010_zam_tutby_phsl_1520.jpg" title="SpaceX" alt="SpaceX">
-                            </a>
-                        </div>
-
-                        <div class="article_right">
-                            <a class="article_heading">До 50%. Где минчанам искать скидки в марте
-                            </a>
-                            <br>
-                            <br>
-                            <span class="article_short_info">
-                            Столичные универмаги и торговые сети в марте продолжат делать скидки. Об акциях на непродовольственные товары и датах их проведения сообщает главное управление потребительского рынка Мингорисполкома.
-                            </span>
-                            <br>
-                            <div class="article_links">
-                                <a class="article_topic">Общество</a>
-                                <a class="article_date">20 Февраля 2017 | 19:00 </a>
-                                <a class="article_author"> Alexander Mikulich</a>
-                            </div>
-                            <br>
-                            <br>
-                        </div>
-                    </div>
-                -->
-            </div>
-
-            <div class="pagination">
-                <a href=""><</a>
-                <a id="current_page" href="">1</a>
-                <a href="">2</a>
-                <a href="">3</a>
-                <a href="">4</a>
-                <a href="">5</a>
-                <a href="">6</a>
-                <a href="">7</a>
-                <a href="">8</a>
-                <a href="">9</a>
-                <a href="">></a>
-                <a href="">последняя</a>
-                <div style="clear: both;"><br></div>
-            </div>
+            <form action="" method="post" name="test" id="loginForm">
+                <label for="name"> Имя:</label>
+                <input type="text" name="name" placeholder="Имя" id="name"/><br/>
+                <label for="pasword">Пароль:</label>
+                <input type="password" name="password" placeholder="Пароль" id="pasword"/><br/>
+                <input type="" onclick=valid(document.getElementById('loginForm')) name="button" value="Готово">
+            </form>
+                <div id="main-article">
+                </div>
+                <div id="news">
+                </div>
+                <div class="pagination">
+                    <a href=""><</a>
+                    <a id="current_page" href="">1</a>
+                    <a href="">2</a>
+                    <a href="">3</a>
+                    <a href="">4</a>
+                    <a href="">5</a>
+                    <a href="">6</a>
+                    <a href="">7</a>
+                    <a href="">8</a>
+                    <a href="">9</a>
+                    <a href="">></a>
+                    <a href="">последняя</a>
+                    <div style="clear: both;"><br></div>
+                </div>
         </main>
         <aside>
             <div class="add-article">
@@ -397,12 +164,12 @@
     <div class="article-list-item" data-id="id">
 
         <div class="article-list-item-left">
-            <img class="article-list-item-img" src="img/spacex.jpg"><img>
-
+            <img class="article-list-item-img" src="img/spacex.jpg"
+                 onclick="renderDetailedArticle(this.parentNode.parentNode)"><img>
         </div>
 
         <div class="article-list-item-right">
-            <a class="article-list-item-title">
+            <a class="article-list-item-title" onclick="renderDetailedArticle(this.parentNode.parentNode);">
                 Заголовок статьи
             </a>
             <br>
@@ -422,12 +189,44 @@
                 <a id="article-list-item-tags-fourth"></a>
                 <a id="article-list-item-tags-fifth"></a>
             </div>
+        </div>
+    </div>
+</template>
+<template id="template-detaild-article-list-item">
+    <div class="detailed-article-list-item" data-id="">
+
+        <div class="detailed-article-list-item-left">
+            <img class="detailed-article-list-item-img" src="img/spacex.jpg"><img>
+        </div>
+
+        <div class="detailed-article-list-item-right">
+            <a class="detailed-article-list-item-title ">
+                Заголовок статьи
+            </a>
+            <br>
+            <br>
+            <p class="detailed-article-list-item-summary">
+                Краткое описание для статьи. Тут краткое описание
+            </p>
+            <div class="detailed-article-list-item-meta">
+                <a class="detailed-article-list-item-topic">Мир</a>
+                <a class="detailed-article-list-item-date">12.12.1995 04:35</a>
+                <a class="detailed-article-list-item-author">Alexander Mikulich</a>
+            </div>
+            <div class="detailed-article-list-item-tags">
+                <a id="detailed-article-list-item-tags-first"></a>
+                <a id="detailed-article-list-item-tags-second"></a>
+                <a id="detailed-article-list-item-tags-third"></a>
+                <a id="detailed-article-list-item-tags-fourth"></a>
+                <a id="detailed-article-list-item-tags-fifth"></a>
+            </div>
 
         </div>
 
 
     </div>
 </template>
+
 
 <!-- scripts -->
 <script src="js/script.js"></script>

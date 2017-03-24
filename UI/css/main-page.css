@@ -1,8 +1,11 @@
-
+#news{
+    display: block;
+}
 main{
     float: left;
     width: 60%;
     margin-left: 10%;
+    display: block;
 }
 
 aside{
@@ -103,14 +106,17 @@ aside{
 }
 
 
+
 .main-buttton{
     float: left;
     width: 100%;
-    background: #09c662;
+    background: #09d263;
     padding: 1vh 1vh;
+    border: 1px solid darkgreen;
 }
 .main-buttton:hover{
-    background: #09d263;
+
+    background: #ffffff
 }
 .main-buttton a{
     margin-left: 0vh;
@@ -119,6 +125,94 @@ aside{
     font-size: 2.7vh;
 }
 
+.main-buttton a:hover{
+    margin-left: 0vh;
+    color: #09d263;
+    font-family: IntroScript;
+    font-size: 2.7vh;
+}
+
+/* ---------------------------------------DETAILED----------------------------------------- */
+.detailed-article-list-item{
+    width: 100%;
+    float: left;
+    border-bottom: solid silver 1px;
+    margin-bottom: 5%;
+}
+
+.detailed-article-list-item-img{
+    z-index: 50;
+    width: 95%;
+    float: left;
+    padding-right: 5%;
+    margin-bottom: 2%;
+    transition: all.1s ease;
+}
+.detailed-article-list-item-img:hover{
+    opacity: 0.7;
+    margin-bottom: 2%;
+    transition: all.1s ease;
+}
+.detailed-article-list-item-right{
+    width: 60%;
+    float: left;
+}
+.detailed-article-list-item-left{
+    float: left;
+    width: 40%;
+    height: 100%;
+}
+.detailed-article-list-item-title{
+    font-size: 140%;
+    font-weight: normal;
+    font-family: CoreSansA45Script;
+}
+
+.detailed-article-list-item-title:hover{
+    font-family: CoreSansA45Script;
+    cursor: pointer;
+    color: #09c662;
+}
+
+.detailed-article-list-item-summary{
+    font-family: CoreSansA45ScriptLigth;
+    color:darkgray;
+    font-size: 100%;
+}
+
+
+.detailed-article-list-item-meta{
+    margin-top: 3%;
+    margin-bottom: 2px;
+}
+
+.detailed-article-list-item-meta a{
+    font-size: 80%;
+    margin-right: 1%;
+}
+
+.detailed-article-list-item-tags a{
+}
+.detailed-article-list-item-meta a:hover{
+    color: black;
+    cursor: pointer;
+}
+.detailed-article-list-item-topic{
+    color: #ed1c24;
+}
+
+.detailed-article-list-item-date{
+    color: darkgray;
+}
+
+.detailed-article-list-item-author{
+    color: #09c662;
+}
+
+
+
+
+/*---------------------------DETAILED-END-------------------------------------------------------*/
 
 .search-bar{
     width: 99%;
@@ -184,4 +278,8 @@ aside{
     .article-list-item-left{
         display: none;
     }
+}
+
+#loginForm{
+    display: none;
 }

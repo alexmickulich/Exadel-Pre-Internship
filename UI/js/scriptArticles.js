@@ -330,15 +330,14 @@ var articleModel = (function () {
         addTag: addTag,
         removeTag:removeTag
     };
-}())
-
-
+}());
 
 
 
 var articleRenderer = (function () {
     var ARTICLE_TEMPLATE;
     var ARTICLE_LIST_NODE;
+    var DETAILED_ARTICLE_TEMPLATE;
 
     function init() {
         ARTICLE_TEMPLATE = document.querySelector('#template-article-list-item');
@@ -361,6 +360,7 @@ var articleRenderer = (function () {
             return renderArticle(article);
         });
     }
+
 
     function renderArticle(article) {
         var template = ARTICLE_TEMPLATE;
@@ -385,6 +385,8 @@ var articleRenderer = (function () {
         return template.content.querySelector('.article-list-item').cloneNode(true);
     }
 
+
+
     function formatDate(d) {
         return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear() + " | " +
             d.getHours() + ':' + d.getMinutes();
@@ -398,12 +400,18 @@ var articleRenderer = (function () {
 }());
 
 
+
+
 document.addEventListener('DOMContentLoaded', startApp);
 
 
 function startApp() {
     articleRenderer.init();
     renderArticles();
+   /* var articleButton = document.querySelector(".article-list-item-title");
+    articleButton.onclick = function () {
+        renderDetailedArticle(articleButton.parentNode.parentNode);
+    }*/
 }
 
 function renderArticles(skip, top) {
@@ -412,9 +420,50 @@ function renderArticles(skip, top) {
     articleRenderer.insertArticlesInDOM(articles);
 }
 
+function renderDetailedArticle(object) {
+    document.querySelector(".wrap").style.display="none";
+    //articleRenderer.removeArticlesFromDom();
+    var detailedArticle = articleModel.getArticle(object.dataset.id);
+    insertDetailedArticlesInDOM(detailedArticle);
+    document.querySelector("#news").style.display="none";
+    document.querySelector(".pagination").style.display="none";
+}
+
+function insertDetailedArticlesInDOM(articles) {
+    DETAILED_ARTICLE_LIST_NODE = document.querySelector("#main-article");
+    var articlesNodes = renderDetailedMapArticle(articles);
+    articlesNodes.forEach(function (node) {
+        DETAILED_ARTICLE_LIST_NODE.appendChild(node);
+    });
+}
+
+
+function renderDetailedMapArticle(articles) {
+    return articles.map(function (article) {
+        return renderMainArticle(article);
+    });
+}
+function renderMainArticle(article) {
+    DETAILED_ARTICLE_TEMPLATE = document.querySelector('#template-detaild-article-list-item');
+    var template = DETAILED_ARTICLE_TEMPLATE;
+    template.content.querySelector('.detailed-article-list-item').dataset.id = article.id;
+    template.content.querySelector('.detailed-article-list-item-title').textContent = article.title;
+    template.content.querySelector('.detailed-article-list-item-summary').textContent = article.summary;
+    template.content.querySelector('.detailed-article-list-item-author').textContent = article.author;
+    template.content.querySelector('.detailed-article-list-item-date').textContent = formatDate(article.createdAt);
+    template.content.querySelector('.detailed-article-list-item-img').setAttribute("src", article.image);
+    return template.content.querySelector('.detailed-article-list-item').cloneNode(true);
+}
+
+function formatDate(d) {
+    return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear() + " | " +
+        d.getHours() + ':' + d.getMinutes();
+}
 
 /*---------------------------- Логирование основное задание---------------------------------------------*/
 
+
+/*
 console.log(" Новости от 0 до 10: ");
 console.log(articleModel.getArticle(0,10));
 
@@ -470,8 +519,11 @@ console.log(articleModel.getArticle(1));
 articleModel.editArticle(1,articleEditor);
 console.log(articleModel.getArticle(1));
 startApp();
+*/
 /*-------------------------------Логирование дополнительное задание: работа с Тегами--------------------------------*/
 
+
+/*
 console.log('Добавим тег "SpaceX" к изменённой новости');
 articleModel.addTag(1,"SpaceX");
 
@@ -487,3 +539,4 @@ console.log('Уберём тег "SpaceX" из изменённой новост
 articleModel.removeTag(1,"SpaceX");
 console.log(articleModel.getArticle(1));
 startApp();
+*/

@@ -19,8 +19,15 @@
 }
 
 body,html {
+    background-color: #d1d1d1;
     height: 100%;
     width: 100%;
+}
+.wraper{
+    background-color: #d1d1d1;
+}
+.content{
+    background-color: #FFFFFF;
 }
 
 a {
@@ -57,7 +64,8 @@ hr{
 
 header{
     float: left;
-    background-color: #ed1c24;
+    /*background-color: #ed1c24;*/
+    background-color: rgb(9, 210, 99);
     width: 100%;
     color: white;
     z-index: 1000;
@@ -125,7 +133,7 @@ nav{
 
 .nav-hide-menu a:hover{
     margin-left: 0.6%;
-    font-size: 1em;
+    font-size: 0.8em;
     color: #09c662;
     border-bottom: 4px solid #09c662;
 }
@@ -214,7 +222,7 @@ nav{
 /*Дизайн для футера*/
 .footer-first{
     float: left;
-    background-color: #ed1c24;
+    background-color: #09d263;
     width: 99.4%;
     padding: 0.3%;
     color: white;
