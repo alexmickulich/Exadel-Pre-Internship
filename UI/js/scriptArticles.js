@@ -4,329 +4,352 @@
 var GLOBAL_DETAILED_ARTICLE_ID;
 
 var articleModel = (function () {
-            var GLOBAL_ARTICLES = [
-                {
-                    id: "1",
-                    image: "./img/bate2.jpg",
-                    title: 'Показал, кто в доме хозяин». БАТЭ стал обладателем Суперкубка страны',
-                    tags: ["спорт", "БАТЭ", "Футбол"],
-                    summary: 'Ну вот и дождались: сегодня в матче за Суперкубок в Минске сошлись географические соседи из Борисова и Жодино. Прошлогодние чемпион и обладатель Кубка оспорили Суперкубок. И спор этот, ставший официальным открытием футбольного сезона, получился весьма содержательным.',
-                    createdAt: new Date(2017, 11, 17, 8, 1, 0),
-                    author: 'Ivanov Ivan'
-                },
-                {
-                    id: "2",
-                    image: "./img/spacex.jpg",
-                    title: 'SpaceX отправила космический грузовик Dragon к МКС',
-                    tags: ["Мир", "SpaceX", "Илон Маск"],
-                    summary: 'Компания SpaceX Илона Маска отправила ракету-носитель Falcon 9 с грузовиком Dragon к МКС. Об этом сообщается в аккаунте компании в Twitter. ',
-                    createdAt: new Date(2017, 11, 17, 3, 24, 0),
-                    author: 'Alexander Mikulich'
-                },
-                {
-                    id: "3",
-                    image: "./img/doctor.jpg",
-                    title: 'Минские врачи начали ходить на вызовы с планшетами',
-                    tags: ["общество", "врачи", "Минск"],
-                    summary: 'Врачи в Минске начали ходить на вызовы с 3G-планшетами, позволяющими удаленно работать с электронными амбулаторными картами.',
-                    createdAt: new Date(2017, 11, 17, 6, 24, 0),
-                    author: 'Alexander Mikulich'
-                },
-                {
-                    id: '4',
-                    image: "./img/president.jpg",
-                    title: 'Порошенко назначил посла в Беларусь ',
-                    tags: ["Порошенко", "Беларусь", "Украина"],
-                    summary: 'Президент Украины Петр Порошенко назначил Игоря Кизима послом в Беларуси. Раньше Кизим работал замдиректора департамента международной безопасности МИД Украины. О назначении сообщается на сайте украинского президента. ',
-                    createdAt: new Date(2017, 11, 17, 5, 24, 0),
-                    author: 'Alexander Mikulich'
-                },
-                {
-                    id: '5',
-                    image: "./img/mail.jpg",
-                    title: 'Счет пошел на часы. Сегодня последний день уплаты налога на тунеядство ',
-                    tags: ["Беларусь", "налог", "тунеядство"],
-                    summary: 'Компания SpaceX Илона Маска отправила ракету-носитель Falcon 9 с грузовиком Dragon к МКС. Об этом сообщается в аккаунте компании в Twitter. ',
-                    createdAt: new Date(2017, 11, 17, 7, 24, 0),
-                    author: 'Alexander Mikulich'
-                },
-                {
-                    id: '6',
-                    image: "./img/bate.jpg",
-                    title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
-                    tags: ["спорт", "БАТЭ", "Футбол"],
-                    summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
-                    createdAt: new Date(2017, 10, 17, 8, 24, 0),
-                    author: 'Ivanov Ivan'
-                },
+        var GLOBAL_ARTICLES = [
+            {
+                id: "1",
+                image: "./img/bate2.jpg",
+                title: 'Показал, кто в доме хозяин». БАТЭ стал обладателем Суперкубка страны',
+                tags: ["спорт", "БАТЭ", "Футбол"],
+                summary: 'Ну вот и дождались: сегодня в матче за Суперкубок в Минске сошлись географические соседи из Борисова и Жодино. Прошлогодние чемпион и обладатель Кубка оспорили Суперкубок. И спор этот, ставший официальным открытием футбольного сезона, получился весьма содержательным.',
+                createdAt: new Date(2015, 11, 17, 8, 1, 0),
+                author: 'Ivanov Ivan'
+            },
+            {
+                id: "2",
+                image: "./img/spacex.jpg",
+                title: 'SpaceX отправила космический грузовик Dragon к МКС',
+                tags: ["Мир", "SpaceX", "Илон Маск"],
+                summary: 'Компания SpaceX Илона Маска отправила ракету-носитель Falcon 9 с грузовиком Dragon к МКС. Об этом сообщается в аккаунте компании в Twitter. ',
+                createdAt: new Date(2015, 11, 17, 3, 24, 0),
+                author: 'Alexander Mikulich'
+            },
+            {
+                id: "3",
+                image: "./img/doctor.jpg",
+                title: 'Минские врачи начали ходить на вызовы с планшетами',
+                tags: ["общество", "врачи", "Минск"],
+                summary: 'Врачи в Минске начали ходить на вызовы с 3G-планшетами, позволяющими удаленно работать с электронными амбулаторными картами.',
+                createdAt: new Date(2015, 11, 17, 6, 24, 0),
+                author: 'Alexander Mikulich'
+            },
+            {
+                id: '4',
+                image: "./img/president.jpg",
+                title: 'Порошенко назначил посла в Беларусь ',
+                tags: ["Порошенко", "Беларусь", "Украина"],
+                summary: 'Президент Украины Петр Порошенко назначил Игоря Кизима послом в Беларуси. Раньше Кизим работал замдиректора департамента международной безопасности МИД Украины. О назначении сообщается на сайте украинского президента. ',
+                createdAt: new Date(2015, 11, 17, 5, 24, 0),
+                author: 'Alexander Mikulich'
+            },
+            {
+                id: '5',
+                image: "./img/mail.jpg",
+                title: 'Счет пошел на часы. Сегодня последний день уплаты налога на тунеядство ',
+                tags: ["Беларусь", "налог", "тунеядство"],
+                summary: 'Компания SpaceX Илона Маска отправила ракету-носитель Falcon 9 с грузовиком Dragon к МКС. Об этом сообщается в аккаунте компании в Twitter. ',
+                createdAt: new Date(2015, 11, 17, 7, 24, 0),
+                author: 'Alexander Mikulich'
+            },
+            {
+                id: '6',
+                image: "./img/bate.jpg",
+                title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
+                tags: ["спорт", "БАТЭ", "Футбол"],
+                summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
+                createdAt: new Date(2015, 10, 17, 8, 24, 0),
+                author: 'Ivanov Ivan'
+            },
 
 
-                {
-                    id: '7',
-                    image: "./img/bate.jpg",
-                    title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
-                    tags: ["спорт", "БАТЭ", "Футбол"],
-                    summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
-                    createdAt: new Date(2017, 10, 17, 8, 24, 0),
-                    author: 'Ivanov Ivan'
-                },
+            {
+                id: '7',
+                image: "./img/bate.jpg",
+                title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
+                tags: ["спорт", "БАТЭ", "Футбол"],
+                summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
+                createdAt: new Date(2015, 10, 17, 8, 24, 0),
+                author: 'Ivanov Ivan'
+            },
 
 
-                {
-                    id: '8',
-                    image: "./img/bate.jpg",
-                    title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
-                    tags: ["спорт", "БАТЭ", "Футбол"],
-                    summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
-                    createdAt: new Date(2017, 10, 17, 8, 24, 0),
-                    author: 'Ivanov Ivan'
-                },
+            {
+                id: '8',
+                image: "./img/bate.jpg",
+                title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
+                tags: ["спорт", "БАТЭ", "Футбол"],
+                summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
+                createdAt: new Date(2015, 10, 17, 8, 24, 0),
+                author: 'Ivanov Ivan'
+            },
 
 
-                {
-                    id: '9',
-                    image: "./img/bate.jpg",
-                    title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
-                    tags: ["спорт", "БАТЭ", "Футбол"],
-                    summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
-                    createdAt: new Date(2017, 10, 17, 8, 24, 0),
-                    author: 'Ivanov Ivan'
-                },
+            {
+                id: '9',
+                image: "./img/bate.jpg",
+                title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
+                tags: ["спорт", "БАТЭ", "Футбол"],
+                summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
+                createdAt: new Date(2015, 10, 17, 8, 24, 0),
+                author: 'Ivanov Ivan'
+            },
 
 
-                {
-                    id: '10',
-                    image: "./img/bate.jpg",
-                    title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
-                    tags: ["спорт", "БАТЭ", "Футбол"],
-                    summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
-                    createdAt: new Date(2017, 10, 17, 8, 24, 0),
-                    author: 'Ivanov Ivan'
-                },
+            {
+                id: '10',
+                image: "./img/bate.jpg",
+                title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
+                tags: ["спорт", "БАТЭ", "Футбол"],
+                summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
+                createdAt: new Date(2015, 10, 17, 8, 24, 0),
+                author: 'Ivanov Ivan'
+            },
 
 
-                {
-                    id: '11',
-                    image: "./img/bate.jpg",
-                    title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
-                    tags: ["спорт", "БАТЭ", "Футбол"],
-                    summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
-                    createdAt: new Date(2017, 10, 17, 8, 24, 0),
-                    author: 'Ivanov Ivan'
-                },
+            {
+                id: '11',
+                image: "./img/bate.jpg",
+                title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
+                tags: ["спорт", "БАТЭ", "Футбол"],
+                summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
+                createdAt: new Date(2015, 10, 17, 8, 24, 0),
+                author: 'Ivanov Ivan'
+            },
 
-                {
-                    id: '12',
-                    image: "./img/bate.jpg",
-                    title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
-                    tags: ["спорт", "БАТЭ", "Футбол"],
-                    summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
-                    createdAt: new Date(2017, 10, 17, 8, 24, 0),
-                    author: 'Ivanov Ivan'
-                },
+            {
+                id: '12',
+                image: "./img/bate.jpg",
+                title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
+                tags: ["спорт", "БАТЭ", "Футбол"],
+                summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
+                createdAt: new Date(2015, 10, 17, 8, 24, 0),
+                author: 'Ivanov Ivan'
+            },
 
-                {
-                    id: '13',
-                    image: "./img/bate.jpg",
-                    title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
-                    tags: ["спорт", "БАТЭ", "Футбол"],
-                    summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
-                    createdAt: new Date(2017, 10, 17, 8, 24, 0),
-                    author: 'Ivanov Ivan'
-                },
+            {
+                id: '13',
+                image: "./img/bate.jpg",
+                title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
+                tags: ["спорт", "БАТЭ", "Футбол"],
+                summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
+                createdAt: new Date(2015, 10, 17, 8, 24, 0),
+                author: 'Ivanov Ivan'
+            },
 
-                {
-                    id: '14',
-                    image: "./img/bate.jpg",
-                    title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
-                    tags: ["спорт", "БАТЭ", "Футбол"],
-                    summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
-                    createdAt: new Date(2017, 10, 17, 8, 24, 0),
-                    author: 'Ivanov Ivan'
-                },
+            {
+                id: '14',
+                image: "./img/bate.jpg",
+                title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
+                tags: ["спорт", "БАТЭ", "Футбол"],
+                summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
+                createdAt: new Date(2015, 10, 17, 8, 24, 0),
+                author: 'Ivanov Ivan'
+            },
 
-                {
-                    id: '15',
-                    image: "./img/bate.jpg",
-                    title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
-                    tags: ["спорт", "БАТЭ", "Футбол"],
-                    summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
-                    createdAt: new Date(2017, 10, 17, 8, 24, 0),
-                    author: 'Ivanov Ivan'
-                },
+            {
+                id: '15',
+                image: "./img/bate.jpg",
+                title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
+                tags: ["спорт", "БАТЭ", "Футбол"],
+                summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
+                createdAt: new Date(2015, 10, 17, 8, 24, 0),
+                author: 'Ivanov Ivan'
+            },
 
-                {
-                    id: '16',
-                    image: "./img/bate.jpg",
-                    title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
-                    tags: ["спорт", "БАТЭ", "Футбол"],
-                    summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
-                    createdAt: new Date(2017, 10, 17, 8, 24, 0),
-                    author: 'Ivanov Ivan'
-                },
+            {
+                id: '16',
+                image: "./img/bate.jpg",
+                title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
+                tags: ["спорт", "БАТЭ", "Футбол"],
+                summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
+                createdAt: new Date(2015, 10, 17, 8, 24, 0),
+                author: 'Ivanov Ivan'
+            },
 
-                {
-                    id: '17',
-                    image: "./img/bate.jpg",
-                    title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
-                    tags: ["спорт", "БАТЭ", "Футбол"],
-                    summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
-                    createdAt: new Date(2017, 10, 17, 8, 24, 0),
-                    author: 'Ivanov Ivan'
-                },
+            {
+                id: '17',
+                image: "./img/bate.jpg",
+                title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
+                tags: ["спорт", "БАТЭ", "Футбол"],
+                summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
+                createdAt: new Date(2015, 10, 17, 8, 24, 0),
+                author: 'Ivanov Ivan'
+            },
 
-                {
-                    id: '18',
-                    image: "./img/bate.jpg",
-                    title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
-                    tags: ["спорт", "БАТЭ", "Футбол"],
-                    summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
-                    createdAt: new Date(2017, 10, 17, 8, 24, 0),
-                    author: 'Ivanov Ivan'
-                },
+            {
+                id: '18',
+                image: "./img/bate.jpg",
+                title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
+                tags: ["спорт", "БАТЭ", "Футбол"],
+                summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
+                createdAt: new Date(2015, 10, 17, 8, 24, 0),
+                author: 'Ivanov Ivan'
+            },
 
-                {
-                    id: '19',
-                    image: "./img/bate.jpg",
-                    title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
-                    tags: ["спорт", "БАТЭ", "Футбол"],
-                    summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
-                    createdAt: new Date(2017, 10, 17, 8, 24, 0),
-                    author: 'Ivanov Ivan'
-                },
+            {
+                id: '19',
+                image: "./img/bate.jpg",
+                title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
+                tags: ["спорт", "БАТЭ", "Футбол"],
+                summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
+                createdAt: new Date(2015, 10, 17, 8, 24, 0),
+                author: 'Ivanov Ivan'
+            },
 
-                {
-                    id: '20',
-                    image: "./img/bate.jpg",
-                    title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
-                    tags: ["спорт", "БАТЭ", "Футбол"],
-                    summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
-                    createdAt: new Date(2017, 10, 17, 8, 24, 0),
-                    author: 'Ivanov Ivan'
-                }
+            {
+                id: '20',
+                image: "./img/spacex.jpg",
+                title: 'Футболист сборной Финляндии прибыл на просмотр в БАТЭ ',
+                tags: ["спорт", "БАТЭ", "Футбол"],
+                summary: 'В расположение БАТЭ, работающего на втором турецком сборе-2017, прибыл финский нападающий Яссе Туоминен (1995), которому предстоит недельный просмотр, сообщает официальный сайт борисовчан. ',
+                createdAt: new Date(2015, 10, 17, 8, 24, 0),
+                author: 'Ivanov Ivan'
+            }
+        ];
+
+        var TAGS_BASE = ["Мир", "SpaceX", "Илон Маск", "Спорт", "Экономика", "общество", "врачи", "Минск", "Беларусь", "налог", "тунеядство", "спорт", "БАТЭ", "Футбол"]
+        var AUTOR_BASE = ['Alexander Mikulich', 'Ivanov Ivan'];
 
 
-            ];
+        function getArticles(skip, top, filterConfig) {
+            skip = skip || 0;
+            top = top || 10;
 
-            var TAGS_BASE = ["Мир", "SpaceX", "Илон Маск", "Спорт", "Экономика", "общество", "врачи", "Минск", "Беларусь", "налог", "тунеядство", "спорт", "БАТЭ", "Футбол"]
-            var AUTOR_BASE = ['Alexander Mikulich', 'Ivanov Ivan'];
+            var newArticles = [];
+            GLOBAL_ARTICLES.forEach(function (item, i, GLOBAL_ARTICLES) {
+                newArticles[i] = item;
+            });
 
-            function getArticles(skip, top, filterConfig) {
-                var newArticles = [];
-                GLOBAL_ARTICLES.forEach(function (item, i, articles) {
-                    newArticles[i] = item;
-                });
-                var start = skip || 0;
-                var size = top || 10;
-                if (filterConfig) {
+            newArticles.sort(function (a, b) {
+                return b.createdAt - a.createdAt;
+            });
+
+            if (filterConfig) {
+                return newArticles.filter(function (element) {
                     if (filterConfig.author) {
-                        newArticles = newArticles.filter(function (element) {
-                            return element.author == filterConfig.author;
-                        })
+                        if (element.author !== filterConfig.author) {
+                            return false;
+                        }
                     }
+
                     if (filterConfig.dateStart) {
-                        newArticles = newArticles.filter(function (element) {
-                            return element.createdAt.getTime() >= filterConfig.dateStart.getTime();
-                        })
+                        if (element.createdAt.getTime() <= filterConfig.dateStart.getTime()) {
+                            return false;
+                        }
                     }
-                    if (filterConfig.dateEnd) {
-                        newArticles = newArticles.filter(function (element) {
-                            return element.createdAt.getTime() <= filterConfig.dateEnd.getTime();
-                        })
+                    if (element.dateEnd) {
+                        if (element.createdAt.getTime() >= filterConfig.dateEnd.getTime()) {
+                            return false;
+                        }
                     }
-                    if (filterConfig.tags != undefined && filterConfig.tags.length != 0) {
-                        result = result.filter(function (element) {
-                            return filterConfig.tags.every(function (tag) {
-                                return element.tags.indexOf(tag) >= 0;
+                    if (filterConfig.tags && !filterConfig.tags.every(function (tag) {
+                            return item.tags.some(function (tagArticle) {
+                                return tag === tagArticle;
                             })
-                        })
+                        })) {
+                        return false;
                     }
-                }
-                newArticles.sort(function (a, b) {
-                    return b.createdAt - a.createdAt;
-                });
-                return newArticles.slice(start, start + size);
+                    return true;
+                }).slice(skip, skip + top);
             }
-
-            function getArticle(curid) {
-                return GLOBAL_ARTICLES.filter(function (currentElement) {
-                    return currentElement.id == curid;
-                });
+            else {
+                return newArticles.slice(skip, skip + top);
             }
+        }
 
 
-            function validateArticle(article) {
-                if (typeof(article.id) != "string") return false;
-                if (typeof(article.title) != "string") return false;
-                if (typeof(article.title.length) < 0) return false;
-                if (typeof(article.summary) != "string") return false;
-                if (typeof(article.summary.length) < 0) return false;
-                if (typeof(article.createdAt) != "object") return false;
-                if (typeof(article.author) != "string") return false;
-                if (article.tags.length < 0) return false;
+        function getArticle(curid) {
+            return GLOBAL_ARTICLES.filter(function (currentElement) {
+                return currentElement.id == curid;
+            });
+        }
+
+
+        function validateArticle(article) {
+            if (typeof(article.id) != "string") return false;
+            if (typeof(article.title) != "string") return false;
+            if (typeof(article.title.length) < 0) return false;
+            if (typeof(article.summary) != "string") return false;
+            if (typeof(article.summary.length) < 0) return false;
+            if (typeof(article.createdAt) != "object") return false;
+            if (typeof(article.author) != "string") return false;
+            if (article.tags.length < 0) return false;
+            return true;
+        }
+
+
+        function addArticle(article) {
+            if (validateArticle(article)) {
+                GLOBAL_ARTICLES.push(article);
                 return true;
+            } else return false;
+        }
+
+        function editArticle(id, article) {
+            if (validateArticle(article)) {
+                getArticle(id)[0].title = article.title;
+                getArticle(id)[0].summary = article.summary;
+                return true;
+            } else return false;
+        }
+
+        function removeArticle(id) {
+            for (var i = 0; i < GLOBAL_ARTICLES.length; i++) {
+                if (GLOBAL_ARTICLES[i].id === id) {
+                    GLOBAL_ARTICLES.splice(i, 1);
+                }
             }
+        };
 
 
-            function addArticle(article) {
-                if (validateArticle(article)) {
-                    GLOBAL_ARTICLES.push(article);
-                    return true;
-                } else return false;
+        function addTag(id, teg) {
+            var key = 0;
+            for (var i = 0; i < TAGS_BASE.length; i++) {
+                if (TAGS_BASE[i] == teg) {
+                    key = 1;
+                }
             }
-
-            function editArticle(id, article) {
-                if (validateArticle(article)) {
-                    getArticle(id)[0].title = article.title;
-                    getArticle(id)[0].summary = article.summary;
-                    return true;
-                } else return false;
-            }
-
-            function removeArticle(id) {
+            if (key > 0) {
                 for (var i = 0; i < GLOBAL_ARTICLES.length; i++) {
-                    if (GLOBAL_ARTICLES[i].id === id) {
-                        GLOBAL_ARTICLES.splice(i, 1);
+                    if (GLOBAL_ARTICLES[i].id == id) {
+                        GLOBAL_ARTICLES[i].tags.push(teg);
+                        return true;
                     }
                 }
-            };
+            } else return false;
+        }
 
-
-            function addTag(id, teg) {
-                var key = 0;
-                for (var i = 0; i < TAGS_BASE.length; i++) {
-                    if (TAGS_BASE[i] == teg) {
-                        key = 1;
-                    }
-                }
-                if (key > 0) {
-                    for (var i = 0; i < GLOBAL_ARTICLES.length; i++) {
-                        if (GLOBAL_ARTICLES[i].id == id) {
-                            GLOBAL_ARTICLES[i].tags.push(teg);
+        function removeTag(id, teg) {
+            for (var i = 0; i < GLOBAL_ARTICLES.length; i++) {
+                if (GLOBAL_ARTICLES[i].id == id) {
+                    for (var j = 0; j < GLOBAL_ARTICLES[i].tags.length; j++) {
+                        if (GLOBAL_ARTICLES[i].tags[j] === teg) {
+                            delete GLOBAL_ARTICLES[i].tags[j];
+                            GLOBAL_ARTICLES[i].tags.length--;
                             return true;
                         }
                     }
-                } else return false;
-            }
-
-            function removeTag(id, teg) {
-                for (var i = 0; i < GLOBAL_ARTICLES.length; i++) {
-                    if (GLOBAL_ARTICLES[i].id == id) {
-                        for (var j = 0; j < GLOBAL_ARTICLES[i].tags.length; j++) {
-                            if (GLOBAL_ARTICLES[i].tags[j] === teg) {
-                                delete GLOBAL_ARTICLES[i].tags[j];
-                                GLOBAL_ARTICLES[i].tags.length--;
-                                return true;
-                            }
-                        }
-                    }
                 }
-                return false;
             }
+            return false;
+        }
 
+        function stringToDate(item) {
+            item.forEach(function (element) {
+                element.createdAt = new Date(element.createdAt);
+            })
+        }
+
+        function copyItem(item) {
+            articles = [];
+            item.forEach(function (element, i) {
+                articles[i] = element;
+            })
+        }
 
             return {
                 GLOBAL_ARTICLES: GLOBAL_ARTICLES,
+                copyItem: copyItem,
+                stringToDate: stringToDate,
                 getArticles: getArticles,
                 getArticle: getArticle,
                 validateArticle: validateArticle,
@@ -337,8 +360,9 @@ var articleModel = (function () {
                 removeTag: removeTag
             };
         }
+
         ()
-    )
+        )
     ;
 
 
@@ -413,6 +437,12 @@ document.addEventListener('DOMContentLoaded', startApp);
 function startApp() {
     articleRenderer.init();
     renderArticles();
+
+    var jsonItem=JSON.parse(localStorage.getItem("myArtickles"));
+    if(jsonItem){
+        articleModel.stringToDate(jsonItem);
+        articleModel.copyItem(jsonItem);
+    }
     /* var articleButton = document.querySelector(".article-list-item-title");
      articleButton.onclick = function () {
      renderDetailedArticle(articleButton.parentNode.parentNode);
@@ -469,22 +499,27 @@ function formatDate(d) {
         d.getHours() + ':' + d.getMinutes();
 }
 
+
 function addArticleItem() {
 
-    article3 = {
-        id: '5000',
+    article_add = {
+        id: new Date().toDateString(),
         title: document.querySelector("#add-news-form-title").value,
         tags: document.querySelector("#add-news-form-tags").value.split(","),
         summary: document.querySelector("#add-news-form-summary").value,
-        createdAt: new Date(2019, 11, 17, 8, 24, 0),
+        createdAt: new Date(),
         author: username
     };
 
 
     console.log(articleModel.getArticles(1, 100));
-    articleModel.addArticle(article3);
+    articleModel.addArticle(article_add);
     document.querySelector("#news").style.display = "block";
+    document.querySelector(".wrap").style.display = "block";
+    document.querySelector(".pagination").style.display = "block";
     startApp();
+
+    localStorage.setItem("myArtickles",JSON.stringify(articleModel.GLOBAL_ARTICLES));
     document.querySelector("#add-news-block").style.display = "none";
     console.log(articleModel.getArticles(1, 100));
 
@@ -494,10 +529,12 @@ function addArticleItem() {
 function showAddArticleForm() {
     document.querySelector("#add-news-block").style.display = "block";
     document.querySelector("#news").style.display = "none";
+    document.querySelector(".wrap").style.display = "none";
+    document.querySelector(".pagination").style.display = "none";
 }
 
 function showEditArticleForm() {
-    var article=articleModel.getArticle(GLOBAL_DETAILED_ARTICLE_ID)[0];
+    var article = articleModel.getArticle(GLOBAL_DETAILED_ARTICLE_ID)[0];
     document.querySelector("#edit-news-form-title").value = article.title;
     document.querySelector("#edit-news-form-summary").value = article.summary;
     document.querySelector("#edit-news-form-content").value = article.summary;
@@ -506,6 +543,8 @@ function showEditArticleForm() {
 
     document.querySelector("#edit-news-block").style.display = "block";
     document.querySelector("#main-article").style.display = "none";
+    document.querySelector(".pagination").style.display = "none";
+
 }
 
 
@@ -525,23 +564,29 @@ function editArticleItem() {
     article2.summary = article.summary;
 
     startApp();
+    localStorage.setItem("myArtickles",JSON.stringify(articleModel.GLOBAL_ARTICLES));
     document.querySelector("#edit-news-block").style.display = "none";
     document.querySelector("#news").style.display = "block";
+    document.querySelector(".wrap").style.display = "block";
+    document.querySelector(".pagination").style.display = "block";
     console.log(articleModel.getArticles(1, 100));
 }
 
 function deleteArticle() {
     articleModel.removeArticle(GLOBAL_DETAILED_ARTICLE_ID);
     startApp();
+    localStorage.setItem("myArtickles",JSON.stringify(articleModel.GLOBAL_ARTICLES));
     document.querySelector("#news").style.display = "block";
+    document.querySelector(".wrap").style.display = "block";
+    document.querySelector(".pagination").style.display = "block";
     document.querySelector("#main-article").style.display = "none";
 }
 
 var GLOBAL_TOP = 20;
 function showMore() {
     articleRenderer.init();
-    renderArticles(0,GLOBAL_TOP);
-    GLOBAL_TOP=GLOBAL_TOP+10;
+    renderArticles(0, GLOBAL_TOP);
+    GLOBAL_TOP = GLOBAL_TOP + 10;
 }
 
 
@@ -560,14 +605,10 @@ function filterArticle() {
     console.log(document.querySelector("#filter-form-tags").value.split(","));
 
 
-
     articleRenderer.removeArticlesFromDom();
     var articles = articleModel.getArticles(0, 100, filter);
     articleRenderer.insertArticlesInDOM(articles);
 }
-
-
-
 
 
 /*---------------------------- Логирование основное задание---------------------------------------------*/

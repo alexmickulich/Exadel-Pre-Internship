@@ -111,7 +111,7 @@ aside{
     margin-top: 2%;
     float: left;
     width: 100%;
-    background: #09d263;
+    background: #ff1008;
     border: 1px solid #09d263;
 }
 
@@ -122,6 +122,11 @@ aside{
     font-family: IntroScript;
     font-size: 1.2em;
     width: 100%;
+}
+
+.main-button:hover{
+    background: #09f570;
+    border: 1px solid #09d263;
 }
 
 /* ---------------------------------------DETAILED----------------------------------------- */
@@ -187,7 +192,7 @@ aside{
 }
 
 .detailed-article-list-item-edit-buttons{
-    visibility: hidden;
+    visibility: visible;
     float: right;
     margin-top: 2%;
 }
@@ -269,6 +274,24 @@ aside{
 #current_page{
     color: #ed1c24;
 }
+
+/*------------------------------------LOGIN----------------------------------------------*/
+#loginForm label{
+    font-family: CoreSansA45ScriptLigth;
+}
+
+
+#loginForm .main-button-label{
+    font-family: IntroScript;
+    width: 40%;
+}
+
+
+
+
+
+
+
 
 
 /*--------------------------------------ADD-NEWS-FORM----------------------------------------*/

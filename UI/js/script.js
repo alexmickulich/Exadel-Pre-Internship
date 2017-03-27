@@ -75,8 +75,8 @@ function singIn() {
 
 
 var userBase = (function () {
-    var loginBase = ["AlexanderMikulich", "IvanovIvan", "PetrovPetr"];
-    var passwordBase = ["123456", "111111", "222222"];
+    var loginBase = ["AlexanderMikulich", "IvanovIvan", "PetrovPetr","admin"];
+    var passwordBase = ["123456", "111111", "222222","admin"];
 
     var flag = false;
     function validateUser(login, password) {
@@ -113,6 +113,8 @@ function valid(form) {
             document.querySelector("#loginForm").style.display = "none";
             document.querySelector("#news").style.display = "block";
             document.querySelector("aside").style.display = "block";
+            document.querySelector(".pagination").style.display="block";
+            document.querySelector(".wrap").style.display="block";
             visibleUser(name);
         }
         else {
@@ -127,6 +129,8 @@ add_article_button.onclick = function () {
     document.querySelector("#loginForm").style.display = "block";
     document.querySelector("#news").style.display = "none";
     document.querySelector("aside").style.display = "none";
+    document.querySelector(".pagination").style.display="none";
+    document.querySelector(".wrap").style.display="none";
 };
 
 
