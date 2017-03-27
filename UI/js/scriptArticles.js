@@ -333,23 +333,22 @@ var articleModel = (function () {
             return false;
         }
 
-        function stringToDate(item) {
-            item.forEach(function (element) {
-                element.createdAt = new Date(element.createdAt);
-            })
-        }
+            function replaceArticles() {
+                GLOBAL_ARTICLES = JSON.parse(localStorage.getItem("articles"));
+                for (var i = 0; i < GLOBAL_ARTICLES.length; i++)
+                    GLOBAL_ARTICLES[i].createdAt = new Date(GLOBAL_ARTICLES[i].createdAt);
+                TAGS_BASE = JSON.parse(localStorage.getItem("tags"));
+            }
 
-        function copyItem(item) {
-            articles = [];
-            item.forEach(function (element, i) {
-                articles[i] = element;
-            })
-        }
+            function storageArticles() {
+                localStorage.setItem("tags", JSON.stringify(TAGS_BASE));
+                localStorage.setItem("articles", JSON.stringify(GLOBAL_ARTICLES));
+            }
 
             return {
                 GLOBAL_ARTICLES: GLOBAL_ARTICLES,
-                copyItem: copyItem,
-                stringToDate: stringToDate,
+                replaceArticles: replaceArticles,
+                storageArticles: storageArticles,
                 getArticles: getArticles,
                 getArticle: getArticle,
                 validateArticle: validateArticle,
@@ -435,14 +434,15 @@ document.addEventListener('DOMContentLoaded', startApp);
 
 
 function startApp() {
+    if(!localStorage.getItem("articles")){
+        articleModel.storageArticles();
+    }
+
+    articleModel.replaceArticles();
     articleRenderer.init();
     renderArticles();
 
-    var jsonItem=JSON.parse(localStorage.getItem("myArtickles"));
-    if(jsonItem){
-        articleModel.stringToDate(jsonItem);
-        articleModel.copyItem(jsonItem);
-    }
+
     /* var articleButton = document.querySelector(".article-list-item-title");
      articleButton.onclick = function () {
      renderDetailedArticle(articleButton.parentNode.parentNode);
@@ -517,9 +517,8 @@ function addArticleItem() {
     document.querySelector("#news").style.display = "block";
     document.querySelector(".wrap").style.display = "block";
     document.querySelector(".pagination").style.display = "block";
+    articleModel.storageArticles();
     startApp();
-
-    localStorage.setItem("myArtickles",JSON.stringify(articleModel.GLOBAL_ARTICLES));
     document.querySelector("#add-news-block").style.display = "none";
     console.log(articleModel.getArticles(1, 100));
 
@@ -563,8 +562,9 @@ function editArticleItem() {
     article2.title = article.title;
     article2.summary = article.summary;
 
+    articleModel.storageArticles();
     startApp();
-    localStorage.setItem("myArtickles",JSON.stringify(articleModel.GLOBAL_ARTICLES));
+
     document.querySelector("#edit-news-block").style.display = "none";
     document.querySelector("#news").style.display = "block";
     document.querySelector(".wrap").style.display = "block";
@@ -574,8 +574,8 @@ function editArticleItem() {
 
 function deleteArticle() {
     articleModel.removeArticle(GLOBAL_DETAILED_ARTICLE_ID);
+    articleModel.storageArticles();
     startApp();
-    localStorage.setItem("myArtickles",JSON.stringify(articleModel.GLOBAL_ARTICLES));
     document.querySelector("#news").style.display = "block";
     document.querySelector(".wrap").style.display = "block";
     document.querySelector(".pagination").style.display = "block";
