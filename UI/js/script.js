@@ -2,6 +2,8 @@
  * Created by Lenovo z50-70 on 22.02.2017.
  */
 
+var username;
+
 var elem = document.querySelector('#burger_menu_id');
 var burgerButton = document.getElementById('burger');
 
@@ -67,6 +69,7 @@ function singIn() {
     if (username) {
         document.querySelector(".nav-hide-menu-login-username").innerHTML = "Hi, " + username + "!";
         document.querySelector(".add-article").style.display = "block";
+        document.querySelector(".detailed-article-list-item-edit-buttons").style.visibility = "visible";
     }
 }
 
