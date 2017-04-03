@@ -36,7 +36,7 @@ app.put('/articles', function (request, response) {
   response.json(db.articles.findOne({ id: request.body.id }));
 });
 
-app.put('/articles:id', function (request, response) {
+app.put('/articles/:id', function (request, response) {
   response.json(db.articles.findOne({ id: request.params.id }));
 });
 
@@ -44,7 +44,7 @@ app.delete('/articles', function (request, response) {
   response.json(db.articles.remove({ id: request.body.id }));
 });
 
-app.delete('/articles:id', function (request, response) {
+app.delete('/articles/:id', function (request, response) {
   response.json(db.articles.remove({ id: request.params.id }));
 });
 
@@ -57,7 +57,7 @@ app.patch('/articles', function (req, res) {
   response.json(db.articles.update(query, request.body, options));
 });
 
-app.patch('/articles:id', function (request, response) {
+app.patch('/articles/:id', function (request, response) {
   var options = {
     multi: false,
     upsert: false

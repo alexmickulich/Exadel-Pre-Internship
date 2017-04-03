@@ -366,7 +366,7 @@ function editArticleItem() {
     var article2 = articleModel.getArticle(GLOBAL_DETAILED_ARTICLE_ID)[0];
     article2.title = article.title;
     article2.summary = article.summary;
-
+    dbRequestModel.editArticle(article2);
 
     startApp();
 
@@ -379,6 +379,7 @@ function editArticleItem() {
 
 function deleteArticle() {
     dbRequestModel.deleteArticle(GLOBAL_DETAILED_ARTICLE_ID);
+
     startApp();
     document.querySelector("#news").style.display = "block";
     document.querySelector(".wrap").style.display = "block";
