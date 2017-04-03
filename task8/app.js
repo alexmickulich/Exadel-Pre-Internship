@@ -48,7 +48,7 @@ app.delete('/articles/:id', function (request, response) {
   response.json(db.articles.remove({ id: request.params.id }));
 });
 
-app.patch('/articles', function (req, res) {
+app.patch('/articles', function (request, response) {
   var options = {
     multi: false,
     upsert: false
