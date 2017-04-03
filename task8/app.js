@@ -1,8 +1,9 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-let db=require('diskdb');
+var db=require('diskdb');
 db.connect('./db',['articles']);
+
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
@@ -48,20 +49,20 @@ app.delete('/articles:id', function (request, response) {
 });
 
 app.patch('/articles', function (req, res) {
-  let options = {
+  var options = {
     multi: false,
     upsert: false
   };
-  let query = db.articles.findOne({ id: request.body.id });
+  var query = db.articles.findOne({ id: request.body.id });
   response.json(db.articles.update(query, request.body, options));
 });
 
 app.patch('/articles:id', function (request, response) {
-  let options = {
+  var options = {
     multi: false,
     upsert: false
   };
-  let query = db.articles.findOne({ id: request.params.id });
+  var query = db.articles.findOne({ id: request.params.id });
   response.json(db.articles.update(query, request.body, options));
 });
 
