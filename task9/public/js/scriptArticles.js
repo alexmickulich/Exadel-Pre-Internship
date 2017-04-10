@@ -178,7 +178,7 @@ var articleModel = (function () {
                         }
 
 
-                        if (filterConfig.tags) {
+                        if (filterConfig.tags && filterConfig.tags!="") {
                             var flag = false;
                             for (var i = 0; i < filterConfig.tags.length; i++) {
                                 for (var j = 0; j < element.tags.length; j++) {
@@ -563,7 +563,7 @@ function filterArticle() {
         dateEnd: new Date(dateE[2], dateE[1], dateE[0], 23, 59, 0),
         tags: document.querySelector("#filter-form-tags").value.split(",")
     };
-
+    console.log(filter);
     console.log(document.querySelector("#filter-form-tags").value.split(","));
 
 
