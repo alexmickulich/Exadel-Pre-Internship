@@ -1,0 +1,316 @@
+@font-face {
+    font-family: "IntroScript"; /* Гарнитура шрифта */
+    src: url(../fonts/intro.otf); /* Путь к файлу со шрифтом */
+}
+
+@font-face {
+    font-family: "CoreSansA45Script";
+    src: url(../fonts/CoreSansA45Regular.otf);
+}
+
+@font-face {
+    font-family: "CoreSansA45ScriptLigth";
+    src: url(../fonts/CoreSansA35Light.otf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body,html {
+    background-color: #d1d1d1;
+    height: 100%;
+    width: 100%;
+}
+.wraper{
+    background-color: #d1d1d1;
+}
+.content{
+    background-color: #FFFFFF;
+}
+
+a {
+    font-family: CoreSansA45ScriptLigth;
+    color: #2d2d2d;
+    text-decoration: none;
+    transition: all .6s ease;
+}
+
+a:hover {
+    font-family: CoreSansA45ScriptLigth;
+    color: #09c662;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .6s ease;
+}
+img{
+    max-width: 100%;
+    height: auto;
+    width: auto\9;
+    transition: all.6s ease;
+}
+
+hr{
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/* Стили для шапки сайта */
+
+header{
+    float: left;
+    /*background-color: #ed1c24;*/
+    background-color: rgb(9, 210, 99);
+    width: 100%;
+    color: white;
+    z-index: 1000;
+}
+
+.header-logo img{
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+.header-logo img:hover{
+    width: 52px;
+    height: 52px;
+    float: left;
+    opacity: 0.5;
+}
+.header-logo a{
+    color: white;
+}
+
+.header-logo span{
+    font-size: 2.5em;
+    margin-left: 10px;
+    font-family: IntroScript;
+    text-decoration: none;
+    transition: all.6s ease;
+}
+
+.header-logo span:hover{
+    font-size: 2.7em;
+}
+
+.header-logo{
+    margin-left: 10%;
+}
+
+/*меню для сайта*/
+
+
+
+
+nav{
+    display: block;
+    background-color: #2d2d2d;
+    width: 99.4%;
+    padding: 0.0% 0.3%;
+    float: left;
+    border-bottom: 1px black;
+    box-bottom-shadow: 0 0 50px rgba(0,0,0,10);
+}
+
+
+.nav-hide-menu a{
+    font-size: 0.8em;
+    color: white;
+    margin-left: 0.6%;
+}
+.nav-hide-menu a:first-child{
+    margin-left: 10%;
+}
+
+.nav-hide-menu a:first-child:hover{
+    margin-left: 10%;
+}
+
+.nav-hide-menu a:hover{
+    margin-left: 0.6%;
+    font-size: 0.8em;
+    color: #09c662;
+    border-bottom: 4px solid #09c662;
+}
+
+.nav-hide-menu-login{
+
+    float: right;
+    margin-right: 10%;
+}
+.nav-hide-menu-login a{
+    text-decoration: none;
+    color: white;
+    font-size: 0.8em;
+    transition: all.6s ease;
+ }
+/*
+.nav-hide-menu-login a:hover{
+    cursor: pointer;
+    color: #09c662;
+    border-bottom: 4px solid #09c662;
+}
+*/
+/*burger стили */
+#burger{
+    height: 1.5em;
+    width: 1.5em;
+    margin-left: 2%;
+    display: none;
+    padding: 0;
+}
+
+#burger_button{
+    height: 100%;
+    margin-left: 50%;
+}
+
+#burger_button:hover{
+    cursor: pointer;
+}
+
+.burger_menu{
+    display: none;
+}
+
+#burger_list{
+    margin-left: 4%;
+    height: 100%;
+    width: 100%;
+    border-bottom: 1px solid white;
+}
+
+#burger_login{
+    margin-top: 2px;
+    margin-left: 4%;
+    margin-bottom: 2px;
+}
+
+.burger_menu a{
+    font-size: 1.0em;
+    color: white;
+    margin-right: 50%;
+}
+.burger_menu_open{
+    border-top: 1px solid white;
+    height: 100%;
+    width: 100%;
+    display: block;
+}
+
+
+
+/*конец стилей для шапки сайта */
+
+.wraper{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.content{
+    display: inline;
+    flex: 1 0 auto;
+}
+
+
+/*Дизайн для футера*/
+.footer-first{
+    float: left;
+    background-color: #09d263;
+    width: 99.4%;
+    padding: 0.3%;
+    color: white;
+    border-top: 5px solid #ffffff;
+}
+
+.footer-first-text-info{
+    font-size: 2.5em;
+    margin-left: 10px;
+    font-family: IntroScript;
+    text-align: center;
+}
+.footer-first-text-author{
+    font-size: 0.7em;
+    margin-left: 10px;
+    font-family: CoreSansA45ScriptLigth;
+    text-align: center;
+}
+
+.footer-second{
+    float: left;
+    background-color: #2d2d2d;
+    width: 99.4%;
+    padding: 0.3%;
+    color: white;
+}
+.footer-second-text-info{
+    font-size: 0.5em;
+    line-height: 1.1em;
+    font-family: CoreSansA45ScriptLigth;
+    margin-left: 10%;
+}
+
+/* -----------------media----------------- */
+@media (max-width: 700px) {
+    #burger{
+        display: block;
+    }
+    .nav-hide-menu{
+        display: none;
+    }
+
+    .header-logo img{
+        width: 2em;
+        height: 2em;
+        float: left;
+    }
+
+    .header-logo img:hover{
+        width: 2.2em;
+        height: 2.2em;
+        float: left;
+        opacity: 0.5;
+    }
+
+
+    .header-logo span{
+        font-size: 1.5em;
+        margin-left: 10px;
+        font-family: IntroScript;
+        text-decoration: none;
+        transition: all.6s ease;
+    }
+
+    .header-logo span:hover{
+        font-size: 1.6em;
+    }
+
+    @media (min-width: 701px) {
+        .burger_menu{
+            display: none;
+        }
+    }
+}
+
+
+/*Scrol styles*/
+
+header {
+    position: fixed;
+    top: 0;
+    box-sizing: border-box;
+}
+.scroll_nav{
+    display: none;
+}
+
+.scroll {
+    box-shadow: 0 7px 0 0 rgba(0, 0, 0, .1);
+}
+
