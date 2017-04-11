@@ -69,7 +69,6 @@ function singIn() {
     if (username) {
         document.querySelector(".nav-hide-menu-login-username").innerHTML = "Hi, " + username + "!";
         document.querySelector(".add-article").style.display = "block";
-        document.querySelector(".detailed-article-list-item-edit-buttons").style.visibility = "visible";
     }
 }
 
@@ -127,10 +126,23 @@ var add_article_button = document.querySelector(".nav-hide-menu-login-username")
 
 add_article_button.onclick = function () {
     document.querySelector("#loginForm").style.display = "block";
+    document.querySelector("#main-article").style.display = "none";
     document.querySelector("#news").style.display = "none";
     document.querySelector("aside").style.display = "none";
     document.querySelector(".pagination").style.display="none";
     document.querySelector(".wrap").style.display="none";
 };
 
+function bySection(sectionConfig) {
+    var filter = {
+      section: sectionConfig
+    };
+
+    console.log(document.querySelector("#filter-form-tags").value.split(","));
+    articleRenderer.removeArticlesFromDom();
+    var articles = articleModel.getArticles(0, 100, filter);
+    articleRenderer.insertArticlesInDOM(articles);
+
+}
+//----------------------------NAVIGATION-MENU-------------------------------//
 

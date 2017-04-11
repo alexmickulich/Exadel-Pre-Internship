@@ -22,13 +22,14 @@
                 <div id="burger"><img id="burger_button" src="img/burger.png"></div>
 
                 <div class="nav-hide-menu">
-                    <a href="">ГЛАВНАЯ</a>
-                    <a href="">МИР</a>
-                    <a href="">ЭКОНОМИКА</a>
-                    <a href="">СПОРТ</a>
-                    <a href="">ОБЩЕСТВО</a>
-                    <a href="">КУЛЬТУРА</a>
-                    <a href="">ПРОИСШЕСТВИЯ</a>
+                    <a href="index.html">ГЛАВНАЯ </a>
+                    <a onclick="bySection('Мир');">МИР</a>
+                    <a onclick="bySection('Политика');">ПОЛИТИКА</a>
+                    <a onclick="bySection('Экономика');">ЭКОНОМИКА</a>
+                    <a onclick="bySection('Спорт');">СПОРТ</a>
+                    <a onclick="bySection('Общество');">ОБЩЕСТВО</a>
+                    <a onclick="bySection('Культура');">КУЛЬТУРА</a>
+                    <a onclick="bySection('Происшествия');">ПРОИСШЕСТВИЯ</a>
                     <div class="nav-hide-menu-login">
                         <a class="nav-hide-menu-login-username">ВОЙТИ</a>
                     </div>
@@ -36,13 +37,14 @@
 
                 <div id="burger_menu_id" class="burger_menu">
                     <div id="burger_list">
-                        <a href="">ГЛАВНАЯ</a>
-                        <a href="">МИР</a>
-                        <a href="">ЭКОНОМИКА</a>
-                        <a href="">СПОРТ</a>
-                        <a href="">ОБЩЕСТВО</a>
-                        <a href="">КУЛЬТУРА</a>
-                        <a href="">ПРОИСШЕСТВИЯ</a>
+                        <a href="index.html">ГЛАВНАЯ </a>
+                        <a onclick="bySection('Мир');">МИР</a>
+                        <a onclick="bySection('Политика');">ПОЛИТИКА</a>
+                        <a onclick="bySection('Экономика');">ЭКОНОМИКА</a>
+                        <a onclick="bySection('Спорт');">СПОРТ</a>
+                        <a onclick="bySection('Общество');">ОБЩЕСТВО</a>
+                        <a onclick="bySection('Культура');">КУЛЬТУРА</a>
+                        <a onclick="bySection('Происшествия');">ПРОИСШЕСТВИЯ</a>
                     </div>
                     <div id="burger_login">
                         <a href="">ВОЙТИ</a><br>
@@ -110,12 +112,18 @@
                     <textarea name="image" rows="1" cols="100" id="add-news-form-image"
                               placeholder="Вставте ссылку на изображение"></textarea>
                     <br><br>
+
+                    <span>Выберите категорию: </span>
+                    <textarea name="section" rows="1" cols="100" id="add-news-form-section"
+                              placeholder="Категория"></textarea>
+                    <br><br>
+
                     <span>Список тегов: </span>
                     <textarea name="image" rows="1" cols="100" id="add-news-form-tags"
                               placeholder="Список тегов через запятую"></textarea>
                     <br><br>
                     <label class="main-button-label">
-                        <input type="button"  class="main-button" onclick="addArticleItem();" value="Добавить новость">
+                        <input type="button" class="main-button" onclick="addArticleItem();" value="Добавить новость">
                     </label>
                     <br><br>
                     <br><br>
@@ -139,12 +147,19 @@
                     <textarea name="image" rows="1" cols="100" id="edit-news-form-image"
                               placeholder="Вставте ссылку на изображение"></textarea>
                     <br><br>
+
+                    <span>Выберите категорию: </span>
+                    <textarea name="section" rows="1" cols="100" id="edit-news-form-section"
+                              placeholder="Категория"></textarea>
+                    <br><br>
+
                     <span>Список тегов: </span>
                     <textarea name="image" rows="1" cols="100" id="edit-news-form-tags"
                               placeholder="Список тегов через запятую"></textarea>
                     <br><br>
                     <label class="main-button-label">
-                        <input type="button"  class="main-button" onclick="editArticleItem();" value="Сохранить изменения">
+                        <input type="button" class="main-button" onclick="editArticleItem();"
+                               value="Сохранить изменения">
                     </label>
                     <br><br>
                     <br><br>
@@ -169,7 +184,8 @@
 
 
                 <label class="main-button-label">
-                    <input class="main-button" type="button" name="button" onclick="showAddArticleForm();" value="Добавить">
+                    <input class="main-button" type="button" name="button" onclick="showAddArticleForm();"
+                           value="Добавить">
                 </label>
                 <div style="clear: both;"><br></div>
             </div>
@@ -222,7 +238,6 @@
             </label>
 
 
-
         </aside>
     </div>
     <footer>
@@ -260,7 +275,7 @@
                 Краткое описание для статьи. Тут краткое описание
             </p>
             <div class="article-list-item-meta">
-                <a class="article-list-item-topic">Мир</a>
+                <a class="article-list-item-section">Мир</a>
                 <a class="article-list-item-date">12.12.1995 04:35</a>
                 <a class="article-list-item-author">Alexander Mikulich</a>
             </div>
@@ -282,13 +297,14 @@
             <a class="detailed-article-list-item-title "> Заголовок статьи </a>
 
             <div class="detailed-article-list-item-meta">
-                <a class="detailed-article-list-item-topic">Мир</a>
+                <a class="detailed-article-list-item-section">Мир</a>
                 <a class="detailed-article-list-item-date">12.12.1995 04:35</a>
                 <a class="detailed-article-list-item-author">Alexander Mikulich</a>
             </div>
 
             <div class="detailed-article-list-item-edit-buttons">
-                <a class="detailed-article-list-item-edit-buttons-edit" onclick="showEditArticleForm()">Редактировать</a>
+                <a class="detailed-article-list-item-edit-buttons-edit"
+                   onclick="showEditArticleForm()">Редактировать</a>
                 <a class="detailed-article-list-item-edit-buttons-edit" onclick="deleteArticle()">Удалить</a>
             </div>
 
@@ -305,6 +321,14 @@
             </p>
 
 
+            <br>
+            <p class="detailed-article-list-item-content">
+                Краткое описание для статьи. Тут краткое описание
+            </p>
+            <br>
+            <br>
+
+
             <div class="detailed-article-list-item-tags">
                 <a id="detailed-article-list-item-tags-first"></a>
                 <a id="detailed-article-list-item-tags-second"></a>
@@ -312,6 +336,10 @@
                 <a id="detailed-article-list-item-tags-fourth"></a>
                 <a id="detailed-article-list-item-tags-fifth"></a>
             </div>
+
+
+            <br>
+            <br>
         </div>
 
 

@@ -49,20 +49,13 @@ app.delete('/articles/:id', function (request, response) {
 });
 
 app.patch('/articles', function (request, response) {
-  var options = {
-    multi: false,
-    upsert: false
-  };
-  var query = db.articles.findOne({ id: request.body.id });
-  response.json(db.articles.update(query, request.body, options));
+db.articles.remove({ id: request.body.id });
+response.json(db.articles.save(request.body));
 });
 
 app.patch('/articles/:id', function (request, response) {
-  var options = {
-    multi: false,
-    upsert: false
-  };
-  var query = db.articles.findOne({ id: request.params.id });
-  response.json(db.articles.update(query, request.body, options));
+db.articles.remove({ id: request.body.id });
+response.json(db.articles.save(request.body));
 });
+
 
