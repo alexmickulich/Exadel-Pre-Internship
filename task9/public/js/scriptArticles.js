@@ -171,6 +171,7 @@ var articleModel = (function () {
                                 return false;
                             }
                         }
+
                         if (filterConfig.dateEnd) {
                             if (element.createdAt.getTime() >= filterConfig.dateEnd.getTime()) {
                                 return false;
@@ -462,9 +463,8 @@ function formatDate(d) {
 
 
 function addArticleItem() {
-
-    article_add = {
-        id: new Date().toDateString(),
+    var article_add = {
+        id: new Date().toString()+username,
         title: document.querySelector("#add-news-form-title").value,
         tags: document.querySelector("#add-news-form-tags").value.split(","),
         summary: document.querySelector("#add-news-form-summary").value,
@@ -482,7 +482,7 @@ function addArticleItem() {
     startApp();
     document.querySelector("#add-news-block").style.display = "none";
     console.log(articleModel.getArticles(1, 100));
-
+    article_add.clear;
 }
 
 
@@ -500,11 +500,10 @@ function showEditArticleForm() {
     document.querySelector("#edit-news-form-content").value = article.summary;
     document.querySelector("#edit-news-form-image").value = article.image;
     document.querySelector("#edit-news-form-tags").value = article.tags;
-
+    document.querySelector("#edit-news-form-section").value = article.section;
     document.querySelector("#edit-news-block").style.display = "block";
     document.querySelector("#main-article").style.display = "none";
     document.querySelector(".pagination").style.display = "none";
-
 }
 
 
