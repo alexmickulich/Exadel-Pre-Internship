@@ -90,7 +90,7 @@ aside{
     color: black;
     cursor: pointer;
 }
-.article-list-item-topic{
+.article-list-item-section{
     color: #ed1c24;
 }
 
@@ -173,8 +173,14 @@ aside{
 }
 
 .detailed-article-list-item-summary{
+    font-family: CoreSansA45Script;
+    color: #2d2d2d;
+    font-size: 120%;
+}
+
+.detailed-article-list-item-content{
     font-family: CoreSansA45ScriptLigth;
-    color:darkgray;
+    color: #393939;
     font-size: 100%;
 }
 
@@ -192,7 +198,7 @@ aside{
 }
 
 .detailed-article-list-item-edit-buttons{
-    visibility: visible;
+    /*visibility: hidden;*/
     float: right;
     margin-top: 2%;
 }
@@ -203,12 +209,13 @@ aside{
 
 
 .detailed-article-list-item-tags a{
+    font-size: 150%;
 }
 .detailed-article-list-item-meta a:hover{
     color: black;
     cursor: pointer;
 }
-.detailed-article-list-item-topic{
+.detailed-article-list-item-section{
     color: #ed1c24;
 }
 

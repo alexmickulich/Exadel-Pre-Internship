@@ -2,17 +2,17 @@
  * Created by Lenovo z50-70 on 22.02.2017.
  */
 
-var username;
+let username;
 
-var elem = document.querySelector('#burger_menu_id');
-var burgerButton = document.getElementById('burger');
+let elem = document.querySelector('#burger_menu_id');
+let burgerButton = document.getElementById('burger');
 
 burgerButton.onclick = function () {
     elem.classList.toggle('burger_menu_open');
 };
 
 
-var m = document.querySelector("main"),
+let m = document.querySelector("main"),
     aSide = document.querySelector("aside");
 h = document.querySelector("header"),
     n = document.querySelector("nav"),
@@ -32,7 +32,7 @@ function setTopPadding() {
 function onScroll() {
     window.addEventListener("scroll", callbackFunc);
     function callbackFunc() {
-        var y = window.pageYOffset;
+        let y = window.pageYOffset;
         if (y > hHeight) {
             h.classList.add("scroll");
             n.classList.add("scroll_nav");
@@ -47,6 +47,7 @@ function onScroll() {
 window.onload = function () {
     setTopPadding();
     onScroll();
+    startApp();
 };
 
 window.onresize = function () {
@@ -69,18 +70,17 @@ function singIn() {
     if (username) {
         document.querySelector(".nav-hide-menu-login-username").innerHTML = "Hi, " + username + "!";
         document.querySelector(".add-article").style.display = "block";
-        document.querySelector(".detailed-article-list-item-edit-buttons").style.visibility = "visible";
     }
 }
 
 
-var userBase = (function () {
-    var loginBase = ["AlexanderMikulich", "IvanovIvan", "PetrovPetr","admin"];
-    var passwordBase = ["123456", "111111", "222222","admin"];
+let userBase = (function () {
+    let loginBase = ["AlexanderMikulich", "IvanovIvan", "PetrovPetr","admin"];
+    let passwordBase = ["123456", "111111", "222222","admin"];
 
-    var flag = false;
+    let flag = false;
     function validateUser(login, password) {
-        for (var i = 0; i < loginBase.length; i++) {
+        for (let i = 0; i < loginBase.length; i++) {
             if (login == loginBase[i] && passwordBase[i] == password) {
                 flag = true;
             }
@@ -95,11 +95,11 @@ var userBase = (function () {
 
 
 function valid(form) {
-    var add_article_button = document.querySelector(".nav-hide-menu-login-username");
+    let add_article_button = document.querySelector(".nav-hide-menu-login-username");
 
-    var fail = false;
-    var name = form.name.value;
-    var password = form.password.value;
+    let fail = false;
+    let name = form.name.value;
+    let password = form.password.value;
     if (name == "" || name == " ") {
         fail = "Вы не ввели свой логин";
     } else if (password == "") {
@@ -123,14 +123,27 @@ function valid(form) {
     }
 }
 
-var add_article_button = document.querySelector(".nav-hide-menu-login-username")
+let add_article_button = document.querySelector(".nav-hide-menu-login-username");
 
 add_article_button.onclick = function () {
     document.querySelector("#loginForm").style.display = "block";
+    document.querySelector("#main-article").style.display = "none";
     document.querySelector("#news").style.display = "none";
     document.querySelector("aside").style.display = "none";
     document.querySelector(".pagination").style.display="none";
     document.querySelector(".wrap").style.display="none";
 };
 
+function bySection(sectionConfig) {
+    let filter = {
+      section: sectionConfig
+    };
+
+    console.log(document.querySelector("#filter-form-tags").value.split(","));
+    articleRenderer.removeArticlesFromDom();
+    let articles = articleModel.getArticles(0, 100, filter);
+    articleRenderer.insertArticlesInDOM(articles);
+
+}
+//----------------------------NAVIGATION-MENU-------------------------------//
 
