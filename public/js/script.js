@@ -70,6 +70,8 @@ function singIn() {
     if (username) {
         document.querySelector(".nav-hide-menu-login-username").innerHTML = "Hi, " + username + "!";
         document.querySelector(".add-article").style.display = "block";
+        document.querySelector("#news").style.display = "block";
+        startApp();
     }
 }
 

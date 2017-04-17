@@ -53,7 +53,7 @@ let articleModel = (function () {
                             let flag = false;
                             for (let i = 0; i < filterConfig.tags.length; i++) {
                                 for (let j = 0; j < element.tags.length; j++) {
-                                    if (element.tags[j] === filterConfig.tags[i]) {
+                                    if (element.tags[j].toLowerCase() === filterConfig.tags[i].toLocaleLowerCase()) {
                                         flag = true;
                                     }
                                 }
