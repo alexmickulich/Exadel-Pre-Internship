@@ -2,12 +2,13 @@ let dbRequestModel = (function () {
     function getArticles() {
         return new Promise((resolve, reject) => {
             let request = new XMLHttpRequest();
-            request.open('GET', '/articles', false);
+            request.open('GET', '/articles');
             request.onload = function () {
                 if (this.status === 200) {
-                    resolve(JSON.parse(this.response));
-                } else {
-                    reject(new Error("Network Error"))
+                    resolve(JSON.parse(this.response, (key, value) => {
+                        if(key === 'createdAt') return new Date(value);
+                        return value;
+                    }));
                 }
             };
             request.onerror = function () {

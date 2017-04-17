@@ -151,14 +151,15 @@ let articleModel = (function () {
             }
 
             function replaceArticles() {
-                dbRequestModel.getArticles().then(
-                    response => {
-                        GLOBAL_ARTICLES = response;
-                        for (let i = 0; i < GLOBAL_ARTICLES.length; i++)
-                            GLOBAL_ARTICLES[i].createdAt = new Date(GLOBAL_ARTICLES[i].createdAt);
-                    },
-                    error => console.log(error)
-                )
+                return new Promise((resolve) => {
+                    dbRequestModel.getArticles().then(
+                        response => {
+                            GLOBAL_ARTICLES = response;
+                            resolve();
+                        },
+                        error => console.log(error)
+                    )
+                });
             }
 
 
@@ -260,10 +261,12 @@ document.addEventListener('DOMContentLoaded', startApp);
 
 
 function startApp() {
-
-    articleModel.replaceArticles();
-    articleRenderer.init();
-    renderArticles(0,10);
+    articleModel.replaceArticles().then(
+        ready => {
+            articleRenderer.init();
+            renderArticles(0,10);
+        }
+    );
 }
 
 function renderArticles(skip, top) {
@@ -401,7 +404,6 @@ function editArticleItem() {
     document.querySelector("#news").style.display = "block";
     document.querySelector(".wrap").style.display = "block";
     document.querySelector(".pagination").style.display = "block";
-    console.log(articleModel.getArticles(1, 100));
 }
 
 function deleteArticle() {

@@ -47,7 +47,7 @@ function onScroll() {
 window.onload = function () {
     setTopPadding();
     onScroll();
-    startApp();
+    //startApp();
 };
 
 window.onresize = function () {
