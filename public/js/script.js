@@ -14,7 +14,7 @@ burgerButton.onclick = function () {
 
 let m = document.querySelector("main"),
     aSide = document.querySelector("aside");
-h = document.querySelector("header"),
+    h = document.querySelector("header"),
     n = document.querySelector("nav"),
     slideShow = document.querySelector(".wrap");
 

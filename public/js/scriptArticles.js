@@ -352,13 +352,13 @@ function addArticleItem() {
 
 
     dbRequestModel.addArticle(article_add).then(
-        response => {
-            resolve();
+        ready => {
+            startApp();
         },
         error => console.log(error)
     );
 
-    startApp();
+
     document.querySelector("#news").style.display = "block";
     document.querySelector(".wrap").style.display = "block";
     document.querySelector(".pagination").style.display = "block";
@@ -396,6 +396,7 @@ function editArticleItem() {
         content: document.querySelector("#edit-news-form-content").value,
         author: username,
         image: document.querySelector("#edit-news-form-image").value,
+        section: document.querySelector("#edit-news-form-section").value,
         tags: document.querySelector("#edit-news-form-tags").value.split(",")
     };
 
@@ -403,13 +404,16 @@ function editArticleItem() {
     articleBeforeChanging.title = article.title;
     articleBeforeChanging.summary = article.summary;
     articleBeforeChanging.content = article.content;
+    articleBeforeChanging.image = article.image;
+    articleBeforeChanging.tags = article.tags;
+    articleBeforeChanging.section = article.section;
     dbRequestModel.editArticle(articleBeforeChanging).then(
-        response => {
-            resolve();
+        ready => {
+            startApp();
         },
         error => console.log(error)
     );
-    startApp();
+
 
     document.querySelector("#edit-news-block").style.display = "none";
     document.querySelector("#news").style.display = "block";
@@ -419,13 +423,12 @@ function editArticleItem() {
 
 function deleteArticle() {
     dbRequestModel.deleteArticle(GLOBAL_DETAILED_ARTICLE_ID).then(
-        response => {
-            resolve();
+        ready => {
+            startApp();
         },
         error => console.log(error)
     );
 
-    startApp();
     document.querySelector("#news").style.display = "block";
     document.querySelector(".wrap").style.display = "block";
     document.querySelector(".pagination").style.display = "block";
