@@ -264,7 +264,7 @@ function startApp() {
     articleModel.replaceArticles().then(
         ready => {
             articleRenderer.init();
-            renderArticles(0,10);
+            renderArticles(0, 10);
         }
     );
 }
@@ -351,11 +351,18 @@ function addArticleItem() {
     };
 
 
-    dbRequestModel.addArticle(article_add);
+    dbRequestModel.addArticle(article_add).then(
+        response => {
+            resolve();
+        },
+        error => console.log(error)
+    );
+
+    startApp();
     document.querySelector("#news").style.display = "block";
     document.querySelector(".wrap").style.display = "block";
     document.querySelector(".pagination").style.display = "block";
-    startApp();
+
     document.querySelector("#add-news-block").style.display = "none";
 }
 
@@ -392,12 +399,16 @@ function editArticleItem() {
         tags: document.querySelector("#edit-news-form-tags").value.split(",")
     };
 
-    let article2 = articleModel.getArticle(GLOBAL_DETAILED_ARTICLE_ID)[0];
-    article2.title = article.title;
-    article2.summary = article.summary;
-    article2.content = article.content;
-    dbRequestModel.editArticle(article2);
-
+    let articleBeforeChanging = articleModel.getArticle(GLOBAL_DETAILED_ARTICLE_ID)[0];
+    articleBeforeChanging.title = article.title;
+    articleBeforeChanging.summary = article.summary;
+    articleBeforeChanging.content = article.content;
+    dbRequestModel.editArticle(articleBeforeChanging).then(
+        response => {
+            resolve();
+        },
+        error => console.log(error)
+    );
     startApp();
 
     document.querySelector("#edit-news-block").style.display = "none";
@@ -407,7 +418,12 @@ function editArticleItem() {
 }
 
 function deleteArticle() {
-    dbRequestModel.deleteArticle(GLOBAL_DETAILED_ARTICLE_ID);
+    dbRequestModel.deleteArticle(GLOBAL_DETAILED_ARTICLE_ID).then(
+        response => {
+            resolve();
+        },
+        error => console.log(error)
+    );
 
     startApp();
     document.querySelector("#news").style.display = "block";
