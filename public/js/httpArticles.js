@@ -69,11 +69,64 @@ let dbRequestModel = (function () {
             });
         }
 
+
+        function logIn(user) {
+            return new Promise((resolve, reject) => {
+                let request = new XMLHttpRequest();
+                request.open('POST', '/login');
+                request.setRequestHeader('content-type', 'application/json');
+                request.onload = function () {
+                    if (this.status === 200) {
+                        resolve();
+                    }
+                    else reject();
+                };
+                request.onerror = function () {
+                    reject(new Error("User is not valid"));
+                };
+                request.send(JSON.stringify(user));
+            });
+        }
+
+        function logOut() {
+            return new Promise((resolve, reject) => {
+                let request = new XMLHttpRequest();
+                request.open('GET', '/logout');
+                request.onload = function () {
+                    if (this.status === 200) {
+                        resolve();
+                    }
+                };
+
+                request.send();
+            });
+        }
+
+        function getUsername() {
+            return new Promise((resolve, reject) => {
+                let request = new XMLHttpRequest();
+                request.open('GET', '/username');
+                request.onload = function () {
+                    if (this.status === 200) {
+                        resolve(request.responseText);
+                    }
+                    else reject();
+                };
+                request.onerror = function () {
+                    reject(new Error("Article is not valid"));
+                };
+                request.send();
+            });
+        }
+
         return {
             editArticle: editArticle,
             deleteArticle: deleteArticle,
             addArticle: addArticle,
             getArticles: getArticles,
+            logIn: logIn,
+            logOut: logOut,
+            getUsername:getUsername
         }
     }
 

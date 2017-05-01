@@ -198,7 +198,7 @@ aside{
 }
 
 .detailed-article-list-item-edit-buttons{
-    /*visibility: hidden;*/
+    visibility: hidden;
     float: right;
     margin-top: 2%;
 }

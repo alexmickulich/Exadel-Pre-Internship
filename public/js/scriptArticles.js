@@ -5,7 +5,7 @@ let GLOBAL_DETAILED_ARTICLE_ID;
 
 let articleModel = (function () {
             let GLOBAL_ARTICLES = [{}];
-
+            let GLOBAL_USERNAME;
             let TAGS_BASE = ["Мир", "SpaceX", "Илон Маск", "Спорт", "Экономика", "общество", "врачи", "Минск", "Беларусь", "налог", "тунеядство", "спорт", "БАТЭ", "Футбол"]
 
 
@@ -53,7 +53,7 @@ let articleModel = (function () {
                             let flag = false;
                             for (let i = 0; i < filterConfig.tags.length; i++) {
                                 for (let j = 0; j < element.tags.length; j++) {
-                                    if (element.tags[j].toLowerCase() === filterConfig.tags[i].toLocaleLowerCase()) {
+                                    if (element.tags[j].toLowerCase() === filterConfig.tags[i].toLowerCase()) {
                                         flag = true;
                                     }
                                 }
@@ -162,9 +162,24 @@ let articleModel = (function () {
                 });
             }
 
+            function replaceUsername() {
+                return new Promise((resolve) => {
+                    dbRequestModel.getUsername().then(
+                        response => {
+                            GLOBAL_USERNAME = response;
+                            document.querySelector(".nav-hide-menu-user").innerHTML = "Hi, " + GLOBAL_USERNAME + "!";
+                            resolve();
+                        },
+                        error => console.log(error)
+                    )
+                });
+            }
+
 
             return {
                 GLOBAL_ARTICLES: GLOBAL_ARTICLES,
+                GLOBAL_USERNAME: GLOBAL_USERNAME,
+                replaceUsername: replaceUsername,
                 replaceArticles: replaceArticles,
                 getArticles: getArticles,
                 getArticle: getArticle,
@@ -267,6 +282,19 @@ function startApp() {
             renderArticles(0, 10);
         }
     );
+
+    dbRequestModel.getUsername().then(
+        function () {
+            articleModel.replaceUsername().then(
+                ready => {
+                    signIn();
+                }
+            );
+        }, function () {
+        }
+    );
+
+
 }
 
 function renderArticles(skip, top) {
@@ -284,8 +312,15 @@ function renderDetailedArticle(object) {
     insertDetailedArticlesInDOM(detailedArticle);
     document.querySelector("#news").style.display = "none";
     document.querySelector("#main-article").style.display = "block";
-    if (username) document.querySelector(".detailed-article-list-item-edit-buttons").style.visibility = "visible";
-    else document.querySelector(".detailed-article-list-item-edit-buttons").style.visibility = "hidden";
+    dbRequestModel.getUsername().then(
+        function () {
+            document.querySelector(".detailed-article-list-item-edit-buttons").style.visibility = "visible";
+        }, function () {
+            document.querySelector(".detailed-article-list-item-edit-buttons").style.visibility = "hidden";
+        }
+    );
+
+
     document.querySelector(".pagination").style.display = "none";
 }
 
@@ -338,8 +373,17 @@ function formatDate(d) {
 
 
 function addArticleItem() {
+    dbRequestModel.getUsername().then(
+        response => {
+            articleModel.GLOBAL_USERNAME = response;
+            resolve();
+        },
+        error => console.log(error)
+    )
+
+
     let article_add = {
-        id: new Date().toString() + username,
+        id: new Date().toString() + articleModel.GLOBAL_USERNAME,
         title: document.querySelector("#add-news-form-title").value,
         tags: document.querySelector("#add-news-form-tags").value.split(","),
         summary: document.querySelector("#add-news-form-summary").value,
@@ -347,12 +391,14 @@ function addArticleItem() {
         section: document.querySelector("#add-news-form-section").value,
         image: document.querySelector("#add-news-form-image").value,
         createdAt: new Date(),
-        author: username
-    };
+        author: articleModel.GLOBAL_USERNAME
+    }
 
 
     dbRequestModel.addArticle(article_add).then(
         ready => {
+
+
             startApp();
         },
         error => console.log(error)
@@ -394,7 +440,6 @@ function editArticleItem() {
         title: document.querySelector("#edit-news-form-title").value,
         summary: document.querySelector("#edit-news-form-summary").value,
         content: document.querySelector("#edit-news-form-content").value,
-        author: username,
         image: document.querySelector("#edit-news-form-image").value,
         section: document.querySelector("#edit-news-form-section").value,
         tags: document.querySelector("#edit-news-form-tags").value.split(",")

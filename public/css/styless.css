@@ -63,13 +63,13 @@ hr{
 /* Стили для шапки сайта */
 
 header{
-    float: left;
     /*background-color: #ed1c24;*/
     background-color: rgb(9, 210, 99);
     width: 100%;
     color: white;
     z-index: 1000;
 }
+
 
 .header-logo img{
     width: 50px;
@@ -98,8 +98,29 @@ header{
     font-size: 2.7em;
 }
 
+.exit-button{
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: none;
+}
+
+.exit-button:hover{
+    background-color: #ed1c24;
+}
+
+.header-right-block{
+    padding: 5px;
+    width: 20%;
+    margin-right: 10%;
+    height: 100%;
+    float: right;
+}
 .header-logo{
+    float: left;
     margin-left: 10%;
+    width: 40%;
+    height: 100%;
 }
 
 /*меню для сайта*/
@@ -139,7 +160,6 @@ nav{
 }
 
 .nav-hide-menu-login{
-
     float: right;
     margin-right: 10%;
 }
@@ -149,6 +169,22 @@ nav{
     font-size: 0.8em;
     transition: all.6s ease;
  }
+
+.nav-hide-menu-user{
+    display: block;
+    float: right;
+}
+
+.nav-hide-menu-user:hover{
+    color: #09c662;
+    display: block;
+    float: right;
+}
+
+
+
+
+
 /*
 .nav-hide-menu-login a:hover{
     cursor: pointer;
@@ -278,6 +314,11 @@ nav{
         opacity: 0.5;
     }
 
+    .header-right-block img{
+        padding: 0.1em;
+        width: 1.8em;
+        width: 1.8em;
+    }
 
     .header-logo span{
         font-size: 1.5em;

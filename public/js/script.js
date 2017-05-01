@@ -2,8 +2,6 @@
  * Created by Lenovo z50-70 on 22.02.2017.
  */
 
-let username;
-
 let elem = document.querySelector('#burger_menu_id');
 let burgerButton = document.getElementById('burger');
 
@@ -14,7 +12,7 @@ burgerButton.onclick = function () {
 
 let m = document.querySelector("main"),
     aSide = document.querySelector("aside");
-    h = document.querySelector("header"),
+h = document.querySelector("header"),
     n = document.querySelector("nav"),
     slideShow = document.querySelector(".wrap");
 
@@ -55,54 +53,28 @@ window.onresize = function () {
 };
 
 
-function visibleUser(name) {
-    if (name && typeof name == "string") {
-        username = name;
-        singIn();
-        console.log("true");
-    } else {
-        console.log("false");
-    }
+function signIn() {
+
+    document.querySelector(".nav-hide-menu-login-username").style.display = "none";
+    document.querySelector(".exit-button").style.display="block";
+    document.querySelector(".add-article").style.display = "block";
+    document.querySelector("#news").style.display = "block";
 }
 
 
-function singIn() {
-    if (username) {
-        document.querySelector(".nav-hide-menu-login-username").innerHTML = "Hi, " + username + "!";
-        document.querySelector(".add-article").style.display = "block";
-        document.querySelector("#news").style.display = "block";
-        startApp();
-    }
+function logOut() {
+    dbRequestModel.logOut().then(() => window.location = "index.html")
+    document.querySelector(".nav-hide-menu-login-username").style.display = "block";
+    document.querySelector(".nav-hide-menu-user").style.display = "none";
+    document.querySelector(".exit-button").style.display = "none";
 }
-
-
-let userBase = (function () {
-    let loginBase = ["AlexanderMikulich", "IvanovIvan", "PetrovPetr","admin"];
-    let passwordBase = ["123456", "111111", "222222","admin"];
-
-    let flag = false;
-    function validateUser(login, password) {
-        for (let i = 0; i < loginBase.length; i++) {
-            if (login == loginBase[i] && passwordBase[i] == password) {
-                flag = true;
-            }
-        }
-        return flag;
-    }
-
-    return {
-        validateUser: validateUser
-    };
-}());
 
 
 function valid(form) {
-    let add_article_button = document.querySelector(".nav-hide-menu-login-username");
-
     let fail = false;
-    let name = form.name.value;
+    let username = form.name.value;
     let password = form.password.value;
-    if (name == "" || name == " ") {
+    if (username == "" || name == " ") {
         fail = "Вы не ввели свой логин";
     } else if (password == "") {
         fail = "Вы не ввели свой пароль";
@@ -111,17 +83,16 @@ function valid(form) {
         alert(fail);
     }
     else {
-        if (userBase.validateUser(name, password)) {
-            document.querySelector("#loginForm").style.display = "none";
-            document.querySelector("#news").style.display = "block";
-            document.querySelector("aside").style.display = "block";
-            document.querySelector(".pagination").style.display="block";
-            document.querySelector(".wrap").style.display="block";
-            visibleUser(name);
-        }
-        else {
-            alert("Не совпадает логин или пароль!");
-        }
+        dbRequestModel.logIn({username, password}).then(
+            function () {
+                document.querySelector("#loginForm").style.display = "none";
+                document.querySelector("#news").style.display = "block";
+                document.querySelector("aside").style.display = "block";
+                document.querySelector(".pagination").style.display = "block";
+                document.querySelector(".wrap").style.display = "block";
+                startApp();
+            }
+        )
     }
 }
 
@@ -132,20 +103,22 @@ add_article_button.onclick = function () {
     document.querySelector("#main-article").style.display = "none";
     document.querySelector("#news").style.display = "none";
     document.querySelector("aside").style.display = "none";
-    document.querySelector(".pagination").style.display="none";
-    document.querySelector(".wrap").style.display="none";
+    document.querySelector(".pagination").style.display = "none";
+    document.querySelector(".wrap").style.display = "none";
 };
 
 function bySection(sectionConfig) {
     let filter = {
-      section: sectionConfig
+        section: sectionConfig
     };
 
-    console.log(document.querySelector("#filter-form-tags").value.split(","));
     articleRenderer.removeArticlesFromDom();
     let articles = articleModel.getArticles(0, 100, filter);
     articleRenderer.insertArticlesInDOM(articles);
-
+    document.querySelector("#news").style.display = "block";
+    document.querySelector(".wrap").style.display = "block";
+    document.querySelector("#main-article").style.display = "none";
+    document.querySelector(".pagination").style.display = "none";
 }
 //----------------------------NAVIGATION-MENU-------------------------------//
 

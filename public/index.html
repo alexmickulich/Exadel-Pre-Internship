@@ -18,6 +18,9 @@
                     <span>BLRNEWS.BY</span>
                 </a>
             </div>
+            <div class="header-right-block">
+                <img class="exit-button" src="img/exit.png" class="nav-hide-menu-logout" onclick="logOut()">
+            </div>
             <nav>
                 <div id="burger"><img id="burger_button" src="img/burger.png"></div>
 
@@ -32,6 +35,7 @@
                     <a onclick="bySection('Происшествия');">ПРОИСШЕСТВИЯ</a>
                     <div class="nav-hide-menu-login">
                         <a class="nav-hide-menu-login-username">ВОЙТИ</a>
+                        <a class="nav-hide-menu-user"> </a>
                     </div>
                 </div>
 
@@ -330,11 +334,11 @@
 
 
             <div class="detailed-article-list-item-tags">
-                <a id="detailed-article-list-item-tags-first"></a>
-                <a id="detailed-article-list-item-tags-second"></a>
-                <a id="detailed-article-list-item-tags-third"></a>
-                <a id="detailed-article-list-item-tags-fourth"></a>
-                <a id="detailed-article-list-item-tags-fifth"></a>
+                <a id="detailed-article-list-item-tags-first" onclick="metaDetailedTagOnClick('first')"></a>
+                <a id="detailed-article-list-item-tags-second" onclick="metaDetailedTagOnClick('second')"></a>
+                <a id="detailed-article-list-item-tags-third" onclick="metaDetailedTagOnClick('third')"></a>
+                <a id="detailed-article-list-item-tags-fourth" onclick="metaDetailedTagOnClick('fourth')"></a>
+                <a id="detailed-article-list-item-tags-fifth" onclick="metaDetailedTagOnClick('fifth')"></a>
             </div>
 
 
@@ -351,5 +355,7 @@
 <script src="js/script.js"></script>
 <script src="js/scriptArticles.js"></script>
 <script src="js/httpArticles.js"></script>
+<script src="js/metaActions.js"></script>
+<script src="js/signIn.js"></script>
 </body>
 </html>
