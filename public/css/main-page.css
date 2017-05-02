@@ -12,17 +12,10 @@ aside{
     display: block;
     height: 100%;
     float: right;
-    width: 30%;
+    width: 14%;
     margin-right: 10%;
     transition: all.6s ease;
 }
-
-aside{
-    width: 14%;
-    margin-right: 10%;
-    height: 100%;
-}
-
 
 
 /*------------------------- CТИЛИ ДЛЯ НОВОСТИ--------------------------------*/
@@ -234,9 +227,18 @@ aside{
 
 .search-bar{
     border: solid #cccccc 1px;
-    padding-left: 1vh;
-    padding-right: 1vh;
-    padding-top: 1vh;
+    width: 99%;
+    height: 100%;
+    padding-top: 2%;
+}
+
+.search-bar input{
+    width: 98%;
+    border: solid 1px;
+    border-bottom-color: #cccccc;
+    border-top-color: #ffffff;
+    border-left-color: #FFFFFF;
+    border-right-color: #FFFFFF;
 }
 
 .select-bar{

@@ -56,7 +56,7 @@ window.onresize = function () {
 function signIn() {
 
     document.querySelector(".nav-hide-menu-login-username").style.display = "none";
-    document.querySelector(".exit-button").style.display="block";
+    document.querySelector(".exit-button").style.display = "block";
     document.querySelector(".add-article").style.display = "block";
     document.querySelector("#news").style.display = "block";
 }
@@ -84,13 +84,16 @@ function valid(form) {
     }
     else {
         dbRequestModel.logIn({username, password}).then(
-            function () {
+            ready => {
                 document.querySelector("#loginForm").style.display = "none";
                 document.querySelector("#news").style.display = "block";
                 document.querySelector("aside").style.display = "block";
                 document.querySelector(".pagination").style.display = "block";
                 document.querySelector(".wrap").style.display = "block";
                 startApp();
+            },
+            notready => {
+                alert("Логин или пароль не совпадают");
             }
         )
     }

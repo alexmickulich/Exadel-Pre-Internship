@@ -290,7 +290,6 @@ function startApp() {
                     signIn();
                 }
             );
-        }, function () {
         }
     );
 
@@ -379,7 +378,7 @@ function addArticleItem() {
             resolve();
         },
         error => console.log(error)
-    )
+    );
 
 
     let article_add = {
@@ -397,8 +396,6 @@ function addArticleItem() {
 
     dbRequestModel.addArticle(article_add).then(
         ready => {
-
-
             startApp();
         },
         error => console.log(error)
