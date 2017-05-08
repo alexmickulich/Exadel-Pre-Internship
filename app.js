@@ -1,14 +1,16 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const db = require('diskdb');
+const articles = require('./db.js').articles;
+const users = require('./db.js').users;
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
-const sessionStore = require('connect-diskdb')(session);
-const store = new sessionStore({path: './db', name: 'sessions'});
+const sessionStore = require('connect-mongo')(session);
+const store = new sessionStore({url: 'mongodb://localhost/admin'});
+const ArticleModel = require('./db.js').ArticleModel;
+const UserModel = require('./db.js').UserModel;
 
-db.connect('./db', ['articles', 'users']);
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -24,101 +26,183 @@ app.listen(app.get('port'), function () {
 
 
 app.get('/articles', function (request, response) {
-
-    response.json(db.articles.find());
+    ArticleModel.find().exec((err, result) => {
+        if (err) {
+            response.sendStatus(500);
+        }
+        else {
+            response.json(result);
+        }
+    });
 })
 
 app.get('/articles/:id', function (request, response) {
-    response.json(db.articles.findOne(
-        {id: request.params.id}
-    ));
+    ArticleModel.findOne().exec((err, result) => {
+        if (err) {
+            response.sendStatus(500);
+        }
+        else {
+            response.json(result.findOne(
+                {id: request.params.id}
+                )
+            );
+        }
+    });
 })
 
 app.post('/articles', function (request, response) {
-    response.json(db.articles.save(request.body));
+    ArticleModel.save().exec((err, result) => {
+        if (err) {
+            response.sendStatus(500);
+        }
+        else {
+            response.json(result.save(request.body));
+        }
+    });
 });
+
 
 app.put('/articles', function (request, response) {
-    const skip = request.body.skip || 0;
-    const top = request.body.top || db.articles.count();
-    const filterConfig = request.body.filterConfig;
-    let articles = [{}];
-    let newArticles = db.articles.find();
-    newArticles.sort(function (a, b) {
-        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-    });
-    if (filterConfig) {
-        articles = newArticles.filter(function (element) {
-            if (filterConfig.author) {
-                if (element.author !== filterConfig.author) {
-                    return false;
-                }
+        const skip = request.body.skip || 0;
+        const top = request.body.top || 10;
+        const filterConfig = request.body.filterConfig;
+        let articles = [{}];
+
+        ArticleModel.find().exec((err, result) => {
+            if (err) {
+                response.sendStatus(500);
             }
-
-            if (filterConfig.section) {
-                if (element.section !== filterConfig.section) {
-                    return false;
-                }
-            }
-
-            if (filterConfig.dateStart) {
-                if (element.createdAt.getTime() <= filterConfig.dateStart.getTime()) {
-                    return false;
-                }
-            }
-
-            if (filterConfig.dateEnd) {
-                if (element.createdAt.getTime() >= filterConfig.dateEnd.getTime()) {
-                    return false;
-                }
-            }
-
-
-            if (filterConfig.tags && filterConfig.tags != "") {
-                let flag = false;
-                for (let i = 0; i < filterConfig.tags.length; i++) {
-                    for (let j = 0; j < element.tags.length; j++) {
-                        if (element.tags[j].toLowerCase() === filterConfig.tags[i].toLowerCase()) {
-                            flag = true;
+            else {
+                let newArticles = result;
+                newArticles.sort(function (a, b) {
+                    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+                });
+                if (filterConfig) {
+                    articles = newArticles.filter(function (element) {
+                        if (filterConfig.author) {
+                            if (element.author !== filterConfig.author) {
+                                return false;
+                            }
                         }
-                    }
+
+                        if (filterConfig.section) {
+                            if (element.section !== filterConfig.section) {
+                                return false;
+                            }
+                        }
+
+                        if (filterConfig.dateStart) {
+                            if (element.createdAt.getTime() <= filterConfig.dateStart.getTime()) {
+                                return false;
+                            }
+                        }
+
+                        if (filterConfig.dateEnd) {
+                            if (element.createdAt.getTime() >= filterConfig.dateEnd.getTime()) {
+                                return false;
+                            }
+                        }
+
+
+                        if (filterConfig.tags && filterConfig.tags != "") {
+                            let flag = false;
+                            for (let i = 0; i < filterConfig.tags.length; i++) {
+                                for (let j = 0; j < element.tags.length; j++) {
+                                    if (element.tags[j].toLowerCase() === filterConfig.tags[i].toLowerCase()) {
+                                        flag = true;
+                                    }
+                                }
+                            }
+                            if (flag === false)
+                                return false;
+
+                        }
+
+                        return true;
+                    }).slice(skip, skip + top)
                 }
-                if (flag === false)
-                    return false;
+                else {
+                    articles = newArticles.slice(skip, skip + top);
+                }
 
+                response.send(articles);
             }
-
-            return true;
-        }).slice(skip, skip + top)
+        });
     }
-    else {
-        articles = newArticles.slice(skip, skip + top);
-    }
+);
 
-    response.send(articles);
-});
 
 app.put('/articlesid', function (request, response) {
-    let article =[db.articles.findOne({id: request.body.id})];
-    response.send(article[0]);
+    ArticleModel.findOne().exec((err, result) => {
+        if (err) {
+            response.sendStatus(500);
+        }
+        else {
+            let article = [result.findOne({id: request.body.id})];
+            response.send(article[0]);
+        }
+    });
 });
 
 app.delete('/articles', function (request, response) {
-    response.json(db.articles.remove({id: request.body.id}));
+    ArticleModel.findOne().exec((err, result) => {
+        if (err) {
+            response.sendStatus(500);
+        }
+        else {
+            response.json(result.remove({id: request.body.id}));
+        }
+    });
 });
 
 app.delete('/articles/:id', function (request, response) {
-    response.json(db.articles.remove({id: request.params.id}));
+    ArticleModel.findOne().exec((err, result) => {
+        if (err) {
+            response.sendStatus(500);
+        }
+        else {
+            response.json(result.remove({id: request.params.id}));
+        }
+    });
 });
 
 app.patch('/articles', function (request, response) {
-    db.articles.remove({id: request.body.id});
-    response.json(db.articles.save(request.body));
+    ArticleModel.remove().exec((err, result) => {
+        if (err) {
+            response.sendStatus(500);
+        }
+        else {
+            result.remove({id: request.body.id});
+            ArticleModel.save().exec((err, result) => {
+                if (err) {
+                    response.sendStatus(500);
+                }
+                else {
+                    response.json(result.save(request.body));
+                }
+            });
+        }
+    });
 });
 
+
 app.patch('/articles/:id', function (request, response) {
-    db.articles.remove({id: request.body.id});
-    response.json(db.articles.save(request.body));
+    ArticleModel.remove().exec((err, result) => {
+        if (err) {
+            response.sendStatus(500);
+        }
+        else {
+            result.remove({id: request.body.id});
+            ArticleModel.save(request.body).exec((err, result) => {
+                if (err) {
+                    response.sendStatus(500);
+                }
+                else {
+                    response.json(result);
+                }
+            });
+        }
+    });
 });
 
 
@@ -142,16 +226,24 @@ passport.use('login', new LocalStrategy({
         passReqToCallback: true
     },
     (req, username, password, done) => {
-        const user = db.users.findOne({username: username});
-        if (!user) {
-            console.log('User Not Found with username ' + username);
-            return done(null, false, {message: 'user not found'});
-        }
-        if (password !== user.password) {
-            console.log('Invalid Password');
-            return done(null, false, {message: 'incorrect password'});
-        }
-        return done(null, user);
+        UserModel.findOne({username: username}).exec((err, result) => {
+            if (err) {
+                response.sendStatus(500);
+            }
+            else {
+
+                const user = result;
+                if (!user) {
+                    console.log('User Not Found with username ' + username);
+                    return done(null, false, {message: 'user not found'});
+                }
+                if (password !== user.password) {
+                    console.log('Invalid Password');
+                    return done(null, false, {message: 'incorrect password'});
+                }
+                return done(null, user);
+            }
+        })
     })
 );
 
