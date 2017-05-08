@@ -8,69 +8,167 @@ let articleModel = (function () {
             let GLOBAL_USERNAME;
             let TAGS_BASE = ["Мир", "SpaceX", "Илон Маск", "Спорт", "Экономика", "общество", "врачи", "Минск", "Беларусь", "налог", "тунеядство", "спорт", "БАТЭ", "Футбол"]
 
-
-            function getArticles(skip, top, filterConfig) {
-                skip = skip || 0;
-                top = top || 10;
-
-                let newArticles = [];
-                GLOBAL_ARTICLES.forEach(function (item, i, GLOBAL_ARTICLES) {
-                    newArticles[i] = item;
+            function dbGetArticles(skip, top, filterConfig) {
+                return new Promise((resolve, reject) => {
+                    let request = new XMLHttpRequest();
+                    request.open('PUT', '/articles');
+                    request.setRequestHeader('content-type', 'application/json');
+                    request.onload = function () {
+                        if (this.status === 200) {
+                            resolve(JSON.parse(this.response, (key, value) => {
+                                if (key === 'createdAt') return new Date(value);
+                                return value;
+                            }));
+                        }
+                    };
+                    request.onerror = function () {
+                        reject(new Error("Network Error"));
+                    };
+                    request.send(JSON.stringify({skip, top, filterConfig}));
                 });
+            }
 
-                newArticles.sort(function (a, b) {
-                    return b.createdAt - a.createdAt;
+            function dbGetArticle(id) {
+                return new Promise((resolve, reject) => {
+                    let request = new XMLHttpRequest();
+                    request.open('PUT', '/articlesid');
+                    request.setRequestHeader('content-type', 'application/json');
+                    request.onload = function () {
+                        if (this.status === 200) {
+                            resolve(JSON.parse(this.response, (key, value) => {
+                                if (key === 'createdAt') return new Date(value);
+                                return value;
+                            }));
+                        }
+                    };
+                    request.onerror = function () {
+                        reject(new Error("Canget detail article"));
+                    };
+                    request.send(JSON.stringify({id}));
                 });
+            }
 
-                if (filterConfig) {
-                    return newArticles.filter(function (element) {
-                        if (filterConfig.author) {
-                            if (element.author !== filterConfig.author) {
-                                return false;
-                            }
+            function dbAddArticle(article) {
+                return new Promise((resolve, reject) => {
+                    let request = new XMLHttpRequest();
+                    request.open('POST', '/articles');
+                    request.setRequestHeader('content-type', 'application/json');
+                    request.onload = function () {
+                        if (this.status === 200) {
+                            resolve();
                         }
+                    };
+                    request.onerror = function () {
+                        reject(new Error("Article is not valid"));
+                    };
 
-                        if (filterConfig.section) {
-                            if (element.section !== filterConfig.section) {
-                                return false;
-                            }
+                    request.send(JSON.stringify(article));
+                });
+            }
+
+            function dbDeleteArticle(id) {
+                return new Promise((resolve, reject) => {
+                    let request = new XMLHttpRequest();
+                    request.open('DELETE', '/articles/' + id);
+                    request.onload = function () {
+                        if (this.status === 200) {
+                            resolve();
                         }
-
-                        if (filterConfig.dateStart) {
-                            if (element.createdAt.getTime() <= filterConfig.dateStart.getTime()) {
-                                return false;
-                            }
-                        }
-
-                        if (filterConfig.dateEnd) {
-                            if (element.createdAt.getTime() >= filterConfig.dateEnd.getTime()) {
-                                return false;
-                            }
-                        }
-
-
-                        if (filterConfig.tags && filterConfig.tags != "") {
-                            let flag = false;
-                            for (let i = 0; i < filterConfig.tags.length; i++) {
-                                for (let j = 0; j < element.tags.length; j++) {
-                                    if (element.tags[j].toLowerCase() === filterConfig.tags[i].toLowerCase()) {
-                                        flag = true;
-                                    }
-                                }
-                            }
-                            if (flag === false)
-                                return false;
-                        }
-
-                        return true;
-                    }).slice(skip, skip + top);
-                }
-                else {
-                    return newArticles.slice(skip, skip + top);
-                }
+                    };
+                    request.onerror = function () {
+                        reject(new Error("Can't delete article"));
+                    };
+                    request.send();
+                });
             }
 
 
+            function dbEditArticle(article) {
+                return new Promise((resolve, reject) => {
+                    let request = new XMLHttpRequest();
+                    request.open('PATCH', '/articles');
+                    request.setRequestHeader('content-type', 'application/json');
+                    request.onload = function () {
+                        if (this.status === 200) {
+                            resolve();
+                        }
+                    };
+                    request.onerror = function () {
+                        reject(new Error("Article is not valid"));
+                    };
+                    request.send(JSON.stringify(article));
+                });
+            }
+
+
+            function dbLogIn(user) {
+                return new Promise((resolve, reject) => {
+                    let request = new XMLHttpRequest();
+                    request.open('POST', '/login');
+                    request.setRequestHeader('content-type', 'application/json');
+                    request.onload = function () {
+                        if (this.status === 200) {
+                            resolve();
+                        }
+                        else reject();
+                    };
+                    request.onerror = function () {
+                        reject(new Error("User is not valid"));
+                    };
+                    request.send(JSON.stringify(user));
+                });
+            }
+
+            function dbLogOut() {
+                return new Promise((resolve, reject) => {
+                    let request = new XMLHttpRequest();
+                    request.open('GET', '/logout');
+                    request.onload = function () {
+                        if (this.status === 200) {
+                            resolve();
+                        }
+                    };
+
+                    request.send();
+                });
+            }
+
+            function dbGetUsername() {
+                return new Promise((resolve, reject) => {
+                    let request = new XMLHttpRequest();
+                    request.open('GET', '/username');
+                    request.onload = function () {
+                        if (this.status === 200) {
+                            resolve(request.responseText);
+                        }
+                        else reject();
+                    };
+                    request.onerror = function () {
+                        reject(new Error("Article is not valid"));
+                    };
+                    request.send();
+                });
+            }
+
+
+            function getArticles(skip, top, filterConfig) {
+                return new Promise((resolve, reject) => {
+                    let request = new XMLHttpRequest();
+                    request.open('GET', '/username');
+                    request.onload = function () {
+                        if (this.status === 200) {
+                            resolve(request.responseText);
+                        }
+                        else reject();
+                    };
+                    request.onerror = function () {
+                        reject(new Error("Article is not valid"));
+                    };
+                    request.send();
+                });
+            }
+
+            /*
             function getArticle(curid) {
                 return GLOBAL_ARTICLES.filter(function (currentElement) {
                     return currentElement.id == curid;
@@ -78,17 +176,17 @@ let articleModel = (function () {
             }
 
 
-            function validateArticle(article) {
-                if (typeof(article.id) != "string") return false;
-                if (typeof(article.title) != "string") return false;
-                if (typeof(article.title.length) < 0) return false;
-                if (typeof(article.summary) != "string") return false;
-                if (typeof(article.summary.length) < 0) return false;
-                if (typeof(article.createdAt) != "object") return false;
-                if (typeof(article.author) != "string") return false;
-                if (article.tags.length < 0) return false;
-                return true;
-            }
+             function validateArticle(article) {
+             if (typeof(article.title) != "string") return false;
+             if (typeof(article.title.length) < 0) return false;
+             if (typeof(article.summary) != "string") return false;
+             if (typeof(article.summary.length) < 0) return false;
+             if (typeof(article.createdAt) != "object") return false;
+             if (typeof(article.author) != "string") return false;
+             if (article.tags.length < 0) return false;
+             return true;
+             }
+
 
 
             function addArticle(article) {
@@ -149,10 +247,11 @@ let articleModel = (function () {
                 }
                 return false;
             }
+            */
 
             function replaceArticles() {
                 return new Promise((resolve) => {
-                    dbRequestModel.getArticles().then(
+                    articleModel.getArticles().then(
                         response => {
                             GLOBAL_ARTICLES = response;
                             resolve();
@@ -164,7 +263,7 @@ let articleModel = (function () {
 
             function replaceUsername() {
                 return new Promise((resolve) => {
-                    dbRequestModel.getUsername().then(
+                    articleModel.dbGetUsername().then(
                         response => {
                             GLOBAL_USERNAME = response;
                             document.querySelector(".nav-hide-menu-user").innerHTML = "Hi, " + GLOBAL_USERNAME + "!";
@@ -182,13 +281,24 @@ let articleModel = (function () {
                 replaceUsername: replaceUsername,
                 replaceArticles: replaceArticles,
                 getArticles: getArticles,
-                getArticle: getArticle,
+                dbGetArticle: dbGetArticle,
+                /*
                 validateArticle: validateArticle,
                 addArticle: addArticle,
                 editArticle: editArticle,
                 removeArticle: removeArticle,
                 addTag: addTag,
-                removeTag: removeTag
+                removeTag: removeTag,
+
+                */
+                dbEditArticle: dbEditArticle,
+                dbDeleteArticle: dbDeleteArticle,
+                dbAddArticle: dbAddArticle,
+                dbGetArticles: dbGetArticles,
+                dbLogIn: dbLogIn,
+                dbLogOut: dbLogOut,
+                dbGetUsername: dbGetUsername
+
             };
         }
 
@@ -276,14 +386,10 @@ document.addEventListener('DOMContentLoaded', startApp);
 
 
 function startApp() {
-    articleModel.replaceArticles().then(
-        ready => {
-            articleRenderer.init();
-            renderArticles(0, 10);
-        }
-    );
+    articleRenderer.init();
+    renderArticles(0, 10);
 
-    dbRequestModel.getUsername().then(
+    articleModel.dbGetUsername().then(
         function () {
             articleModel.replaceUsername().then(
                 ready => {
@@ -292,87 +398,73 @@ function startApp() {
             );
         }
     );
-
-
 }
 
-function renderArticles(skip, top) {
-    articleRenderer.removeArticlesFromDom();
-    let articles = articleModel.getArticles(skip, top);
-    articleRenderer.insertArticlesInDOM(articles);
+function renderArticles(skip, top, filterConfig) {
+    return new Promise(resolve => {
+        articleRenderer.removeArticlesFromDom();
+        articleModel.dbGetArticles(skip, top, filterConfig).then(response => {
+            articleRenderer.insertArticlesInDOM(response);
+            resolve();
+        })
+    });
 }
 
 function renderDetailedArticle(object) {
-    document.querySelector(".wrap").style.display = "none";
-    articleRenderer.removeArticlesFromDom();
-    GLOBAL_DETAILED_ARTICLE_ID = object.dataset.id;
-    let detailedArticle = articleModel.getArticle(GLOBAL_DETAILED_ARTICLE_ID);
+    return new Promise(resolve => {
+        document.querySelector(".wrap").style.display = "none";
 
-    insertDetailedArticlesInDOM(detailedArticle);
-    document.querySelector("#news").style.display = "none";
-    document.querySelector("#main-article").style.display = "block";
-    dbRequestModel.getUsername().then(
-        function () {
-            document.querySelector(".detailed-article-list-item-edit-buttons").style.visibility = "visible";
-        }, function () {
-            document.querySelector(".detailed-article-list-item-edit-buttons").style.visibility = "hidden";
-        }
-    );
-
-
-    document.querySelector(".pagination").style.display = "none";
-}
-
-function insertDetailedArticlesInDOM(articles) {
-    DETAILED_ARTICLE_LIST_NODE = document.querySelector("#main-article");
-    DETAILED_ARTICLE_LIST_NODE.innerHTML = '';
-    let articlesNodes = renderDetailedMapArticle(articles);
-    articlesNodes.forEach(function (node) {
-        DETAILED_ARTICLE_LIST_NODE.appendChild(node);
+        GLOBAL_DETAILED_ARTICLE_ID = object.dataset.id;
+        articleModel.dbGetArticle(GLOBAL_DETAILED_ARTICLE_ID).then(response => {
+            document.querySelector("#news").style.display = "none";
+            document.querySelector("#main-article").style.display = "block";
+            renderMainArticle(response);
+            articleModel.dbGetUsername().then(
+                function () {
+                    document.querySelector(".detailed-article-list-item-edit-buttons").style.visibility = "visible";
+                }, function () {
+                    document.querySelector(".detailed-article-list-item-edit-buttons").style.visibility = "hidden";
+                }
+            );
+            document.querySelector(".pagination").style.display = "none";
+            resolve();
+        })
     });
 }
 
 
-function renderDetailedMapArticle(articles) {
-    return articles.map(function (article) {
-        return renderMainArticle(article);
-    });
-}
 function renderMainArticle(article) {
-    DETAILED_ARTICLE_TEMPLATE = document.querySelector('#template-detaild-article-list-item');
-    let template = DETAILED_ARTICLE_TEMPLATE;
-    template.content.querySelector('.detailed-article-list-item').dataset.id = article.id;
-    template.content.querySelector('.detailed-article-list-item-title').textContent = article.title;
-    template.content.querySelector('.detailed-article-list-item-summary').textContent = article.summary;
-    template.content.querySelector('.detailed-article-list-item-author').textContent = article.author;
-    template.content.querySelector('.detailed-article-list-item-date').textContent = formatDate(article.createdAt);
-    template.content.querySelector('.detailed-article-list-item-img').setAttribute("src", article.image);
-    template.content.querySelector('.detailed-article-list-item-content').textContent = article.content;
-    template.content.querySelector('.detailed-article-list-item-section').textContent = article.section;
+    console.log(article.tags.length);
+    document.querySelector('.detailed-article-list-item').dataset.id = article.id;
+    document.querySelector('.detailed-article-list-item-title').textContent = article.title;
+    document.querySelector('.detailed-article-list-item-summary').textContent = article.summary;
+    document.querySelector('.detailed-article-list-item-author').textContent = article.author;
+    document.querySelector('.detailed-article-list-item-date').textContent = formatDate(article.createdAt);
+    document.querySelector('.detailed-article-list-item-img').setAttribute("src", article.image);
+    document.querySelector('.detailed-article-list-item-content').textContent = article.content;
+    document.querySelector('.detailed-article-list-item-section').textContent = article.section;
 
     let newTags = [];
     for (let i = 0; i < article.tags.length; i++) {
         newTags[i] = "#" + article.tags[i];
     }
-
-    template.content.querySelector('#detailed-article-list-item-tags-first').textContent = newTags[0];
-    template.content.querySelector('#detailed-article-list-item-tags-second').textContent = newTags[1];
-    template.content.querySelector('#detailed-article-list-item-tags-third').textContent = newTags[2];
-    template.content.querySelector('#detailed-article-list-item-tags-fourth').textContent = newTags[3];
-    template.content.querySelector('#detailed-article-list-item-tags-fifth').textContent = newTags[4];
-
-
-    return template.content.querySelector('.detailed-article-list-item').cloneNode(true);
+    document.querySelector('#detailed-article-list-item-tags-first').textContent = newTags[0];
+    document.querySelector('#detailed-article-list-item-tags-second').textContent = newTags[1];
+    document.querySelector('#detailed-article-list-item-tags-third').textContent = newTags[2];
+    document.querySelector('#detailed-article-list-item-tags-fourth').textContent = newTags[3];
+    document.querySelector('#detailed-article-list-item-tags-fifth').textContent = newTags[4];
 }
 
 function formatDate(d) {
-    return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear() + " | " +
-        d.getHours() + ':' + d.getMinutes();
+    if (d) {
+        return d.getDate() + '.' + (d.getMonth() + 1) + '.' + d.getFullYear() + " | " +
+            d.getHours() + ':' + d.getMinutes();
+    }
 }
 
 
 function addArticleItem() {
-    dbRequestModel.getUsername().then(
+    articleModel.dbGetUsername().then(
         response => {
             articleModel.GLOBAL_USERNAME = response;
             resolve();
@@ -391,10 +483,10 @@ function addArticleItem() {
         image: document.querySelector("#add-news-form-image").value,
         createdAt: new Date(),
         author: articleModel.GLOBAL_USERNAME
-    }
+    };
 
 
-    dbRequestModel.addArticle(article_add).then(
+    articleModel.dbAddArticle(article_add).then(
         ready => {
             startApp();
         },
@@ -417,17 +509,19 @@ function showAddArticleForm() {
     document.querySelector(".pagination").style.display = "none";
 }
 
-function showEditArticleForm() {
-    let article = articleModel.getArticle(GLOBAL_DETAILED_ARTICLE_ID)[0];
-    document.querySelector("#edit-news-form-title").value = article.title;
-    document.querySelector("#edit-news-form-summary").value = article.summary;
-    document.querySelector("#edit-news-form-content").value = article.content;
-    document.querySelector("#edit-news-form-image").value = article.image;
-    document.querySelector("#edit-news-form-tags").value = article.tags;
-    document.querySelector("#edit-news-form-section").value = article.section;
-    document.querySelector("#edit-news-block").style.display = "block";
-    document.querySelector("#main-article").style.display = "none";
-    document.querySelector(".pagination").style.display = "none";
+function showEditArticleForm(article) {
+    articleModel.dbGetArticle(GLOBAL_DETAILED_ARTICLE_ID).then(response => {
+        let article = response;
+        document.querySelector("#edit-news-form-title").value = article.title;
+        document.querySelector("#edit-news-form-summary").value = article.summary;
+        document.querySelector("#edit-news-form-content").value = article.content;
+        document.querySelector("#edit-news-form-image").value = article.image;
+        document.querySelector("#edit-news-form-tags").value = article.tags;
+        document.querySelector("#edit-news-form-section").value = article.section;
+        document.querySelector("#edit-news-block").style.display = "block";
+        document.querySelector("#main-article").style.display = "none";
+        document.querySelector(".pagination").style.display = "none";
+    });
 }
 
 
@@ -442,19 +536,22 @@ function editArticleItem() {
         tags: document.querySelector("#edit-news-form-tags").value.split(",")
     };
 
-    let articleBeforeChanging = articleModel.getArticle(GLOBAL_DETAILED_ARTICLE_ID)[0];
-    articleBeforeChanging.title = article.title;
-    articleBeforeChanging.summary = article.summary;
-    articleBeforeChanging.content = article.content;
-    articleBeforeChanging.image = article.image;
-    articleBeforeChanging.tags = article.tags;
-    articleBeforeChanging.section = article.section;
-    dbRequestModel.editArticle(articleBeforeChanging).then(
-        ready => {
-            startApp();
-        },
-        error => console.log(error)
-    );
+    articleModel.dbGetArticle(GLOBAL_DETAILED_ARTICLE_ID).then(response => {
+        let articleBeforeChanging = response;
+        articleBeforeChanging.title = article.title;
+        articleBeforeChanging.summary = article.summary;
+        articleBeforeChanging.content = article.content;
+        articleBeforeChanging.image = article.image;
+        articleBeforeChanging.tags = article.tags;
+        articleBeforeChanging.section = article.section;
+        articleModel.dbEditArticle(articleBeforeChanging).then(
+            ready => {
+                startApp();
+            },
+            error => console.log(error)
+        );
+        resolve();
+    });
 
 
     document.querySelector("#edit-news-block").style.display = "none";
@@ -464,7 +561,7 @@ function editArticleItem() {
 }
 
 function deleteArticle() {
-    dbRequestModel.deleteArticle(GLOBAL_DETAILED_ARTICLE_ID).then(
+    articleModel.dbDeleteArticle(GLOBAL_DETAILED_ARTICLE_ID).then(
         ready => {
             startApp();
         },
@@ -502,12 +599,6 @@ function filterArticle() {
         dateEnd: new Date(dateE[2], dateE[1], dateE[0], 23, 59, 0),
         tags: document.querySelector("#filter-form-tags").value.split(",")
     };
-    console.log(filter);
-    console.log(document.querySelector("#filter-form-tags").value.split(","));
-
-
-    articleRenderer.removeArticlesFromDom();
-    let articles = articleModel.getArticles(0, 100, filter);
+    renderArticles(0,100,filter);
     document.querySelector(".pagination").style.display = "none";
-    articleRenderer.insertArticlesInDOM(articles);
 }

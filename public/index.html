@@ -172,6 +172,61 @@
 
 
             <div id="main-article">
+                <div id="template-detaild-article-list-item">
+                    <div class="detailed-article-list-item" data-id="">
+
+                        <div class="detailed-article-list-item-left">
+                            <a class="detailed-article-list-item-title "> Заголовок статьи </a>
+
+                            <div class="detailed-article-list-item-meta">
+                                <a class="detailed-article-list-item-section">Мир</a>
+                                <a class="detailed-article-list-item-date">12.12.1995 04:35</a>
+                                <a class="detailed-article-list-item-author">Alexander Mikulich</a>
+                            </div>
+
+                            <div class="detailed-article-list-item-edit-buttons">
+                                <a class="detailed-article-list-item-edit-buttons-edit"
+                                   onclick="showEditArticleForm()">Редактировать</a>
+                                <a class="detailed-article-list-item-edit-buttons-edit" onclick="deleteArticle()">Удалить</a>
+                            </div>
+
+
+                        </div>
+
+                        <div class="detailed-article-list-item-right">
+                            <img class="detailed-article-list-item-img" src="img/spacex.jpg"><img>
+
+                            <br>
+                            <br>
+                            <p class="detailed-article-list-item-summary">
+                                Краткое описание для статьи. Тут краткое описание
+                            </p>
+
+
+                            <br>
+                            <p class="detailed-article-list-item-content">
+                                Краткое описание для статьи. Тут краткое описание
+                            </p>
+                            <br>
+                            <br>
+
+
+                            <div class="detailed-article-list-item-tags">
+                                <a id="detailed-article-list-item-tags-first" onclick="metaDetailedTagOnClick('first')"></a>
+                                <a id="detailed-article-list-item-tags-second" onclick="metaDetailedTagOnClick('second')"></a>
+                                <a id="detailed-article-list-item-tags-third" onclick="metaDetailedTagOnClick('third')"></a>
+                                <a id="detailed-article-list-item-tags-fourth" onclick="metaDetailedTagOnClick('fourth')"></a>
+                                <a id="detailed-article-list-item-tags-fifth" onclick="metaDetailedTagOnClick('fifth')"></a>
+                            </div>
+
+
+                            <br>
+                            <br>
+                        </div>
+
+
+                    </div>
+                </div>
             </div>
             <div id="news">
             </div>
@@ -203,38 +258,6 @@
                     <input type="text" name="dateform" placeholder="Дата с ДД.ММ.ГГ" id="filter-form-date-start"/><br>
                     <input type="text" name="dateform" placeholder="Дата по ДД.ММ.ГГ" id="filter-form-date-end"/><br>
                 </form>
-
-                <!--
-
-                <select class="select-bar" name="Имя автора">
-                    <option>Имя Автора</option>
-                    <option>Alexander Mikulich</option>
-                    <option>User2</option>
-                    <option>User3</option>
-                </select>
-
-                <select class="select-bar" name="Дата">
-                    <option>Дата</option>
-                    <option>2017</option>
-                    <option>2016</option>
-                    <option>2015</option>
-                    <option>2015</option>
-                    <option>2015</option>
-                </select>
-
-                <select class="select-bar" name="Раздел">
-                    <option>Раздел</option>
-                    <option>Мир</option>
-                    <option>Общество</option>
-                    <option>Экономика</option>
-                    <option>Культура</option>
-                    <option>Происшествия</option>
-                    <option>Спорт</option>
-                </select>
-
-                -->
-
-
             </div>
 
             <label class="main-button-label">
@@ -294,61 +317,6 @@
     </div>
 </template>
 
-<template id="template-detaild-article-list-item">
-    <div class="detailed-article-list-item" data-id="">
-
-        <div class="detailed-article-list-item-left">
-            <a class="detailed-article-list-item-title "> Заголовок статьи </a>
-
-            <div class="detailed-article-list-item-meta">
-                <a class="detailed-article-list-item-section">Мир</a>
-                <a class="detailed-article-list-item-date">12.12.1995 04:35</a>
-                <a class="detailed-article-list-item-author">Alexander Mikulich</a>
-            </div>
-
-            <div class="detailed-article-list-item-edit-buttons">
-                <a class="detailed-article-list-item-edit-buttons-edit"
-                   onclick="showEditArticleForm()">Редактировать</a>
-                <a class="detailed-article-list-item-edit-buttons-edit" onclick="deleteArticle()">Удалить</a>
-            </div>
-
-
-        </div>
-
-        <div class="detailed-article-list-item-right">
-            <img class="detailed-article-list-item-img" src="img/spacex.jpg"><img>
-
-            <br>
-            <br>
-            <p class="detailed-article-list-item-summary">
-                Краткое описание для статьи. Тут краткое описание
-            </p>
-
-
-            <br>
-            <p class="detailed-article-list-item-content">
-                Краткое описание для статьи. Тут краткое описание
-            </p>
-            <br>
-            <br>
-
-
-            <div class="detailed-article-list-item-tags">
-                <a id="detailed-article-list-item-tags-first" onclick="metaDetailedTagOnClick('first')"></a>
-                <a id="detailed-article-list-item-tags-second" onclick="metaDetailedTagOnClick('second')"></a>
-                <a id="detailed-article-list-item-tags-third" onclick="metaDetailedTagOnClick('third')"></a>
-                <a id="detailed-article-list-item-tags-fourth" onclick="metaDetailedTagOnClick('fourth')"></a>
-                <a id="detailed-article-list-item-tags-fifth" onclick="metaDetailedTagOnClick('fifth')"></a>
-            </div>
-
-
-            <br>
-            <br>
-        </div>
-
-
-    </div>
-</template>
 
 
 <!-- scripts -->

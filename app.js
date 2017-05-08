@@ -1,14 +1,14 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const db=require('diskdb');
+const db = require('diskdb');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const sessionStore = require('connect-diskdb')(session);
-const store = new sessionStore({ path: './db', name: 'sessions' });
+const store = new sessionStore({path: './db', name: 'sessions'});
 
-db.connect('./db',['articles','users']);
+db.connect('./db', ['articles', 'users']);
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -16,50 +16,109 @@ app.use(express.static(__dirname + '/public'));
 
 app.use(bodyParser.json());
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 
-app.listen(app.get('port'), function(){
-  console.log("localhost:", app.get('port'));
+app.listen(app.get('port'), function () {
+    console.log("localhost:", app.get('port'));
 })
 
-app.get('/articles', function(request,response){
-  response.json(db.articles.find());
+
+app.get('/articles', function (request, response) {
+
+    response.json(db.articles.find());
 })
 
-app.get('/articles/:id',function(request,response){
-  response.json(db.articles.findOne(
-    {id: request.params.id}
-  ));
+app.get('/articles/:id', function (request, response) {
+    response.json(db.articles.findOne(
+        {id: request.params.id}
+    ));
 })
 
 app.post('/articles', function (request, response) {
-  response.json(db.articles.save(request.body));
+    response.json(db.articles.save(request.body));
 });
 
 app.put('/articles', function (request, response) {
-  response.json(db.articles.findOne({ id: request.body.id }));
+    const skip = request.body.skip || 0;
+    const top = request.body.top || db.articles.count();
+    const filterConfig = request.body.filterConfig;
+    let articles = [{}];
+    let newArticles = db.articles.find();
+    newArticles.sort(function (a, b) {
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    });
+    if (filterConfig) {
+        articles = newArticles.filter(function (element) {
+            if (filterConfig.author) {
+                if (element.author !== filterConfig.author) {
+                    return false;
+                }
+            }
+
+            if (filterConfig.section) {
+                if (element.section !== filterConfig.section) {
+                    return false;
+                }
+            }
+
+            if (filterConfig.dateStart) {
+                if (element.createdAt.getTime() <= filterConfig.dateStart.getTime()) {
+                    return false;
+                }
+            }
+
+            if (filterConfig.dateEnd) {
+                if (element.createdAt.getTime() >= filterConfig.dateEnd.getTime()) {
+                    return false;
+                }
+            }
+
+
+            if (filterConfig.tags && filterConfig.tags != "") {
+                let flag = false;
+                for (let i = 0; i < filterConfig.tags.length; i++) {
+                    for (let j = 0; j < element.tags.length; j++) {
+                        if (element.tags[j].toLowerCase() === filterConfig.tags[i].toLowerCase()) {
+                            flag = true;
+                        }
+                    }
+                }
+                if (flag === false)
+                    return false;
+
+            }
+
+            return true;
+        }).slice(skip, skip + top)
+    }
+    else {
+        articles = newArticles.slice(skip, skip + top);
+    }
+
+    response.send(articles);
 });
 
-app.put('/articles/:id', function (request, response) {
-  response.json(db.articles.findOne({ id: request.params.id }));
+app.put('/articlesid', function (request, response) {
+    let article =[db.articles.findOne({id: request.body.id})];
+    response.send(article[0]);
 });
 
 app.delete('/articles', function (request, response) {
-  response.json(db.articles.remove({ id: request.body.id }));
+    response.json(db.articles.remove({id: request.body.id}));
 });
 
 app.delete('/articles/:id', function (request, response) {
-  response.json(db.articles.remove({ id: request.params.id }));
+    response.json(db.articles.remove({id: request.params.id}));
 });
 
 app.patch('/articles', function (request, response) {
-db.articles.remove({ id: request.body.id });
-response.json(db.articles.save(request.body));
+    db.articles.remove({id: request.body.id});
+    response.json(db.articles.save(request.body));
 });
 
 app.patch('/articles/:id', function (request, response) {
-db.articles.remove({ id: request.body.id });
-response.json(db.articles.save(request.body));
+    db.articles.remove({id: request.body.id});
+    response.json(db.articles.save(request.body));
 });
 
 
@@ -80,17 +139,17 @@ passport.deserializeUser((user, done) => {
 });
 
 passport.use('login', new LocalStrategy({
-    passReqToCallback: true
-},
+        passReqToCallback: true
+    },
     (req, username, password, done) => {
-        const user = db.users.findOne({ username: username });
+        const user = db.users.findOne({username: username});
         if (!user) {
             console.log('User Not Found with username ' + username);
-            return done(null, false, { message: 'user not found' });
+            return done(null, false, {message: 'user not found'});
         }
         if (password !== user.password) {
             console.log('Invalid Password');
-            return done(null, false, { message: 'incorrect password' });
+            return done(null, false, {message: 'incorrect password'});
         }
         return done(null, user);
     })

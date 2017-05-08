@@ -54,7 +54,6 @@ window.onresize = function () {
 
 
 function signIn() {
-
     document.querySelector(".nav-hide-menu-login-username").style.display = "none";
     document.querySelector(".exit-button").style.display = "block";
     document.querySelector(".add-article").style.display = "block";
@@ -63,7 +62,7 @@ function signIn() {
 
 
 function logOut() {
-    dbRequestModel.logOut().then(() => window.location = "index.html")
+    articleModel.dbLogOut().then(() => window.location = "index.html")
     document.querySelector(".nav-hide-menu-login-username").style.display = "block";
     document.querySelector(".nav-hide-menu-user").style.display = "none";
     document.querySelector(".exit-button").style.display = "none";
@@ -83,7 +82,7 @@ function valid(form) {
         alert(fail);
     }
     else {
-        dbRequestModel.logIn({username, password}).then(
+        articleModel.dbLogIn({username, password}).then(
             ready => {
                 document.querySelector("#loginForm").style.display = "none";
                 document.querySelector("#news").style.display = "block";
@@ -115,9 +114,7 @@ function bySection(sectionConfig) {
         section: sectionConfig
     };
 
-    articleRenderer.removeArticlesFromDom();
-    let articles = articleModel.getArticles(0, 100, filter);
-    articleRenderer.insertArticlesInDOM(articles);
+    renderArticles(0, 100, filter);
     document.querySelector("#news").style.display = "block";
     document.querySelector(".wrap").style.display = "block";
     document.querySelector("#main-article").style.display = "none";
