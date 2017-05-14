@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/admin');
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -7,7 +7,7 @@ db.once('open', () => {
   console.log('connection success');
 });
 
-const articleSchema = new mongoose.Schema({
+const articles = new mongoose.Schema({
     image: String,
     title: String,
     tags: [String],
@@ -17,11 +17,11 @@ const articleSchema = new mongoose.Schema({
     createdAt: Date,
     author: String,
 });
-const userSchema = new mongoose.Schema({
+const users = new mongoose.Schema({
   username: String,
   password: String
 });
 
 
-module.exports.ArticleModel = db.model('articleModel', articleSchema);
-module.exports.UserModel = db.model('userModel', userSchema);
+module.exports.ArticleModel = db.model('articleModel', articles);
+module.exports.UserModel = db.model('userModel', users);

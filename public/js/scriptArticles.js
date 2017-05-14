@@ -29,6 +29,7 @@ let articleModel = (function () {
             }
 
             function dbGetArticle(id) {
+                console.log(id);
                 return new Promise((resolve, reject) => {
                     let request = new XMLHttpRequest();
                     request.open('PUT', '/articlesid');
@@ -337,7 +338,7 @@ let articleRenderer = (function () {
 
     function renderArticle(article) {
         let template = ARTICLE_TEMPLATE;
-        template.content.querySelector('.article-list-item').dataset.id = article.id;
+        template.content.querySelector('.article-list-item').dataset.id = article._id;
         template.content.querySelector('.article-list-item-title').textContent = article.title;
         template.content.querySelector('.article-list-item-summary').textContent = article.summary;
         template.content.querySelector('.article-list-item-section').textContent = article.section;
@@ -435,7 +436,7 @@ function renderDetailedArticle(object) {
 
 function renderMainArticle(article) {
     console.log(article.tags.length);
-    document.querySelector('.detailed-article-list-item').dataset.id = article.id;
+    document.querySelector('.detailed-article-list-item').dataset.id = article._id;
     document.querySelector('.detailed-article-list-item-title').textContent = article.title;
     document.querySelector('.detailed-article-list-item-summary').textContent = article.summary;
     document.querySelector('.detailed-article-list-item-author').textContent = article.author;
