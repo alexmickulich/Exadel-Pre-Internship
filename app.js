@@ -20,6 +20,7 @@ arts.forEach(item => {
     delete item._id;
     new ArticleModel(item).save(err => !err ? console.log('added') : console.log('err'));
 })
+/*
 let db = require('diskdb');
 db.connect('./db', ['users']);
 const arts = db.users.find();
@@ -67,15 +68,9 @@ app.get('/articles/:id', function (request, response) {
     });
 })
 
-app.post('/articles', function (request, response) {
-    ArticleModel.save().exec((err, result) => {
-        if (err) {
-            response.sendStatus(500);
-        }
-        else {
-            response.json(result.save(request.body));
-        }
-    });
+
+app.post('/articles', (req, res) => {
+    new ArticleModel(req.body).save(err => !err ? res.sendStatus(200) : res.sendStatus(500));
 });
 
 
@@ -155,79 +150,21 @@ app.put('/articlesid', function (request, response) {
         }
         else {
             let article = [result];
-            console.log(article);
             response.send(article[0]);
         }
     });
 });
 
 
-
-
-
-
-
-app.delete('/articles', function (request, response) {
-    ArticleModel.findOne().exec((err, result) => {
-        if (err) {
-            response.sendStatus(500);
-        }
-        else {
-            response.json(result.remove({id: request.body.id}));
-        }
-    });
+app.delete('/articles/:id', (req, res) => {
+    ArticleModel.findByIdAndRemove(req.params.id, err =>
+        !err ? res.sendStatus(200) : res.sendStatus(500));
 });
 
-app.delete('/articles/:id', function (request, response) {
-    ArticleModel.findOne().exec((err, result) => {
-        if (err) {
-            response.sendStatus(500);
-        }
-        else {
-            response.json(result.remove({id: request.params.id}));
-        }
-    });
+app.patch('/articles', (req, res) => {
+    ArticleModel.findByIdAndUpdate(req.body._id, { $set: req.body }, err =>
+        !err ? res.sendStatus(200) : res.sendStatus(500));
 });
-
-app.patch('/articles', function (request, response) {
-    ArticleModel.remove().exec((err, result) => {
-        if (err) {
-            response.sendStatus(500);
-        }
-        else {
-            result.remove({id: request.body.id});
-            ArticleModel.save().exec((err, result) => {
-                if (err) {
-                    response.sendStatus(500);
-                }
-                else {
-                    response.json(result.save(request.body));
-                }
-            });
-        }
-    });
-});
-
-
-app.patch('/articles/:id', function (request, response) {
-    ArticleModel.remove().exec((err, result) => {
-        if (err) {
-            response.sendStatus(500);
-        }
-        else {
-            result.remove({id: request.body.id});
-            ArticleModel.save(request.body).exec((err, result) => {
-                if (err) {
-                    response.sendStatus(500);
-                }
-                else {
-                    response.json(result);
-                }
-            });
-        }
-    });
-});
-
 
 app.use(session({
     secret: 'secret',
