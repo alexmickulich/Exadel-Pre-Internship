@@ -109,16 +109,6 @@ add_article_button.onclick = function () {
     document.querySelector(".wrap").style.display = "none";
 };
 
-function bySection(sectionConfig) {
-    let filter = {
-        section: sectionConfig
-    };
 
-    renderArticles(0, 100, filter);
-    document.querySelector("#news").style.display = "block";
-    document.querySelector(".wrap").style.display = "block";
-    document.querySelector("#main-article").style.display = "none";
-    document.querySelector(".pagination").style.display = "none";
-}
 //----------------------------NAVIGATION-MENU-------------------------------//
 

@@ -4,9 +4,7 @@
 let GLOBAL_DETAILED_ARTICLE_ID;
 
 let articleModel = (function () {
-            let GLOBAL_ARTICLES = [{}];
             let GLOBAL_USERNAME;
-            let TAGS_BASE = ["Мир", "SpaceX", "Илон Маск", "Спорт", "Экономика", "общество", "врачи", "Минск", "Беларусь", "налог", "тунеядство", "спорт", "БАТЭ", "Футбол"]
 
             function dbGetArticles(skip, top, filterConfig) {
                 return new Promise((resolve, reject) => {
@@ -169,98 +167,18 @@ let articleModel = (function () {
                 });
             }
 
-            /*
-            function getArticle(curid) {
-                return GLOBAL_ARTICLES.filter(function (currentElement) {
-                    return currentElement.id == curid;
-                });
+
+            function validateArticle(article) {
+                if (typeof(article.title) != "string") return false;
+                if (typeof(article.title.length) < 0) return false;
+                if (typeof(article.summary) != "string") return false;
+                if (typeof(article.summary.length) < 0) return false;
+                if (typeof(article.createdAt) != "object") return false;
+                if (typeof(article.author) != "string") return false;
+                if (article.tags.length < 0) return false;
+                return true;
             }
 
-
-             function validateArticle(article) {
-             if (typeof(article.title) != "string") return false;
-             if (typeof(article.title.length) < 0) return false;
-             if (typeof(article.summary) != "string") return false;
-             if (typeof(article.summary.length) < 0) return false;
-             if (typeof(article.createdAt) != "object") return false;
-             if (typeof(article.author) != "string") return false;
-             if (article.tags.length < 0) return false;
-             return true;
-             }
-
-
-
-            function addArticle(article) {
-                if (validateArticle(article)) {
-                    GLOBAL_ARTICLES.push(article);
-                    return true;
-                } else return false;
-            }
-
-            function editArticle(id, article) {
-                if (validateArticle(article)) {
-                    getArticle(id)[0].title = article.title;
-                    getArticle(id)[0].summary = article.summary;
-                    getArticle(id)[0].content = article.content;
-                    getArticle(id)[0].image = article.image;
-                    getArticle(id)[0].tags = article.tags;
-                    return true;
-                } else return false;
-            }
-
-            function removeArticle(id) {
-                for (let i = 0; i < GLOBAL_ARTICLES.length; i++) {
-                    if (GLOBAL_ARTICLES[i].id === id) {
-                        GLOBAL_ARTICLES.splice(i, 1);
-                    }
-                }
-            };
-
-
-            function addTag(id, tag) {
-                let key = 0;
-                for (let i = 0; i < TAGS_BASE.length; i++) {
-                    if (TAGS_BASE[i] == tag) {
-                        key = 1;
-                    }
-                }
-                if (key > 0) {
-                    for (let i = 0; i < GLOBAL_ARTICLES.length; i++) {
-                        if (GLOBAL_ARTICLES[i].id == id) {
-                            GLOBAL_ARTICLES[i].tags.push(teg);
-                            return true;
-                        }
-                    }
-                } else return false;
-            }
-
-            function removeTag(id, teg) {
-                for (let i = 0; i < GLOBAL_ARTICLES.length; i++) {
-                    if (GLOBAL_ARTICLES[i].id == id) {
-                        for (let j = 0; j < GLOBAL_ARTICLES[i].tags.length; j++) {
-                            if (GLOBAL_ARTICLES[i].tags[j] === teg) {
-                                delete GLOBAL_ARTICLES[i].tags[j];
-                                GLOBAL_ARTICLES[i].tags.length--;
-                                return true;
-                            }
-                        }
-                    }
-                }
-                return false;
-            }
-            */
-
-            function replaceArticles() {
-                return new Promise((resolve) => {
-                    articleModel.getArticles().then(
-                        response => {
-                            GLOBAL_ARTICLES = response;
-                            resolve();
-                        },
-                        error => console.log(error)
-                    )
-                });
-            }
 
             function replaceUsername() {
                 return new Promise((resolve) => {
@@ -277,21 +195,11 @@ let articleModel = (function () {
 
 
             return {
-                GLOBAL_ARTICLES: GLOBAL_ARTICLES,
                 GLOBAL_USERNAME: GLOBAL_USERNAME,
                 replaceUsername: replaceUsername,
-                replaceArticles: replaceArticles,
                 getArticles: getArticles,
                 dbGetArticle: dbGetArticle,
-                /*
                 validateArticle: validateArticle,
-                addArticle: addArticle,
-                editArticle: editArticle,
-                removeArticle: removeArticle,
-                addTag: addTag,
-                removeTag: removeTag,
-
-                */
                 dbEditArticle: dbEditArticle,
                 dbDeleteArticle: dbDeleteArticle,
                 dbAddArticle: dbAddArticle,
@@ -311,6 +219,7 @@ let articleModel = (function () {
 let articleRenderer = (function () {
     let ARTICLE_TEMPLATE;
     let ARTICLE_LIST_NODE;
+    let ARTICLE_CURRENT_COUNT;
     let DETAILED_ARTICLE_TEMPLATE;
 
     function init() {
@@ -377,6 +286,7 @@ let articleRenderer = (function () {
 
     return {
         init: init,
+        ARTICLE_CURRENT_COUNT: ARTICLE_CURRENT_COUNT,
         insertArticlesInDOM: insertArticlesInDOM,
         removeArticlesFromDom: removeArticlesFromDom
     };
@@ -388,7 +298,7 @@ document.addEventListener('DOMContentLoaded', startApp);
 
 function startApp() {
     articleRenderer.init();
-    renderArticles(0, 10);
+    renderArticles(0, 5);
 
     articleModel.dbGetUsername().then(
         function () {
@@ -405,8 +315,11 @@ function renderArticles(skip, top, filterConfig) {
     return new Promise(resolve => {
         articleRenderer.removeArticlesFromDom();
         articleModel.dbGetArticles(skip, top, filterConfig).then(response => {
-            articleRenderer.insertArticlesInDOM(response);
-            resolve();
+            articleRenderer.ARTICLE_CURRENT_COUNT = response.size;
+            if (articleRenderer.ARTICLE_CURRENT_COUNT <= 5) {
+                document.querySelector(".pagination").style.display = "none";
+            }
+            articleRenderer.insertArticlesInDOM(response.articles);
         })
     });
 }
@@ -435,7 +348,6 @@ function renderDetailedArticle(object) {
 
 
 function renderMainArticle(article) {
-    console.log(article.tags.length);
     document.querySelector('.detailed-article-list-item').dataset.id = article._id;
     document.querySelector('.detailed-article-list-item-title').textContent = article.title;
     document.querySelector('.detailed-article-list-item-summary').textContent = article.summary;
@@ -528,7 +440,6 @@ function showEditArticleForm(article) {
 
 function editArticleItem() {
     let article = {
-        id: "9000",
         title: document.querySelector("#edit-news-form-title").value,
         summary: document.querySelector("#edit-news-form-summary").value,
         content: document.querySelector("#edit-news-form-content").value,
@@ -575,31 +486,45 @@ function deleteArticle() {
     document.querySelector("#main-article").style.display = "none";
 }
 
-let GLOBAL_TOP = 20;
+let GLOBAL_TOP = 10;
+let GLOBAL_FILTER;
 function showMore() {
-    let y = window.pageYOffset;
+    let position = window.pageYOffset;
     document.querySelector(".pagination").style.display = "block";
     articleRenderer.init();
-    renderArticles(0, GLOBAL_TOP);
-    if (articleModel.GLOBAL_ARTICLES.length <= GLOBAL_TOP) {
+    renderArticles(0, GLOBAL_TOP, GLOBAL_FILTER);
+    if (articleRenderer.ARTICLE_CURRENT_COUNT <= GLOBAL_TOP) {
         document.querySelector(".pagination").style.display = "none";
     }
-    GLOBAL_TOP = GLOBAL_TOP + 10;
-    scrollTo(0, y);
+    GLOBAL_TOP = GLOBAL_TOP + 5;
+    scrollTo(0, position);
 }
 
 
 function filterArticle() {
-
-    let dateS = document.querySelector("#filter-form-date-start").value.split(".");
-    let dateE = document.querySelector("#filter-form-date-end").value.split(".");
-
-    let filter = {
+    document.querySelector(".pagination").style.display = "block";
+    let dateS = document.querySelector("#filter-form-date-start").value.split("-");
+    let dateE = document.querySelector("#filter-form-date-end").value.split("-");
+    GLOBAL_FILTER = {
         author: document.querySelector("#filter-form-author").value,
-        dateStart: new Date(dateS[2], dateS[1], dateS[0], 0, 0, 1),
-        dateEnd: new Date(dateE[2], dateE[1], dateE[0], 23, 59, 0),
+        dateStart: new Date(dateS[0], dateS[1] - 1, dateS[2], 0, 0, 1),
+        dateEnd: new Date(dateE[0], dateE[1] - 1, dateE[2], 23, 59, 0),
         tags: document.querySelector("#filter-form-tags").value.split(",")
     };
-    renderArticles(0,100,filter);
-    document.querySelector(".pagination").style.display = "none";
+    renderArticles(0, 5, GLOBAL_FILTER);
+    console.log(articleRenderer.ARTICLE_CURRENT_COUNT);
+    document.querySelector(".wrap").style.display = "none";
+}
+
+function bySection(sectionConfig) {
+    document.querySelector(".pagination").style.display = "block";
+    GLOBAL_FILTER = {
+        section: sectionConfig
+    };
+
+    renderArticles(0, 5, GLOBAL_FILTER);
+    document.querySelector("#news").style.display = "block";
+    document.querySelector(".wrap").style.display = "none";
+    document.querySelector("#main-article").style.display = "none";
+    console.log(articleRenderer.ARTICLE_CURRENT_COUNT);
 }

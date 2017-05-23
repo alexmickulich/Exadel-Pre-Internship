@@ -12,22 +12,22 @@ const ArticleModel = require('./db.js').ArticleModel;
 const UserModel = require('./db.js').UserModel;
 
 /*
-let db = require('diskdb');
-db.connect('./db', ['articles']);
-const arts = db.articles.find();
-arts.forEach(item => {
-    delete item.id;
-    delete item._id;
-    new ArticleModel(item).save(err => !err ? console.log('added') : console.log('err'));
-})
-/*
-let db = require('diskdb');
-db.connect('./db', ['users']);
-const arts = db.users.find();
-arts.forEach(item => {
-    new UserModel(item).save(err => !err ? console.log('added') : console.log('err'));
-})
-*/
+ let db = require('diskdb');
+ db.connect('./db', ['articles']);
+ const arts = db.articles.find();
+ arts.forEach(item => {
+ delete item.id;
+ delete item._id;
+ new ArticleModel(item).save(err => !err ? console.log('added') : console.log('err'));
+ })
+ /*
+ let db = require('diskdb');
+ db.connect('./db', ['users']);
+ const arts = db.users.find();
+ arts.forEach(item => {
+ new UserModel(item).save(err => !err ? console.log('added') : console.log('err'));
+ })
+ */
 
 
 app.set('port', (process.env.PORT || 5000));
@@ -79,6 +79,7 @@ app.put('/articles', function (request, response) {
         const top = request.body.top || 10;
         const filterConfig = request.body.filterConfig;
         let articles = [{}];
+        console.log(filterConfig);
 
         ArticleModel.find().exec((err, result) => {
             if (err) {
@@ -104,13 +105,13 @@ app.put('/articles', function (request, response) {
                         }
 
                         if (filterConfig.dateStart) {
-                            if (element.createdAt.getTime() <= filterConfig.dateStart.getTime()) {
+                            if (element.createdAt.getTime() <= new Date(filterConfig.dateStart).getTime()) {
                                 return false;
                             }
                         }
 
                         if (filterConfig.dateEnd) {
-                            if (element.createdAt.getTime() >= filterConfig.dateEnd.getTime()) {
+                            if (element.createdAt.getTime() >= new Date(filterConfig.dateEnd).getTime()) {
                                 return false;
                             }
                         }
@@ -131,13 +132,14 @@ app.put('/articles', function (request, response) {
                         }
 
                         return true;
-                    }).slice(skip, skip + top)
+                    })
                 }
                 else {
-                    articles = newArticles.slice(skip, skip + top);
+                    articles = newArticles;
                 }
-
-                response.send(articles);
+                let size = articles.length;
+                articles = articles.slice(skip, skip + top);
+                response.send({articles, size});
             }
         });
     }
@@ -162,7 +164,7 @@ app.delete('/articles/:id', (req, res) => {
 });
 
 app.patch('/articles', (req, res) => {
-    ArticleModel.findByIdAndUpdate(req.body._id, { $set: req.body }, err =>
+    ArticleModel.findByIdAndUpdate(req.body._id, {$set: req.body}, err =>
         !err ? res.sendStatus(200) : res.sendStatus(500));
 });
 

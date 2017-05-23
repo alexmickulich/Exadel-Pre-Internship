@@ -302,26 +302,24 @@ nav{
     }
 
     .header-logo img{
-        width: 2em;
-        height: 2em;
+        width: 1.4em;
+        height: 1.4em;
         float: left;
     }
 
     .header-logo img:hover{
-        width: 2.2em;
-        height: 2.2em;
+        width: 1.4em;
+        height: 1.4em;
         float: left;
         opacity: 0.5;
     }
 
-    .header-right-block img{
-        padding: 0.1em;
-        width: 1.8em;
-        width: 1.8em;
+    .header-right-block{
+        display: none;
     }
 
     .header-logo span{
-        font-size: 1.5em;
+        font-size: 1.2em;
         margin-left: 10px;
         font-family: IntroScript;
         text-decoration: none;
@@ -329,7 +327,7 @@ nav{
     }
 
     .header-logo span:hover{
-        font-size: 1.6em;
+        font-size: 1.2em;
     }
 
     @media (min-width: 701px) {
