@@ -10,47 +10,7 @@ burgerButton.onclick = function () {
 };
 
 
-let m = document.querySelector("main"),
-    aSide = document.querySelector("aside");
-h = document.querySelector("header"),
-    n = document.querySelector("nav"),
-    slideShow = document.querySelector(".wrap");
 
-nHeight = 0;
-hHeight = 0;
-
-function setTopPadding() {
-    hHeight = h.offsetHeight;
-    nHeight = n.offsetHeight;
-    slideShow.style.paddingTop = nHeight + nHeight + hHeight + "px";
-    m.style.paddingTop = nHeight + hHeight + "px";
-    aSide.style.paddingTop = nHeight + hHeight + "px";
-}
-
-function onScroll() {
-    window.addEventListener("scroll", callbackFunc);
-    function callbackFunc() {
-        let y = window.pageYOffset;
-        if (y > hHeight) {
-            h.classList.add("scroll");
-            n.classList.add("scroll_nav");
-        } else {
-            h.classList.remove("scroll");
-            n.classList.remove("scroll_nav");
-        }
-    }
-}
-
-
-window.onload = function () {
-    setTopPadding();
-    onScroll();
-    //startApp();
-};
-
-window.onresize = function () {
-    setTopPadding();
-};
 
 
 function signIn() {

@@ -299,7 +299,6 @@ document.addEventListener('DOMContentLoaded', startApp);
 function startApp() {
     articleRenderer.init();
     renderArticles(0, 5);
-
     articleModel.dbGetUsername().then(
         function () {
             articleModel.replaceUsername().then(
@@ -319,6 +318,10 @@ function renderArticles(skip, top, filterConfig) {
             if (articleRenderer.ARTICLE_CURRENT_COUNT <= 5) {
                 document.querySelector(".pagination").style.display = "none";
             }
+            if (response.size === 0){
+                document.querySelector("#error-message").style.display ="block";
+            }
+
             articleRenderer.insertArticlesInDOM(response.articles);
         })
     });

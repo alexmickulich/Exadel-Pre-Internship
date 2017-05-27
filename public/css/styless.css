@@ -106,7 +106,9 @@ header{
 }
 
 .exit-button:hover{
-    background-color: #ed1c24;
+    height: 39px;
+    width: 39px;
+    opacity: 0.5;
 }
 
 .header-right-block{
@@ -239,6 +241,19 @@ nav{
     display: block;
 }
 
+#burger_filter{
+    display: none;
+}
+
+#burger_filter{
+    margin-top: 2%;
+    padding-right: 50%;
+    padding-left: 2%;
+    padding-bottom: 2%;
+    border: none;
+}
+
+
 
 
 /*конец стилей для шапки сайта */
@@ -257,12 +272,13 @@ nav{
 
 /*Дизайн для футера*/
 .footer-first{
+    position: relative;
+    z-index: 10000;
     float: left;
     background-color: #09d263;
     width: 99.4%;
     padding: 0.3%;
     color: white;
-    border-top: 5px solid #ffffff;
 }
 
 .footer-first-text-info{
@@ -279,6 +295,8 @@ nav{
 }
 
 .footer-second{
+    position: relative;
+    z-index: 10000;
     float: left;
     background-color: #2d2d2d;
     width: 99.4%;
@@ -353,3 +371,40 @@ header {
     box-shadow: 0 7px 0 0 rgba(0, 0, 0, .1);
 }
 
+
+#updown {
+    z-index: 5000;
+    width: 100%;
+    font-size: 2em;
+    font-family: CoreSansA45ScriptLigth;
+    position: relative;
+    text-align: center;
+    top: 15%;
+    cursor: pointer;
+}
+
+#updown.up::before {
+    content: '\2191';
+    opacity: 0.2;
+}
+
+#updown.down::before {
+    content: '\2193';
+    opacity: 0.2;
+}
+
+#updown-background{
+    z-index: 1;
+    position: fixed;
+    height: 100%;
+    width: 5%;
+    background: #ffffff;
+}
+
+#updown-background:hover{
+    z-index: 1;
+    position: fixed;
+    height: 100%;
+    width: 5%;
+    background: #f1f1f1;
+}

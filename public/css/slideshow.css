@@ -16,8 +16,7 @@
 
 .slide-header {
     height: 2.5em;
-    background: #2d2d2d;
-    box-shadow: 0 .5em 1em #111;
+    background: #ffffff;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -27,20 +26,35 @@
 
 .slide-header label {
     font-family: CoreSansA45ScriptLigth;
-    width: 30%;
+    height: 2.5em;
+    width: 31.73%;
+    display: inherit;
+    float: left;
     color: #ffffff;
     cursor: pointer;
-    display: inline-block;
-    line-height: 2.5em;
     font-size: 1em;
     font-weight: bold;
-    padding: 0 0em;
+    padding: 0.5em;
+    margin: 0;
+}
+
+#slide-header-label-1{
+    background: #09d263;
+}
+
+#slide-header-label-2{
+    background: #2d2d2d;
+}
+
+#slide-header-label-3{
     background: #2d2d2d;
 }
 
 .slide-header label:hover {
-    background: #09d263;
+    opacity: 0.9;
 }
+
+
 
 .slide {
     height: 100%;
@@ -50,7 +64,7 @@
     left: 100%;
     z-index: 10;
     padding: 8em 1em 0;
-    background-color: #120103;
+    background-color: #ffffff;
     background-position: 50% 50%;
     background-size: cover;
     transition: left 0s .75s;
@@ -80,12 +94,11 @@
     transition: left .65s ease-out;
 }
 
-[id^='slide']:checked + .slide-header>label {
-  background-color: #09d263;
-}
 
 [id^='slide']:checked + .slide h1 {
     opacity: 1;
     transform: translateY(0);
     transition: all .5s .5s;
 }
+
+[id^='slide']:checked .

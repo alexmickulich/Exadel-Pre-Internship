@@ -1,0 +1,32 @@
+input{
+    background: #ffffff;
+    border: solid 1px;
+    border-bottom-color: #cccccc;
+    border-top-color: #ffffff;
+    border-left-color: #FFFFFF;
+    border-right-color: #FFFFFF;
+}
+
+
+.search-bar input {
+    width: 100%;
+}
+
+.search-bar input[type=date] {
+    font-family: CoreSansA45ScriptLigth;
+    color: #4c4c4c;
+}
+
+
+
+
+input:focus{
+     outline: none;
+     border-bottom-color: #09d263;
+}
+
+input[type=placeholder]:focus{
+    color: #09c662;
+    font-size: 4%;
+    text-align: right;
+}

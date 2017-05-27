@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/styless.css">
     <link rel="stylesheet" href="css/slideshow.css">
     <link rel="stylesheet" href="css/main-page.css">
+    <link rel="stylesheet" href="css/input.css">
 </head>
 <body>
 
@@ -51,17 +52,58 @@
                         <a onclick="bySection('Происшествия');">ПРОИСШЕСТВИЯ</a>
                     </div>
                     <div id="burger_login">
-                        <a href="">ВОЙТИ</a><br>
+                        <a class="nav-hide-menu-login-username">ВОЙТИ</a>
+                        <a class="nav-hide-menu-user"> </a>
                     </div>
+                    <!--
+                    <div class="add-article">
+                        <label class="main-button-label">
+                            <input class="main-button" type="button" name="button" onclick="showAddArticleForm();"
+                                   value="Добавить">
+                        </label>
+                        <div style="clear: both;"><br></div>
+                    </div>
+                    -->
+
+                    <a id="burger_filter_button" onclick="showBurgerFilter()">ПОИСК ПО ФИЛЬТРАМ</a>
+                    <div id="burger_filter">
+
+                        <!--
+                        <div class="search-bar">
+                            <form action="" method="post" name="test" class="filter-form">
+                                <input type="text" name="autor" placeholder="Автор" class="filter-form-author"/><br>
+                                <input type="text" name="tags" placeholder="Теги через запятую"
+                                       class="filter-form-tags"/><br>
+                                <input type="text" name="dateform" placeholder="Дата с ДД.ММ.ГГГГ"
+                                       onfocus="this.type='date'" class="filter-form-date-start"/><br>
+                                <input type="text" name="dateform" placeholder="Дата по ДД.ММ.ГГГГ"
+                                       onfocus="this.type='date'" class="filter-form-date-end"/><br>
+                            </form>
+                        </div>
+
+                        <label class="main-button-label">
+                            <input class="main-button" type="button" onclick="filterArticle()" name="button"
+                                   value="найти">
+                        </label>
+                        -->
+                    </div>
+
                 </div>
 
             </nav>
         </header>
+
+        <div id="updown-background">
+            <div id="updown"></div>
+        </div>
         <div class="wrap">
             <div class="slide-header">
-                <label for="slide-1">Доступна мобильная версия сайта</label>
-                <label for="slide-2">Новостная рассылка</label>
-                <label for="slide-3">Читай нас в соц-сетях</label>
+                <label id="slide-header-label-1" onclick="swapColorsLabelFirst()" for="slide-1">Доступна мобильная
+                    версия сайта</label>
+                <label id="slide-header-label-2" onclick="swapColorsLabelSecond()" for="slide-2">Новостная
+                    рассылка</label>
+                <label id="slide-header-label-3" onclick="swapColorsLabelThrid()" for="slide-3">Читай нас в
+                    соцсетях</label>
             </div>
             <input id="slide-1" type="radio" name="slides" checked>
             <section class="slide slide-one">
@@ -76,9 +118,10 @@
                 <h1></h1>
             </section>
         </div>
+
         <main>
             <form action="" method="post" name="test" id="loginForm">
-                <label for="name"> Имя:</label>
+                <label for="name"> Логин: </label>
                 <input type="text" name="name" placeholder="Имя" id="name"/><br/>
                 <label for="pasword">Пароль:</label>
                 <input type="password" name="password" placeholder="Пароль" id="pasword"/><br/>
@@ -86,15 +129,6 @@
                     <input class="main-button" type="button" onclick=valid(document.getElementById('loginForm'));
                            name="button" value="Готово">
                 </label>
-
-                <br><br><br>
-                /*---------------------------------------------------- <br>
-                Для входа используйте следующий логин и пароль: <br>
-                login: admin <br>
-                password: admin <br>
-                ----------------------------------------------------*/ <br>
-                <br>
-
             </form>
 
 
@@ -169,8 +203,6 @@
                     <br><br>
                 </form>
             </div>
-
-
             <div id="main-article">
                 <div id="template-detaild-article-list-item">
                     <div class="detailed-article-list-item" data-id="">
@@ -212,11 +244,16 @@
 
 
                             <div class="detailed-article-list-item-tags">
-                                <a id="detailed-article-list-item-tags-first" onclick="metaDetailedTagOnClick('first')"></a>
-                                <a id="detailed-article-list-item-tags-second" onclick="metaDetailedTagOnClick('second')"></a>
-                                <a id="detailed-article-list-item-tags-third" onclick="metaDetailedTagOnClick('third')"></a>
-                                <a id="detailed-article-list-item-tags-fourth" onclick="metaDetailedTagOnClick('fourth')"></a>
-                                <a id="detailed-article-list-item-tags-fifth" onclick="metaDetailedTagOnClick('fifth')"></a>
+                                <a id="detailed-article-list-item-tags-first"
+                                   onclick="metaDetailedTagOnClick('first')"></a>
+                                <a id="detailed-article-list-item-tags-second"
+                                   onclick="metaDetailedTagOnClick('second')"></a>
+                                <a id="detailed-article-list-item-tags-third"
+                                   onclick="metaDetailedTagOnClick('third')"></a>
+                                <a id="detailed-article-list-item-tags-fourth"
+                                   onclick="metaDetailedTagOnClick('fourth')"></a>
+                                <a id="detailed-article-list-item-tags-fifth"
+                                   onclick="metaDetailedTagOnClick('fifth')"></a>
                             </div>
 
 
@@ -229,6 +266,11 @@
                 </div>
             </div>
             <div id="news">
+            </div>
+            <div id="error-message">
+                <span> Извините, но по вашему запросу ничего не найдено</span>
+                <br>
+                <a href="index.html"> вернуться на главную</a>
             </div>
             <div class="pagination">
                 <label class="main-button-label">
@@ -255,8 +297,10 @@
                 <form action="" method="post" name="test" id="filter-form">
                     <input type="text" name="autor" placeholder="Автор" id="filter-form-author"/><br>
                     <input type="text" name="tags" placeholder="Теги через запятую" id="filter-form-tags"/><br>
-                    <input type="date" name="dateform" placeholder="Дата с ДД.ММ.ГГГГ" id="filter-form-date-start"/><br>
-                    <input type="date" name="dateform" placeholder="Дата по ДД.ММ.ГГГГ" id="filter-form-date-end"/><br>
+                    <input type="text" name="dateform" placeholder="Дата с ДД.ММ.ГГГГ" onfocus="this.type='date'"
+                           id="filter-form-date-start"/><br>
+                    <input type="text" name="dateform" placeholder="Дата по ДД.ММ.ГГГГ" onfocus="this.type='date'"
+                           id="filter-form-date-end"/><br>
                 </form>
             </div>
 
@@ -318,12 +362,14 @@
 </template>
 
 
-
 <!-- scripts -->
 <script src="js/script.js"></script>
 <script src="js/scriptArticles.js"></script>
 <script src="js/httpArticles.js"></script>
 <script src="js/metaActions.js"></script>
 <script src="js/signIn.js"></script>
+<script src="js/burgerMenu.js"></script>
+<script src="js/slideShow.js"></script>
+<script src="js/scrolActions.js"></script>
 </body>
 </html>
