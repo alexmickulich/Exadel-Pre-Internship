@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/admin');
+mongoose.connect('mongodb://administrator:admin@ds155651.mlab.com:55651/blrnews');
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
-  console.log('connection success');
+    console.log('connection success');
 });
 
 const articles = new mongoose.Schema({
@@ -18,8 +18,8 @@ const articles = new mongoose.Schema({
     author: String,
 });
 const users = new mongoose.Schema({
-  username: String,
-  password: String
+    username: String,
+    password: String
 });
 
 

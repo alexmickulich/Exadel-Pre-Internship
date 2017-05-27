@@ -11,23 +11,8 @@ const store = new sessionStore({url: 'mongodb://localhost/admin'});
 const ArticleModel = require('./db.js').ArticleModel;
 const UserModel = require('./db.js').UserModel;
 
-/*
- let db = require('diskdb');
- db.connect('./db', ['articles']);
- const arts = db.articles.find();
- arts.forEach(item => {
- delete item.id;
- delete item._id;
- new ArticleModel(item).save(err => !err ? console.log('added') : console.log('err'));
- })
- /*
- let db = require('diskdb');
- db.connect('./db', ['users']);
- const arts = db.users.find();
- arts.forEach(item => {
- new UserModel(item).save(err => !err ? console.log('added') : console.log('err'));
- })
- */
+
+
 
 
 app.set('port', (process.env.PORT || 5000));
