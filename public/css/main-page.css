@@ -362,7 +362,7 @@ aside {
 
 /*--------------------------------------EDIT-NEWS-FORM-END--------------------------------------*/
 
-@media (max-width: 700px) {
+@media all and (max-width: 700px) {
     aside {
         display: none;
     }
